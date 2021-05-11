@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Row } from "react-bootstrap";
 
-const UpdateUserModal = ({show, onCloseModal, userUpdate}) => {
+const UpdateUserModal = ({show, onCloseModal, user}) => {
 
     return (
         <div>
@@ -11,13 +11,19 @@ const UpdateUserModal = ({show, onCloseModal, userUpdate}) => {
         </Modal.Header>
         <Modal.Body>
         <Row>
-          <input placeholder={userUpdate.name} />
+          <input defaultValue={user.name}/>
         </Row>
         <Row>
-          <input placeholder="Email" />
+          <input defaultValue={user.surnames} />
         </Row>
         <Row>
-          <input placeholder="Password"/>
+          <input defaultValue={user.email}/>
+        </Row>
+        <Row>
+          <input defaultValue={user.phone}/>
+        </Row>
+        <Row>
+          <input defaultValue={user.city}/>
         </Row>   
         </Modal.Body>
         <Modal.Footer>

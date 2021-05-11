@@ -17,9 +17,8 @@ const Login = () => {
         }else{
           getUserLogin(email, password)
             .then((resp) => {
-              localStorage.setItem("userId", resp?.user?._id?.toString());
+              localStorage.setItem("user", JSON.stringify(resp?.user));
               localStorage.setItem('token', resp?.token);
-              localStorage.setItem('userRole', resp?.user?.userRoleId?.name);
               history.push("/backofficeUser");
             })
             .catch((err) => {
@@ -33,7 +32,7 @@ const Login = () => {
             <div className="login">
                 <h1>Login</h1>
                 <input type="text" placeholder="email" onChange={(event)=> setEmail(event.target.value)}/>
-                <input type="text" placeholder="password" onChange={(event)=> setPasword(event.target.value)} />
+                <input type="password" placeholder="password" onChange={(event)=> setPasword(event.target.value)} />
                 <button onClick={() => onLogin(email, password)}>Log in</button>
             </div>
         </div>

@@ -1,0 +1,22 @@
+.users-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer{
+    background-color: black;
+    margin-top: 64px;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.footer h1{
+    color: white;
+    font-size: 60px;
+}
+
+.table table{
+    margin: 0 auto;
+    margin-top: 30px;
+}

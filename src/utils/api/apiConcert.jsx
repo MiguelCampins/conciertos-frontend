@@ -14,10 +14,10 @@ export const getConcerts = () =>
       });
   });
 
-export const createUser = (name, email, password) =>
+export const createUser = (name, surnames, email, password, phone, city) =>
   new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}/user`, { name, email, password })
+      .post(`${baseURL}/user`, {name, surnames, email, password, phone, city})
       .then((res) => {
         resolve(res.data);
       })
