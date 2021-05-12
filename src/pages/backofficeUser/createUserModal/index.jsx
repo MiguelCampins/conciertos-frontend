@@ -23,10 +23,6 @@ const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
       });
   },[]);
 
-  useEffect(()=>{
-    console.log(rol)
-  },[rol])
-
   return (
     <div>
       <Modal show={show}>
@@ -52,9 +48,10 @@ const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
         <Row>
           <input placeholder="Ciudad" type="text" onChange={(e) => setCity(e.target.value)} />
         </Row>
-        <select name="role" onChange={(e) => setRol(e.currentTarget.value)}>
-          {roles && roles.map((role) => (
-            <option value={role._id}>{role.name}</option>
+        <select onChange={(e) => setRol(e.currentTarget.value)}>
+        <option disabled selected> -- Tipo de usuario -- </option>
+          {roles && roles.map((role,index) => (
+            <option key={index} value={role._id}>{role.name}</option>
           ))}
         </select>
         </Modal.Body>

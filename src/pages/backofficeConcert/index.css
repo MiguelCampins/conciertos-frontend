@@ -1,0 +1,17 @@
+.concerts-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.concert-user{
+    background-color: black;
+    margin-top: 64px;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.concert-user h1{
+    color: white;
+    font-size: 60px;
+}

@@ -50,6 +50,18 @@ export const getUser = (_id) =>
       });
   });
 
+export const updateUser = (user) =>
+  new Promise((resolve, reject) => {
+    axios
+      .put(`${baseURL}/user/${user._id}`, user)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  })
+
 export const deleteUser = (_id) =>
   new Promise((resolve, reject) => {
     axios

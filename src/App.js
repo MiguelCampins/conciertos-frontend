@@ -4,9 +4,9 @@ import Login from "../src/pages/login";
 import Home from "../src/pages/home";
 import User from "./pages/user";
 import BackofficeUser from "./pages/backofficeUser";
+import BackofficeConcerts from "./pages/backofficeConcert";
 import Navbar from "./components/panel/navBar";
 import { ROLES } from "./utils/constants";
-
 
 const App = () => {
 
@@ -19,7 +19,7 @@ const App = () => {
    */
   const redirectAdmin = (component) => {
     let userFromLocalStorage = {...user};
-
+    
     if(!Object.keys(userFromLocalStorage).length){
       userFromLocalStorage = JSON.parse(localStorage.getItem('user'));
       setUser(userFromLocalStorage);
@@ -76,6 +76,7 @@ const App = () => {
         <Route exact path="/login" render={redirectPrivate} />
         <Route exact path="/user" render={() => redirectPublic(<User />)} />
         <Route exact path="/backofficeUser" render={() => redirectAdmin(<BackofficeUser />)}/>
+        <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)} />
       </Switch>
     </BrowserRouter>
   );
