@@ -26,11 +26,12 @@ const BackofficeUser = () => {
     setShowUpdateUserModal(false);
   };
 
-  const onCreateUser = (name, surnames, email, password, phone, city) => {
-    if (!name || !surnames || !email || !password || !phone || !city) {
+  const onCreateUser = (user) => {
+    const {name, surnames, email, password, phone, city, userRoleId} = user;
+    if (!name || !surnames || !email || !password || !phone || !city || !userRoleId ) {
       alert("Faltan datos");
     } else {
-      createUser(name, surnames, email, password, phone, city)
+      createUser(user)
         .then((resp) => {
           const newUsers = [...users];
           newUsers.push(resp);

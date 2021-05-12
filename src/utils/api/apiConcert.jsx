@@ -12,12 +12,24 @@ export const getConcerts = () =>
       .catch((err) => {
         reject(err);
       });
-  });
+  });  
 
-export const createUser = (name, surnames, email, password, phone, city) =>
+export const getRoles = () =>
   new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}/user`, {name, surnames, email, password, phone, city})
+      .get(`${baseURL}/role`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+export const createUser = (user) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/user`, {user})
       .then((res) => {
         resolve(res.data);
       })
