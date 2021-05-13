@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.concert-footer{
+.concert-header{
     background-color: black;
     margin-top: 64px;
     height: 30vh;
@@ -11,12 +11,12 @@
     align-items: center;
     justify-content: space-around;
 }
-.concert-footer > h1{
+.concert-header > h1{
     color: white;
     font-size: 60px;
 }
 
-.concert-footer > button {
+.concert-header > button {
     color: white;
     background: var(--primary-color);
     padding: 4px 16px;
