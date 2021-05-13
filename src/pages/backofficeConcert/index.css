@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.concert-user{
+.concert-footer{
     background-color: black;
     margin-top: 64px;
     height: 30vh;
@@ -11,7 +11,22 @@
     align-items: center;
     justify-content: space-around;
 }
-.concert-user h1{
+.concert-footer > h1{
     color: white;
     font-size: 60px;
+}
+
+.concert-footer > button {
+    color: white;
+    background: var(--primary-color);
+    padding: 4px 16px;
+    border-radius: 5px;
+}
+
+.concert-modal {
+    display: none;
+}
+
+.concert-modal-open{
+    display: inline;
 }

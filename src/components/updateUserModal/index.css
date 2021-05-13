@@ -1,0 +1,50 @@
+.update-form > h1 {
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+}
+
+.update-form > hr {
+    background-color: var(--primary-color);
+    height: 1px;
+    border: 0;
+    width: 100%;
+}
+
+.update-form-container {
+    display: flex;
+}
+
+.update-form-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-form-body > input {
+    width: 246px;
+    margin: auto;
+    margin-bottom: 16px;
+}
+.update-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    height: 48px;
+}
+
+.update-form-footer > :first-child {
+    background: black;
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}
+
+.update-form-footer > :nth-child(2) {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}

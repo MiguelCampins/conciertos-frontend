@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Modal, Row } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import "./index.css";
 
 const UpdateUserModal = ({show, onCloseModal, user, onUpdateUser}) => {
 
@@ -12,30 +13,22 @@ const UpdateUserModal = ({show, onCloseModal, user, onUpdateUser}) => {
     return (
         <div>
       <Modal show={show}>
-        <Modal.Header>
-          <Modal.Title>Actualizar usuario</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <Row>
+        <div className="update-form">
+        <h1>Actualizar usuario</h1>
+        <hr/> 
+        <div className="update-form-body">
           <input defaultValue={user.name} onChange={(e) => setName(e.target.value)}/>
-        </Row>
-        <Row>
           <input defaultValue={user.surnames} onChange={(e)=>setSurnames(e.target.value)}/>
-        </Row>
-        <Row>
           <input defaultValue={user.email} onChange={(e)=>setEmail(e.target.value)}/>
-        </Row>
-        <Row>
           <input defaultValue={user.phone} onChange={(e)=>setPhone(e.target.value)}/>
-        </Row>
-        <Row>
           <input defaultValue={user.city} onChange={(e)=>setCity(e.target.value)}/>
-        </Row>   
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={()=> onCloseModal()}>Cerrar</Button>
-          <Button variant="primary" onClick={()=> onUpdateUser({name, surnames, email, phone, city, _id: user?._id })}>Actualizar usuario</Button>
-        </Modal.Footer>
+        </div>
+        <hr/>
+        <div className="update-form-footer">
+          <button variant="secondary" onClick={()=> onCloseModal()}>Cerrar</button>
+          <button variant="primary" onClick={()=> onUpdateUser({name, surnames, email, phone, city, _id: user?._id })}>Actualizar</button>
+        </div>  
+       </div>   
       </Modal>
     </div>
     )

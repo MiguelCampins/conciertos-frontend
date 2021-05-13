@@ -5,7 +5,7 @@ import Home from "../src/pages/home";
 import User from "./pages/user";
 import BackofficeUser from "./pages/backofficeUser";
 import BackofficeConcerts from "./pages/backofficeConcert";
-import Navbar from "./components/panel/navBar";
+import Navbar from "./components/navBar";
 import { ROLES } from "./utils/constants";
 
 const App = () => {

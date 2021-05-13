@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.footer{
+.header{
     background-color: black;
     margin-top: 64px;
     height: 30vh;
@@ -11,12 +11,22 @@
     align-items: center;
     justify-content: space-around;
 }
-.footer h1{
+.header h1{
     color: white;
     font-size: 60px;
+}
+
+.header > button {
+    color: white;
+    background: var(--primary-color);
+    padding: 4px 16px;
+    border-radius: 5px;
 }
 
 .table table{
     margin: 0 auto;
     margin-top: 30px;
+}
+tr:nth-child(even) {
+    background-color: #bdece2;
 }

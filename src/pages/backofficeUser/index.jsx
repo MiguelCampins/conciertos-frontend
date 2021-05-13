@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createUser, deleteUser, getUsers, getRoles, updateUser } from "../../utils/api/apiConcert";
-import CreateUserModal from "./createUserModal";
-import TableUsers from "./tableUser/tableUser";
-import UpdateUserModal from "./updateUserModal";
+import CreateUserModal from "../../components/createUserModal";
+import TableUsers from "../../components/tableUser/tableUser";
+import UpdateUserModal from "../../components/updateUserModal";
 import "./index.css";
 
 const BackofficeUser = () => {
@@ -43,7 +43,7 @@ const onCloseModal = () => {
   const onCreateUser = (user) => {
     const {name, surnames, email, password, phone, city, userRoleId} = user;
     if (!name || !surnames || !email || !password || !phone || !city || !userRoleId ) {
-      alert("Faltan datos");
+      
     } else {
       createUser(user)
         .then((resp) => {
@@ -84,6 +84,10 @@ const onCloseModal = () => {
       });
   };
 
+/**
+ * funcion para acualizar un usuario
+ * @param {*} user 
+ */
   const onUpdateUser = (user) =>{
     const {name, surnames, email, phone, city, _id } = user;
       if(!name || !surnames || !email || !phone || !city ){
@@ -92,10 +96,13 @@ const onCloseModal = () => {
         updateUser(user)
         .then((resp) => {
           setShowUpdateUserModal(false);
-          // modificar el usuario en el array principal
+          // copia de los usuarios
           const newUsers = [...users];
+          //comparamos el indice de el usuario seleccionado 
           const index = newUsers.findIndex(user => user._id === selectedUser._id);
+          //añadimos a ese usuario la actualizacion
           newUsers.splice(index, resp);
+          //seteamos los nuevos usuarios
           setUsers(newUsers);
         })
         .catch((err) => {
@@ -106,7 +113,7 @@ const onCloseModal = () => {
 
   return (
     <div className="users-container">
-      <div className="footer">
+      <div className="header">
         <h1>Users</h1>
         <button onClick={() => setShowCreateUserModal(true)}>
           Crear usuario
@@ -127,7 +134,7 @@ const onCloseModal = () => {
           onUpdateUser={onUpdateUser}
         />
       )}
-        <div className="table">
+        <div className="table table-bordered table-hover ">
           <TableUsers
             users={users && users}
             roles={roles && roles}

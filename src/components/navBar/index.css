@@ -5,12 +5,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  background-color: #25b393;
+  background-color: var(--primary-color);
   position: fixed;
   top: 0;
 }
 .custom-navbar > img {
   height: 36px;
+}
+.custom-navbar > span{
+  color: black;
 }
 .custom-navbar .navbar-links {
   display: flex;

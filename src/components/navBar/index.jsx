@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MenuIcon from '@material-ui/icons/Menu';
 import "./index.css";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 const Navbar = ({ isLoggedIn, logOut, user }) => {
 

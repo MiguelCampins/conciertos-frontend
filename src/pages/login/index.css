@@ -42,7 +42,7 @@
     height: 40px;
     border-radius: 60px;
     font-size: 18px;
-    background-color: #25b393;
+    background-color: var(--primary-color);
     border-color: transparent;
     color: #fff;
     transition: all 0.5s;
@@ -55,7 +55,7 @@
 .login button:active{
     background-color: white;
     color: black;
-    border: 1px solid #25b393;
+    border: 1px solid var(--primary-color);
     box-shadow: none;
 }
 

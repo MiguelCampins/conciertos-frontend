@@ -1,11 +1,33 @@
 body{
     margin: 0 auto;
 }
-.header{
-    background-image: url("../../assets/images/pexels-daniel-dinu-849.jpg");
+.home-header{
+    background-image: url("../../assets/images/angad-singh-9POz8PXGWjM-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 70vh;
+    margin-top: 64px;
     box-shadow: 0 6px 20px grey;
+    display: flex;
+    align-items: flex-end;
+}
+
+.tag-entradas {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 40px;
+    width: 36vw;
+}
+
+.tag-entradas > h2, p {
+    color: white;
+}
+
+.tag-entradas > a {
+    color: white;
+    background-color: var(--primary-color);
+    width: 72px;
+    padding: 5px;
 }

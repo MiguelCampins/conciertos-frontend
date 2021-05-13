@@ -1,0 +1,56 @@
+.create-form > h1 {
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+}
+
+.create-form > hr {
+    background-color: var(--primary-color);
+    height: 1px;
+    border: 0;
+    width: 100%;
+}
+
+.create-form-container {
+    display: flex;
+}
+
+.create-form-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-form-body > input {
+    width: 246px;
+    margin: auto;
+    margin-bottom: 16px;
+}
+
+.create-form-body > select {
+    width: 246px;
+    margin: auto;
+}
+
+.create-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    height: 48px;
+}
+
+.create-form-footer > :first-child {
+    background: black;
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}
+
+.create-form-footer > :nth-child(2) {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}
