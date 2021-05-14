@@ -114,7 +114,7 @@ const onCloseModal = () => {
   return (
     <div className="users-container">
       <div className="header">
-        <h1>Users</h1>
+        <h1>Usuarios</h1>
         <button onClick={() => setShowCreateUserModal(true)}>
           Crear usuario
         </button>

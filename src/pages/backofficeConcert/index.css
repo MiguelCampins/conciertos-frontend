@@ -23,10 +23,10 @@
     border-radius: 5px;
 }
 
-.concert-modal {
-    display: none;
+.table table{
+    margin: 0 auto;
+    margin-top: 30px;
 }
-
-.concert-modal-open{
-    display: inline;
+tr:nth-child(even) {
+    background-color: #bdece2;
 }

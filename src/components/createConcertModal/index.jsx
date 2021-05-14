@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from "react-bootstrap";
 import "./index.css";
 
-const CreateConcertModal = ({show}) => {
+const CreateConcertModal = ({show, onCloseModal, onCreateConcert}) => {
     const [ name, setName ] = useState();
     const [ date, setDate ] = useState();
     const [ city, setCity ] = useState();
     const [ tickets, setTickets ] = useState();
-    const [ priceTicket, setPriceTicket] = useState();
+    const [ ticketPrice, setTicketPrice] = useState();
     const [ artists, setArtists ] = useState([]);
 
     return (
@@ -17,17 +17,17 @@ const CreateConcertModal = ({show}) => {
                     <h1>Crear concierto</h1>
                     <hr/>
                     <div className="concert-body">
-                        <input placeholder="Nombre" type="text"></input>
-                        <input type="date"></input>
-                        <input placeholder="Ciudad" type="text"></input>
-                        <input placeholder="Numero entradas" type=""></input>
-                        <input placeholder="Precio" type=""></input>
-                        <input placeholder="Artistas" type=""></input>
+                        <input placeholder="Nombre" type="text" onChange={(e)=>setName(e.target.value)}/>
+                        <input type="date" onChange={(e)=> setDate(e.target.value)}/>
+                        <input placeholder="Ciudad" type="text" onChange={(e)=> setCity(e.target.value)}/>
+                        <input placeholder="Numero entradas" type="" onChange={(e)=> setTickets(e.target.value)}/>
+                        <input placeholder="Precio" type="" onChange={(e)=> setTicketPrice(e.target.value)}/>
+                        <input placeholder="Artistas" type="" onChange={(e)=> setArtists(e.target.value)}/>
                     </div>
                     <hr/>
                     <div className="concert-footer">
-                        <button>Cerrar</button>
-                        <button>Crear</button>
+                        <button onClick={()=> onCloseModal()}>Cerrar</button>
+                        <button onClick={()=> onCreateConcert({name, date, city, maxTickets:tickets, ticketPrice, artists})}>Crear</button>
                     </div>
                 </div>
             </Modal>

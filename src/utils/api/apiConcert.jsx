@@ -12,8 +12,20 @@ export const getConcerts = () =>
       .catch((err) => {
         reject(err);
       });
-  });  
-
+  });
+  
+export const createConcert  = (concert) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/concert`, {concert})
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  })
+ 
 export const getRoles = () =>
   new Promise((resolve, reject) => {
     axios
