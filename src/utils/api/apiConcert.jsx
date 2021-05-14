@@ -25,6 +25,18 @@ export const createConcert  = (concert) =>
         reject(err);
       });
   })
+
+  export const deleteConcert = (_id) =>
+  new Promise((resolve, reject) => {
+    axios
+      .delete(`${baseURL}/concert/${_id}`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });  
  
 export const getRoles = () =>
   new Promise((resolve, reject) => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getConcerts, createConcert } from "../../utils/api/apiConcert";
+import { getConcerts, createConcert, deleteConcert } from "../../utils/api/apiConcert";
 import CreateConcertModal from "../../components/createConcertModal";
 import "./index.css";
 import TableConcert from "../../components/tableConcert";
@@ -38,6 +38,22 @@ const BackofficeConcerts = () => {
     }
   };
 
+  const onDeleteConcert = (user, index) => {
+    
+    deleteConcert(user._id)
+      .then((resp) => {
+        //Hacemos una copia de los conciertos
+        const newConcerts = [...concerts];
+        //Sabemos cual es el concierto con el indice y lo borramos
+        newConcerts.splice(index, 1);
+        //seteamos los nuevos conciertos
+        setConcerts(newConcerts);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
   return (
     <div className="concerts-container">
       <div className="concert-header">
@@ -47,7 +63,7 @@ const BackofficeConcerts = () => {
         </button>
       </div>
       <div className="table table-bordered table-hover">
-        <TableConcert concerts={concerts && concerts}/>
+        <TableConcert concerts={concerts && concerts} onDeleteConcert={onDeleteConcert}/>
       </div>
       {showCreateConcertModal && (
         <CreateConcertModal
