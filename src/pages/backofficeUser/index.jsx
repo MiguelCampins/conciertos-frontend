@@ -90,9 +90,7 @@ const onCloseModal = () => {
  */
   const onUpdateUser = (user) =>{
     const {name, surnames, email, phone, city, _id } = user;
-      if(!name || !surnames || !email || !phone || !city ){
-        alert('Faltan datos')
-      }else{
+     if(name && surnames && email && phone && city && _id){
         updateUser(user)
         .then((resp) => {
           setShowUpdateUserModal(false);
@@ -108,7 +106,7 @@ const onCloseModal = () => {
         .catch((err) => {
           console.warn(err);
         });
-      }
+     } 
   }
 
   return (

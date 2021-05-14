@@ -2,7 +2,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
 
-const TableConcert = ({ concerts, onDeleteConcert }) => {
+const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
 
   return (
     <table>
@@ -23,14 +23,14 @@ const TableConcert = ({ concerts, onDeleteConcert }) => {
               <td>{concert.city}</td>
               <td>{concert.maxTickets}</td>
               <td>{concert.ticketPrice}</td>
-              <td></td>
+              <td>{concert.artists.map(artist => (artist + " / "))}</td>
               <td>
                 <button onClick={()=> { if (window.confirm('Estas seguro que quieres borrar el usuario?')) onDeleteConcert(concert, index)}}>
                   <DeleteIcon />
                 </button>
               </td>
               <td>
-                <button>
+                <button onClick={()=> onSelectConcert(concert)}>
                   <EditIcon />
                 </button>
               </td>

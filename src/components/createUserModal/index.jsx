@@ -64,9 +64,7 @@ const validateUserAndSave = () => {
             <hr/>
             <div className="create-form-footer">
               <button variant="secondary" onClick={() => onCloseModal()}>Cerrar</button>
-              <button variant="primary"
-                onClick={validateUserAndSave}>Crear usuario</button>
-            </div>
+              <button variant="primary" onClick={validateUserAndSave}>Crear usuario</button></div>
           </div>
       </Modal>
     </div>

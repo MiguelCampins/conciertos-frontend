@@ -9,6 +9,22 @@ const CreateConcertModal = ({show, onCloseModal, onCreateConcert}) => {
     const [ tickets, setTickets ] = useState();
     const [ ticketPrice, setTicketPrice] = useState();
     const [ artists, setArtists ] = useState([]);
+    const [validationError, setValidationError ] = useState(false);
+
+    const validateConcertAndSave = () => {
+        let hasError = false;
+        // validamos que están todos los campos
+        if(!name || !date || !city || !tickets || !ticketPrice || !artists) {
+          hasError = true;
+        }
+        // si hay alguno que falta ponemos que hay un error de validacion
+        if(hasError) {
+          setValidationError(true);
+        } else {
+          // si no hay error, guardamos
+          onCreateConcert({name, date, city, maxTickets:tickets, ticketPrice, artists:artists.split(",")})
+        }
+      }; 
 
     return (
         <div>
@@ -24,10 +40,11 @@ const CreateConcertModal = ({show, onCloseModal, onCreateConcert}) => {
                         <input placeholder="Precio" type="" onChange={(e)=> setTicketPrice(e.target.value)}/>
                         <input placeholder="Artistas" type="" onChange={(e)=> setArtists(e.target.value)}/>
                     </div>
+                    {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
                     <hr/>
                     <div className="concert-footer">
                         <button onClick={()=> onCloseModal()}>Cerrar</button>
-                        <button onClick={()=> onCreateConcert({name, date, city, maxTickets:tickets, ticketPrice, artists})}>Crear</button>
+                        <button onClick={validateConcertAndSave}>Crear</button>
                     </div>
                 </div>
             </Modal>

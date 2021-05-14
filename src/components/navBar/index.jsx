@@ -38,7 +38,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         {!isLoggedIn ? (
         <>
           <a href="/login">Login</a>
-          <a href="/contact">Register</a>
+          <a href="/register">Register</a>
         </>
         ):(
          <>

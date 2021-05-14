@@ -2,6 +2,10 @@ import axios from "axios";
 
 const baseURL = "http://localhost:5000";
 
+/**
+ * Mostrar, crear, borrar y actualizar conciertos
+ * ***********************************************************************************************************
+ */
 export const getConcerts = () =>
   new Promise((resolve, reject) => {
     axios
@@ -13,20 +17,20 @@ export const getConcerts = () =>
         reject(err);
       });
   });
-  
-export const createConcert  = (concert) =>
+
+export const createConcert = (concert) =>
   new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}/concert`, {concert})
+      .post(`${baseURL}/concert`, { concert })
       .then((res) => {
         resolve(res.data);
       })
       .catch((err) => {
         reject(err);
       });
-  })
+  });
 
-  export const deleteConcert = (_id) =>
+export const deleteConcert = (_id) =>
   new Promise((resolve, reject) => {
     axios
       .delete(`${baseURL}/concert/${_id}`)
@@ -36,12 +40,12 @@ export const createConcert  = (concert) =>
       .catch((err) => {
         reject(err);
       });
-  });  
- 
-export const getRoles = () =>
+  });
+
+export const updateConcert = (concert) =>
   new Promise((resolve, reject) => {
     axios
-      .get(`${baseURL}/role`)
+      .put(`${baseURL}/concert/${concert._id}`, concert)
       .then((res) => {
         resolve(res.data);
       })
@@ -50,10 +54,14 @@ export const getRoles = () =>
       });
   });
 
+/**
+ * Mostrar, crear, actualizar y borrar usuarios
+ ************************************************************************************************************************
+ */
 export const createUser = (user) =>
   new Promise((resolve, reject) => {
     axios
-      .post(`${baseURL}/user`, {user})
+      .post(`${baseURL}/user`, { user })
       .then((res) => {
         resolve(res.data);
       })
@@ -84,7 +92,7 @@ export const updateUser = (user) =>
       .catch((err) => {
         reject(err);
       });
-  })
+  });
 
 export const deleteUser = (_id) =>
   new Promise((resolve, reject) => {
@@ -102,6 +110,18 @@ export const getUsers = () =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/user`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+export const getRoles = () =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/role`)
       .then((res) => {
         resolve(res.data);
       })
