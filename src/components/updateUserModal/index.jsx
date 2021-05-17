@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { getRoles } from "../../utils/api/apiConcert";
 import { Modal } from "react-bootstrap";
 import "./index.css";
 
@@ -8,12 +9,24 @@ const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
+  const [roles, setRoles] = useState([]);
+  const [role, setRole] = useState();
   const [validationError, setValidationError ] = useState(false);
+
+  useEffect(() => {
+    getRoles()
+      .then((foundRoles) => {
+        setRoles(foundRoles);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
 
   const validateUserAndSave = () => {
     let hasError = false;
     // validamos que están todos los campos
-    if(!name || !surnames || !email || !phone || !city ) {
+    if(!name || !surnames || !email || !phone || !city || !role) {
       hasError = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
@@ -21,7 +34,7 @@ const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
       setValidationError(true);
     } else {
       // si no hay error, guardamos
-      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id,})
+      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id, userRoleId: role })
     }
   }; 
   
@@ -52,6 +65,13 @@ const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
               defaultValue={user.city}
               onChange={(e) => setCity(e.target.value)}
             />
+            <select onChange={(e) => setRole(e.currentTarget.value)}>
+              <option disabled selected>--Tipo de usuario</option>
+              {roles &&
+                  roles.map((role, index) => (
+                    <option key={index} value={role._id}>{role.name}</option>
+                  ))}
+            </select>
           </div>
           {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
           <hr />

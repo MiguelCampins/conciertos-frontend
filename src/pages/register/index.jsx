@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { createUser } from "../../utils/api/apiConcert";
+import React, { useEffect, useState } from "react";
+import { registerUser } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import "./index.css";
+import { getRoles } from "../../utils/api/apiConcert";
 
 const Register = () => {
   const [name, setName] = useState();
@@ -10,15 +11,42 @@ const Register = () => {
   const [phone, setPhone] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [roles, setRoles] = useState([]);
+  const [validationError, setValidationError ] = useState(false);
   
   const history = useHistory();
 
+  useEffect(()=>{
+    getRoles()
+      .then((foundRoles) => {
+        setRoles(foundRoles);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  },[]);
+
+  const validateUserAndSave = () => {
+    let hasError = false;
+    // validamos que estan todos los campos
+    if(!name || !surnames || !city || !phone || !email || !password){
+      hasError = true;
+    }
+    // si hay alguno que falta ponemos que hay un error de validacion
+  if(hasError) {
+    setValidationError(true);
+  } else {
+    // si no hay error, guardamos
+    onRegister({name, surnames, city, phone, email, password, userRoleId:roles[1]._id})
+  }
+  };
+
   const onRegister = (user) => {
-    const {name, surnames, city, phone, email, password} = user;
-    if(name && surnames && city && phone && email && password){
-        createUser(user)
+    const {name, surnames, city, phone, email, password, userRoleId} = user;
+    if(name && surnames && city && phone && email && password && userRoleId){
+        registerUser(user)
         .then((resp) => {
-            history.push("/");
+            history.push("/login");
         })
         .catch((err) => {
             console.warn(err);
@@ -35,8 +63,9 @@ const Register = () => {
         <input placeholder="ciudad" onChange={(e)=>setCity(e.target.value)} />
         <input placeholder="telefono" onChange={(e)=>setPhone(e.target.value)} />
         <input placeholder="email" onChange={(e)=>setEmail(e.target.value)} />
-        <input placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
-        <button onClick={() => onRegister({name, surnames, city, phone, email, password})}>Registrar</button>
+        <input placeholder="password" type="password" onChange={(e)=>setPassword(e.target.value)} />
+        {validationError && <span style={{color:'red'}}>Error de validacion!!</span>}
+        <button onClick={validateUserAndSave}>Registrar</button>
       </div>
     </div>
   );

@@ -31,3 +31,8 @@ body{
     width: 72px;
     padding: 5px;
 }
+
+.home-body {
+    display: flex;
+    flex-wrap: wrap;
+}

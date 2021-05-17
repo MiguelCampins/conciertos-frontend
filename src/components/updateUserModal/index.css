@@ -20,11 +20,12 @@
     flex-direction: column;
 }
 
-.update-form-body > input {
+.update-form-body > input,select {
     width: 246px;
     margin: auto;
     margin-bottom: 16px;
 }
+
 .update-form-footer {
     display: flex;
     justify-content: flex-end;

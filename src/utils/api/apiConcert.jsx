@@ -70,6 +70,18 @@ export const createUser = (user) =>
       });
   });
 
+  export const registerUser = (user) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/user/register`, { user })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });  
+
 export const getUser = (_id) =>
   new Promise((resolve, reject) => {
     axios

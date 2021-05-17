@@ -89,8 +89,8 @@ const onCloseModal = () => {
  * @param {*} user 
  */
   const onUpdateUser = (user) =>{
-    const {name, surnames, email, phone, city, _id } = user;
-     if(name && surnames && email && phone && city && _id){
+    const {name, surnames, email, phone, city, _id, userRoleId} = user;
+     if(name && surnames && email && phone && city && _id && userRoleId){
         updateUser(user)
         .then((resp) => {
           setShowUpdateUserModal(false);

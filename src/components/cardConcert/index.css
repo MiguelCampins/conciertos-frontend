@@ -1,0 +1,12 @@
+.card-concert {
+    border: 1px solid grey;
+    width: 300px;
+}
+
+.card-concert > img {
+    width: 100%
+}
+
+.card-concert > p {
+    color: black;
+}
