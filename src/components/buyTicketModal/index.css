@@ -1,0 +1,59 @@
+.buy-form > h1 {
+    text-align: center;
+    padding: 8px;
+    margin: 0;
+}
+
+.buy-form > hr {
+    background-color: var(--primary-color);
+    height: 1px;
+    border: 0;
+    width: 100%;
+}
+
+.buy-form-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.buy-form-body > span {
+    color: black;
+    margin-left: 36px;
+    margin-top: 18px;
+}
+
+.buy-form-body > input {
+    width: 260px;
+    margin-left: 40px;
+    margin-right: 28px;
+    margin-top: 18px;
+}
+
+.buy-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    height: 48px;
+}
+
+.buy-form-footer > :first-child {
+    background: black;
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}
+
+.buy-form-footer > :nth-child(2) {
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    width: 110px;
+    height: 38px;
+    margin-right: 8px;
+}
+
+.buy-form-body .total {
+    margin-left: 352px;
+}

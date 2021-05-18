@@ -24,6 +24,7 @@ const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
       });
   }, []);
 
+
 const validateUserAndSave = () => {
   let hasError = false;
   // validamos que están todos los campos

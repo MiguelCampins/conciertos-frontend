@@ -3,13 +3,19 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getConcert } from "../../utils/api/apiConcert";
+import { useHistory } from "react-router-dom";
 import imgDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.jpg";
 import "./index.css";
+import BuyTicketModal from "../../components/buyTicketModal";
 
 const Concert = ({ location }) => {
   const [concert, setConcert] = useState();
   const [showInfo, setShowInfo] = useState(false);
+  const [numTickets, setNumTickets] = useState(1);
+  const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
+
   const params = new URLSearchParams(useLocation().search);
+  const history = useHistory();
 
   useEffect(() => {
     const _id = params.get("id");
@@ -21,6 +27,28 @@ const Concert = ({ location }) => {
         console.warn(err);
       });
   }, []);
+
+  const onAreYouRegistered = () => {
+    //Comprobar si es usuario
+    if (localStorage.getItem("user") && localStorage.getItem("token")) {
+      //mostrar modal para intoducir datos de pago
+      setShowModalToBuyTickets(true);
+    } else {
+      history.push("/login");
+    }
+  };
+
+  const onBuyTickets = (sale) => {
+    const {country, street, city, postalCode, region, targetNum, date, cvv} = sale;
+    if(country && street && city && postalCode && region && targetNum && date && cvv){
+     //Crear una venta 
+    }
+    setShowModalToBuyTickets(false);
+  };
+
+  const onCloseModal = () => {
+    setShowModalToBuyTickets(false);
+  }
 
   return (
     <div className="concierto-container">
@@ -37,16 +65,21 @@ const Concert = ({ location }) => {
         <button onClick={() => setShowInfo(false)}>Evento</button>
       </div>
       <div className="concierto-body">
-      <hr/>
+        <hr />
         {!showInfo ? (
           <div className="concierto-info">
             <div>
-              <span>Dia {concert && concert.date} a las {concert && concert.hour}</span>
+              <span>
+                Dia {concert && concert.date} a las {concert && concert.hour}
+              </span>
               <span>En la ciudad de {concert && concert.city}</span>
             </div>
             <span>Precio {concert && concert.ticketPrice} euros</span>
+            <input type="number" min="1" defaultValue="1" onChange={(e) => setNumTickets(e.target.value)}/>
             <div>
-              <buton className="btn btn-primary">Comprar</buton>
+              <button
+                className="btn btn-primary" onClick={() => onAreYouRegistered()}>Comprar
+              </button>
             </div>
           </div>
         ) : (
@@ -79,8 +112,15 @@ const Concert = ({ location }) => {
             </p>
           </>
         )}
-        <hr/>
+        <hr />
       </div>
+      <BuyTicketModal
+        show={showModalToBuyTickets}
+        onCloseModal={onCloseModal}
+        onBuyTickets={onBuyTickets}
+        numTickets={numTickets && numTickets}
+        ticketPrice={concert && concert.ticketPrice}
+      />
     </div>
   );
 };

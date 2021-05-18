@@ -2,7 +2,29 @@
     width: 518px;
     height: 280px;
     margin: 18px;
-    
+    position: relative;
+    background-color: transparent;
+}
+
+
+.card-concert::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.45);
+    height: 100%;
+    width: 100%;
+    transition: all .5s;
+    pointer-events: none;
+}
+
+.card-concert:hover::after{
+    background-color: rgba(0,0,0,1);
+}
+
+.card-concert:hover .card-concert-text {
+    opacity: 1;
 }
 
 .card-concert  img {
@@ -13,9 +35,16 @@
 
 .card-concert-text {
     display: flex;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: all .5s .5s;
 }
 
 .card-concert-text > p{
-    color: black;
+    color: white;
     margin-left: 6px;
 }
