@@ -1,6 +1,13 @@
 body{
     margin: 0 auto;
 }
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .home-header{
     background-image: url("../../assets/images/angad-singh-9POz8PXGWjM-unsplash.jpg");
     background-repeat: no-repeat;
@@ -35,4 +42,7 @@ body{
 .home-body {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }

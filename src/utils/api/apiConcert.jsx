@@ -18,6 +18,18 @@ export const getConcerts = () =>
       });
   });
 
+  export const getConcert = (_id) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/concert/${_id}`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });  
+
 export const createConcert = (concert) =>
   new Promise((resolve, reject) => {
     axios

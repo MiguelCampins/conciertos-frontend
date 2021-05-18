@@ -29,8 +29,8 @@ const BackofficeConcerts = () => {
 
   const onCreateConcert = (concert) => {
     
-    const { name, date, city, maxTickets, ticketPrice, artists } = concert;
-    if (name && date && city && maxTickets && ticketPrice && artists) {
+    const { name, date, city, maxTickets, ticketPrice, artists, hour } = concert;
+    if (name && date && city && maxTickets && ticketPrice && artists && hour) {
       createConcert(concert)
         .then((resp) => {
           const newConcerts = [...concerts];
@@ -60,8 +60,8 @@ const BackofficeConcerts = () => {
   };
 
   const onUpdateconcert = (concert) => {
-    const {name, date, city, maxTickets, ticketPrice, artists, _id} = concert;
-      if(name && date && city && maxTickets && ticketPrice && artists && _id){
+    const {name, date,hour, city, maxTickets, ticketPrice, artists, _id} = concert;
+      if(name && date && hour && city && maxTickets && ticketPrice && artists && _id){
         updateConcert(concert)
         .then((resp) => {
           setShowUpdateConcertModal(false);

@@ -11,7 +11,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
    * Funcion para comprobar si el user del localstorage es admin o no 
    */
   const isUserAdmin = () => {
-    if(user?.userRoleId?.name === "admin"){
+    if(user?.userRoleId?.name === "administrador"){
       return true;
     }
     return false;

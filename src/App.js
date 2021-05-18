@@ -8,6 +8,7 @@ import BackofficeConcerts from "./pages/backofficeConcert";
 import Navbar from "./components/navBar";
 import { ROLES } from "./utils/constants";
 import Register from "./pages/register";
+import Concert from "./pages/concert";
 
 const App = () => {
 
@@ -79,6 +80,7 @@ const App = () => {
         <Route exact path="/user" render={() => redirectPublic(<User />)} />
         <Route exact path="/backofficeUser" render={() => redirectAdmin(<BackofficeUser />)}/>
         <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)} />
+        <Route path="/concert" component={Concert}/>
       </Switch>
     </BrowserRouter>
   );

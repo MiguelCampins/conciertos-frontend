@@ -10,6 +10,7 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
         <tr>
           <th>Nombre</th>
           <th>Fecha</th>
+          <th>Hora</th>
           <th>Ciudad</th>
           <th>Entradas</th>
           <th>Precio</th>
@@ -20,6 +21,7 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
             <tr key={index}>
               <td>{concert.name}</td>
               <td>{concert.date}</td>
+              <td>{concert.hour}</td>
               <td>{concert.city}</td>
               <td>{concert.maxTickets}</td>
               <td>{concert.ticketPrice}</td>
