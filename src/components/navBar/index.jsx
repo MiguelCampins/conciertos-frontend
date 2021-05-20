@@ -21,28 +21,29 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
   return (
     <div className="custom-navbar">
       <img alt="logo" src={logo}></img>
-      <span>TicketClick</span>
+      <span>TICKETCLICK</span>
       <div className={`navbar-links ${isOpen ? 'navbarOpen' : ''}`}>
-      <a href="/">Home</a>
+      <a href="/">Inicio</a>
         {!isUserAdmin() ? (
         <>
-          <a href="/contact">Contacto</a>
+          <a href="/aboutUs">Sobre nosotros</a>
           <a href="/contact">Contacto</a>
         </>
         ):(
         <>
           <a href="/backofficeUser">Usuarios</a>
           <a href="/backofficeConcert">Conciertos</a>
+          <a href="/backofficeSale">Ventas</a>
         </>
         )}
         {!isLoggedIn ? (
         <>
-          <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <a href="/login">Accede</a>
+          <a href="/register">Registro</a>
         </>
         ):(
          <>
-          <span>{user.name}</span>
+          <span >{user.name}</span>
           <button onClick={()=>logOut()}>Logout</button>
         </> 
         )}

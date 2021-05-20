@@ -22,7 +22,31 @@
   align-items: center;
   justify-content: flex-end;
 }
-.custom-navbar .navbar-links > a,span {
+.custom-navbar .navbar-links > a {
+  color: white;
+  padding: 0px 8px;
+  position: relative;
+  text-decoration: none;
+}
+
+.custom-navbar .navbar-links > a::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    opacity: 0;
+    display: block;
+    bottom: -4px;
+    left: 0;
+    transition: opacity 0.5s, width 0.5s 0.25s;
+    background-color: #fff;
+}
+
+.custom-navbar .navbar-links > a:hover::after {
+  opacity: 1;
+  width: 100%;
+}
+
+.custom-navbar .navbar-links > span {
   color: white;
   padding: 0px 8px;
 }
@@ -69,6 +93,10 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+  }
+
+  .custom-navbar > span {
+    display: none;
   }
 
   .custom-navbar .navbar-links > button {

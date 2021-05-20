@@ -2,14 +2,16 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getConcert } from "../../utils/api/apiConcert";
+import { createSale, getConcert, getRemainingTickets } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import imgDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.jpg";
 import "./index.css";
 import BuyTicketModal from "../../components/buyTicketModal";
+import Footer from "../../components/footer";
 
-const Concert = ({ location }) => {
+const Concert = () => {
   const [concert, setConcert] = useState();
+  const [maxTickets, setMaxTickets] = useState();
   const [showInfo, setShowInfo] = useState(false);
   const [numTickets, setNumTickets] = useState(1);
   const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
@@ -17,20 +19,23 @@ const Concert = ({ location }) => {
   const params = new URLSearchParams(useLocation().search);
   const history = useHistory();
 
-  useEffect(() => {
+  useEffect(()=> {
     const _id = params.get("id");
-    getConcert(_id)
+    Promise.all([getConcert(_id),getRemainingTickets(_id)])
       .then((resp) => {
-        setConcert(resp);
+        setConcert(resp[0]);
+        setMaxTickets(resp[1]);
       })
       .catch((err) => {
         console.warn(err);
       });
-  }, []);
+  });
 
   const onAreYouRegistered = () => {
-    //Comprobar si es usuario
-    if (localStorage.getItem("user") && localStorage.getItem("token")) {
+    if(maxTickets <= 0 || maxTickets < numTickets){
+      alert("entradas agotadas")
+      //Comprobar si es usuario
+    }else if (localStorage.getItem("user") && localStorage.getItem("token")) {
       //mostrar modal para intoducir datos de pago
       setShowModalToBuyTickets(true);
     } else {
@@ -41,14 +46,29 @@ const Concert = ({ location }) => {
   const onBuyTickets = (sale) => {
     const {country, street, city, postalCode, region, targetNum, date, cvv} = sale;
     if(country && street && city && postalCode && region && targetNum && date && cvv){
-     //Crear una venta 
+      //cogemos el usuario del localStorage
+      let user = JSON.parse(localStorage.getItem("user"));
+     //Crear una venta en la base de datos
+     createSale({quantity:numTickets, unitPrice:concert.ticketPrice,concertId:concert._id,userId:user._id})
+      .then((resp) =>{
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
     }
     setShowModalToBuyTickets(false);
   };
 
   const onCloseModal = () => {
     setShowModalToBuyTickets(false);
-  }
+  };
+
+  const formatDate = (date) => {
+    let splitString = date.split("-");
+    let reverseArray = splitString.reverse();
+    let joinArray = reverseArray.join("-");
+    return joinArray;
+};
 
   return (
     <div className="concierto-container">
@@ -70,7 +90,7 @@ const Concert = ({ location }) => {
           <div className="concierto-info">
             <div>
               <span>
-                Dia {concert && concert.date} a las {concert && concert.hour}
+                Dia {concert && formatDate(concert.date)} a las {concert && concert.hour}
               </span>
               <span>En la ciudad de {concert && concert.city}</span>
             </div>
@@ -121,6 +141,7 @@ const Concert = ({ location }) => {
         numTickets={numTickets && numTickets}
         ticketPrice={concert && concert.ticketPrice}
       />
+      <Footer />
     </div>
   );
 };

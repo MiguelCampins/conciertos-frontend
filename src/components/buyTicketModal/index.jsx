@@ -48,7 +48,7 @@ const BuyTicketModal = ({show, onBuyTickets, numTickets, ticketPrice, onCloseMod
                         <span>Número targeta</span><input onChange={(e) => setTargetNum(e.target.value) }/>
                         <span>Fecha caducidad</span><input onChange={(e) => setDate(e.target.value) } type="date"/>
                         <span>CVV</span><input onChange={(e) => setCvv(e.target.value) }/>
-                        <span className="total">Total {calculatePrice()} euros</span>
+                        <span className="total"><b>Total:</b> {calculatePrice()} euros</span>
                     </div>
                     {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
                     <hr/>

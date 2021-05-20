@@ -5,10 +5,12 @@ import Home from "../src/pages/home";
 import User from "./pages/user";
 import BackofficeUser from "./pages/backofficeUser";
 import BackofficeConcerts from "./pages/backofficeConcert";
+import BackofficeSale from "./pages/backofficeSale";
 import Navbar from "./components/navBar";
 import { ROLES } from "./utils/constants";
 import Register from "./pages/register";
 import Concert from "./pages/concert";
+import AboutUs from "./pages/aboutUs";
 
 const App = () => {
 
@@ -79,8 +81,10 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/user" render={() => redirectPublic(<User />)} />
         <Route exact path="/backofficeUser" render={() => redirectAdmin(<BackofficeUser />)}/>
-        <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)} />
+        <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)}/>
+        <Route exact path="/backofficeSale" render={() => redirectAdmin(<BackofficeSale />)}/>
         <Route path="/concert" component={Concert}/>
+        <Route path="/aboutUs" component={AboutUs}/>
       </Switch>
     </BrowserRouter>
   );

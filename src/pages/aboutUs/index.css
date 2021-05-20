@@ -1,0 +1,58 @@
+.aboutUs-container {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.aboutUs-container > img {
+    width: 100%;
+    height: 70vh;
+}
+
+.aboutUs {
+    max-width: 60%;
+    padding-bottom: 20px;
+}
+
+.aboutUs-container h3{
+    text-align: center;
+    padding: 26px 0px;
+    margin: 0px;
+}
+
+.aboutUs > p {
+    color: gray;
+}
+
+.about-us-section-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.about-us-section-wrapper:nth-child(odd){
+    flex-direction: row-reverse;
+}
+
+.about-us-img-wrapper,.about-us-text {
+    flex: 0 50%;
+    min-width: 300px;
+}
+
+.about-us-img {
+    background-image: url(../../assets/images/jeshoots-com--2vD8lIhdnw-unsplash.jpg);
+    background-size: cover;
+    height: 100%;
+    min-height: 300px;
+}
+
+.about-us-text {
+    padding: 30px;
+}
+.about-us-text > p {
+    color: grey;
+    max-width: 70ch;
+}

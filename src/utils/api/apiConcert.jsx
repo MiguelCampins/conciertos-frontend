@@ -18,7 +18,7 @@ export const getConcerts = () =>
       });
   });
 
-  export const getConcert = (_id) =>
+export const getConcert = (_id) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${baseURL}/concert/${_id}`)
@@ -28,7 +28,19 @@ export const getConcerts = () =>
       .catch((err) => {
         reject(err);
       });
-  });  
+  });
+
+export const getRemainingTickets = (_id) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/concert/remainingTickets/${_id}`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 
 export const createConcert = (concert) =>
   new Promise((resolve, reject) => {
@@ -82,7 +94,7 @@ export const createUser = (user) =>
       });
   });
 
-  export const registerUser = (user) =>
+export const registerUser = (user) =>
   new Promise((resolve, reject) => {
     axios
       .post(`${baseURL}/user/register`, { user })
@@ -92,7 +104,7 @@ export const createUser = (user) =>
       .catch((err) => {
         reject(err);
       });
-  });  
+  });
 
 export const getUser = (_id) =>
   new Promise((resolve, reject) => {
@@ -142,6 +154,11 @@ export const getUsers = () =>
       });
   });
 
+/**
+ * mostrar roles
+ * @returns
+ */
+
 export const getRoles = () =>
   new Promise((resolve, reject) => {
     axios
@@ -153,6 +170,12 @@ export const getRoles = () =>
         reject(err);
       });
   });
+
+/**
+ * autologin de usuarios
+ * @param {*} _id
+ * @returns
+ */
 
 export const getUserAutologin = (_id) =>
   new Promise((resolve, reject) => {
@@ -166,6 +189,13 @@ export const getUserAutologin = (_id) =>
       });
   });
 
+/**
+ * login de usuario
+ * @param {*} email
+ * @param {*} password
+ * @returns
+ */
+
 export const getUserLogin = (email, password) =>
   new Promise((resolve, reject) => {
     axios
@@ -177,3 +207,33 @@ export const getUserLogin = (email, password) =>
         reject(err);
       });
   });
+
+/**
+ * crear una venta
+ * @param {*} sale
+ * @returns
+ */
+export const createSale = (sale) =>
+  new Promise((resolve, reject) => {
+    axios
+      .post(`${baseURL}/sale`, { sale })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
+  export const getSales = () =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${baseURL}/sale`)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+
