@@ -15,7 +15,7 @@ const CardConcert = ({ concert }) => {
 
   return (
     <div className="card-concert">
-      <Link to={`/concert?id=${concert._id}`}>
+      <Link to={`/concert/${concert._id}`}>
         {imageUrl ? (
           <img alt="img-concert" src={imageUrl} />
         ) : (

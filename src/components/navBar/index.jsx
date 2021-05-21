@@ -43,7 +43,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         </>
         ):(
          <>
-          <span >{user.name}</span>
+          <a href="/user">{user.name}</a>
           <button onClick={()=>logOut()}>Logout</button>
         </> 
         )}

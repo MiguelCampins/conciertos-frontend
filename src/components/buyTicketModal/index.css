@@ -1,10 +1,10 @@
-.buy-form > h1 {
+.buy-form>h1 {
     text-align: center;
     padding: 8px;
     margin: 0;
 }
 
-.buy-form > hr {
+.buy-form>hr {
     background-color: var(--primary-color);
     height: 1px;
     border: 0;
@@ -12,22 +12,30 @@
 }
 
 .buy-form-body {
+    width: 60%;
+    margin: 0 auto;
+    padding-bottom: 16px;
+}
+
+.buy-form-body-inputs {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+} 
+
+.buy-form-body-inputs > span {
+    color: gray;
 }
 
-.buy-form-body > span {
-    color: black;
-    margin-left: 36px;
-    margin-top: 18px;
+.buy-form-body-total {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.buy-form-body > input {
-    width: 260px;
-    margin-left: 40px;
-    margin-right: 28px;
-    margin-top: 18px;
+.buy-form-body-total > span{
+    padding-right: 16px;
+    color:black;
 }
 
 .buy-form-footer {
@@ -36,7 +44,7 @@
     height: 48px;
 }
 
-.buy-form-footer > :first-child {
+.buy-form-footer> :first-child {
     background: black;
     color: white;
     border-radius: 4px;
@@ -45,7 +53,7 @@
     margin-right: 8px;
 }
 
-.buy-form-footer > :nth-child(2) {
+.buy-form-footer> :nth-child(2) {
     background-color: var(--primary-color);
     color: white;
     border-radius: 4px;

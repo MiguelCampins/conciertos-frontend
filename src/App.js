@@ -83,7 +83,7 @@ const App = () => {
         <Route exact path="/backofficeUser" render={() => redirectAdmin(<BackofficeUser />)}/>
         <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)}/>
         <Route exact path="/backofficeSale" render={() => redirectAdmin(<BackofficeSale />)}/>
-        <Route path="/concert" component={Concert}/>
+        <Route path="/concert/:id" component={Concert}/>
         <Route path="/aboutUs" component={AboutUs}/>
       </Switch>
     </BrowserRouter>
