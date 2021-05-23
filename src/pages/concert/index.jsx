@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+// import { useParams } from 'react-router-dom';
 import {createSale, getConcert, getRemainingTickets} from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import imgDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.jpg";
@@ -20,13 +20,13 @@ const Concert = () => {
   const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
 
-  // const params = new URLSearchParams(useLocation().search);
-  const {id} = useParams();
+  const params = new URLSearchParams(useLocation().search);
+  // const {id} = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    // const _id = params.get("id");
-    Promise.all([getConcert(id), getRemainingTickets(id)])
+    const _id = params.get("id");
+    Promise.all([getConcert(_id), getRemainingTickets(_id)])
       .then((resp) => {
         setConcert(resp[0]);
         setMaxTickets(resp[1]);
@@ -34,7 +34,6 @@ const Concert = () => {
       .catch((err) => {
         console.warn(err);
       }); 
-      
   },[]);
 
   const onAreYouRegistered = (tickets) => {
@@ -131,7 +130,7 @@ const Concert = () => {
           concert={concert}
         />
       </div>
-      <CarouselConcert />
+      <CarouselConcert imagesUrl={concert && concert.images}/>
       <BuyTicketModal
         show={showModalToBuyTickets}
         onCloseModal={onCloseModal}

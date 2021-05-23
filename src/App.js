@@ -11,6 +11,7 @@ import { ROLES } from "./utils/constants";
 import Register from "./pages/register";
 import Concert from "./pages/concert";
 import AboutUs from "./pages/aboutUs";
+import ScrollRestoration from 'react-scroll-restoration';
 
 const App = () => {
 
@@ -75,15 +76,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar isLoggedIn={isLoggedIn()} user={user && user} logOut={logOut}/>
+      <ScrollRestoration />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Home}/>
         <Route exact path="/login" render={redirectPrivate} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/user" render={() => redirectPublic(<User />)} />
         <Route exact path="/backofficeUser" render={() => redirectAdmin(<BackofficeUser />)}/>
         <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)}/>
         <Route exact path="/backofficeSale" render={() => redirectAdmin(<BackofficeSale />)}/>
-        <Route path="/concert/:id" component={Concert}/>
+        <Route path="/concert" component={Concert}/>
         <Route path="/aboutUs" component={AboutUs}/>
       </Switch>
     </BrowserRouter>
