@@ -3,14 +3,14 @@ import "./index.css";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 
-const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
+const moths = [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
 
 const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
   const [tickets, setTickets] = useState(1);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.warn(tickets);
-  },[tickets])
+  }, [tickets]);
   const formatDay = (date) => {
     let splitString = date.split("-");
     return splitString[2];
@@ -28,6 +28,12 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
     }
   };
 
+  const maxNumTickets = (value) => {
+    if(maxTickets > value){
+      setTickets(value +1);
+    }
+  }
+
   if (!concert) {
     return <div>Cargando...</div>;
   }
@@ -43,20 +49,47 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
       <div className="event-body-ticket-text">
         <h3>{concert.name}</h3>
         <span>{concert.city}</span>
-        {maxTickets === 0 ? (<span>Entradas agotadas</span>) : (<span>Quedan {maxTickets} entradas</span>)}
+        {maxTickets === 0 ? (
+          <span>Entradas agotadas</span>
+        ) : (
+          <span>Quedan {maxTickets} entradas</span>
+        )}
       </div>
-      <div className="event-body-ticket-num">
-        <span onClick={() => minNumTickets(tickets)}>
-          <RemoveIcon />
-        </span>
-        <input id="cantidad" type="number" min="1" disabled value={tickets} onChange={(e) => setTickets(e.target.value)}/>
-        <span onClick={() => setTickets(tickets + 1)}>
-          <AddIcon />
-        </span>
-      </div>
+      {maxTickets === 0 ? (
+        <>
+          <div className="event-body-ticket-num">
+            <span>
+              <RemoveIcon />
+            </span>
+            <input id="cantidad" disabled value="0"/>
+            <span>
+              <AddIcon />
+            </span>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="event-body-ticket-num">
+            <span onClick={() => minNumTickets(tickets)}>
+              <RemoveIcon />
+            </span>
+            <input id="cantidad" type="number" min="1" max={maxTickets} disabled value={tickets} onChange={(e) => setTickets(e.target.value)}/>
+            <span onClick={() => maxNumTickets(tickets)}>
+              <AddIcon />
+            </span>
+          </div>
+        </>
+      )}
+
       <div className="event-body-ticket-buy">
         <span>{concert.ticketPrice} Euros</span>
-        <button onClick={() => onAreYouRegistered(tickets)}>Comprar</button>
+        {maxTickets === 0 ? (
+          <button className="button-disabled" disabled>
+            Agotadas
+          </button>
+        ) : (
+          <button onClick={() => onAreYouRegistered(tickets)}>Comprar</button>
+        )}
       </div>
     </div>
   );

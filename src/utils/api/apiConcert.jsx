@@ -237,3 +237,14 @@ export const createSale = (sale) =>
       });
   });
 
+  export const getFilterSale = (userId) => 
+    new Promise((resolve, reject) => {
+      axios
+        .post(`${baseURL}/sale/filter`, {userId})
+        .then((resp) => {
+          resolve(resp.data)
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    })

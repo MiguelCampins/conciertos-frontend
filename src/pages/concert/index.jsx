@@ -19,8 +19,6 @@ const Concert = () => {
   const [numTickets, setNumTickets] = useState(1);
   const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
   const [showAlertThanks, setShowAlertThanks] = useState(false);
-  const [showAlertSpend, setShowAlertSpend] = useState(false);
-  const [showAlertMaxLimit, setShowAlertMaxLimit] = useState(false);
 
   const params = new URLSearchParams(useLocation().search);
   // const {id} = useParams();
@@ -39,12 +37,8 @@ const Concert = () => {
   },[]);
 
   const onAreYouRegistered = (tickets) => {
-    if (maxTickets === 0 ) {
-         setShowAlertSpend(true);
-      //Comprobar si es usuario
-    }else if(maxTickets < tickets){
-         setShowAlertMaxLimit(true);
-    } else if (localStorage.getItem("user") && localStorage.getItem("token")) {
+    
+      if (localStorage.getItem("user") && localStorage.getItem("token")) {
       //mostrar modal para intoducir datos de pago
       setShowModalToBuyTickets(true);
       setNumTickets(tickets);
@@ -140,8 +134,6 @@ const Concert = () => {
         ticketPrice={concert && concert.ticketPrice}
       />
       <ModalAlert tittle="Gracias por su compra!" show={showAlertThanks} setShowAlert={setShowAlertThanks}/>
-      <ModalAlert tittle="Entadas agotadas" show={showAlertSpend} setShowAlert={setShowAlertSpend}/>
-      <ModalAlert tittle="No hay suficientes entradas" show={showAlertMaxLimit} setShowAlert={setShowAlertMaxLimit}/>
       <Footer />
     </div>
   );

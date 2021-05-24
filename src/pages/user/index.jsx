@@ -3,7 +3,7 @@ import "./index.css";
 import Footer from "../../components/footer";
 import EditUser from "../../components/userEdit";
 import UserTickets from "../../components/userTickets";
-import {updateUser } from "../../utils/api/apiConcert";
+import { getFilterSale, updateUser } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
@@ -16,8 +16,23 @@ const MODES = {
 const User = () => {
   const [mode, setMode] = useState(MODES.editarPerfil);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [sales, setSales] = useState();
 
   const history = useHistory();
+
+  useEffect(() => {
+    getFilterSale(user._id)
+      .then((resp) => {
+        setSales(resp);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(sales);
+  }, [sales]);
 
   const logOut = () => {
     localStorage.removeItem("user");
