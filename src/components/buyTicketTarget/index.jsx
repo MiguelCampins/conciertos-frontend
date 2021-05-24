@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -8,6 +8,9 @@ const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov"
 const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
   const [tickets, setTickets] = useState(1);
 
+  useEffect(()=>{
+    console.warn(tickets);
+  },[tickets])
   const formatDay = (date) => {
     let splitString = date.split("-");
     return splitString[2];
@@ -46,7 +49,7 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
         <span onClick={() => minNumTickets(tickets)}>
           <RemoveIcon />
         </span>
-        <input id="cantidad" type="number" value={tickets} onChange={(e) => setTickets(e.target.value)}/>
+        <input id="cantidad" type="number" min="1" disabled value={tickets} onChange={(e) => setTickets(e.target.value)}/>
         <span onClick={() => setTickets(tickets + 1)}>
           <AddIcon />
         </span>

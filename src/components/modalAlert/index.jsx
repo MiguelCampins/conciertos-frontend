@@ -1,21 +1,18 @@
 import { Modal } from "react-bootstrap";
 import React from "react";
-import { useHistory } from "react-router-dom";
 import "./index.css";
 
-const Modalthanks = ({ show, setShowThanks }) => {
-    
-  const history = useHistory();
+const ModalAlert = ({ show, setShowAlert, tittle }) => {
 
   const redirect = () => {
-    setShowThanks(false);
-    history.push("/")
+    setShowAlert(false);
   }
+
   return (
     <div>
       <Modal show={show}>
         <div className="my-modal">
-          <h3>Gracias por su compra!</h3>
+          <h3>{tittle}</h3>
           <hr />
           <button onClick={redirect}>Aceptar</button>
         </div>
@@ -24,4 +21,4 @@ const Modalthanks = ({ show, setShowThanks }) => {
   );
 };
 
-export default Modalthanks;
+export default ModalAlert;

@@ -16,7 +16,6 @@ import ScrollRestoration from 'react-scroll-restoration';
 const App = () => {
 
   const [user , setUser] = useState(JSON.parse(localStorage.getItem('user')));
-
   /**
    * Esta función te mira si hay usuario y si el rol es admin, y si hay te devuelve el componente que toca. Sino te lleva al home.
    * @param {*} component

@@ -15,7 +15,7 @@ html {
     background: var(--primary-color);  
     background: -webkit-linear-gradient(to top, #166b57, var(--primary-color)); 
     background: linear-gradient(to top, #166b57, var(--primary-color)); 
-
+    box-shadow: 0 6px 20px grey;
 }
 
 .event-header .event-header-left {

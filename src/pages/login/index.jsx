@@ -30,7 +30,7 @@ const Login = () => {
         <div className="login-container">
             <div className="login">
                 <h1>Login</h1>
-                <input type="text" placeholder="email" onChange={(event)=> setEmail(event.target.value)}/>
+                <input type="text" placeholder="email" onFocus onChange={(event)=> setEmail(event.target.value)}/>
                 <input type="password" placeholder="password" onChange={(event)=> setPasword(event.target.value)} />
                 <button onClick={() => onLogin(email, password)}>Log in</button>
             </div>

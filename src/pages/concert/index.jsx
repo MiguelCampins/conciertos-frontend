@@ -10,7 +10,7 @@ import BuyTicketModal from "../../components/buyTicketModal";
 import Footer from "../../components/footer";
 import BuyTicketTarget from "../../components/buyTicketTarget";
 import "./index.css";
-import Modalthanks from "../../components/modalThanks";
+import ModalAlert from "../../components/modalAlert";
 import CarouselConcert from "../../components/carouselConcert";
 
 const Concert = () => {
@@ -18,7 +18,9 @@ const Concert = () => {
   const [maxTickets, setMaxTickets] = useState();
   const [numTickets, setNumTickets] = useState(1);
   const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
-  const [showThanks, setShowThanks] = useState(false);
+  const [showAlertThanks, setShowAlertThanks] = useState(false);
+  const [showAlertSpend, setShowAlertSpend] = useState(false);
+  const [showAlertMaxLimit, setShowAlertMaxLimit] = useState(false);
 
   const params = new URLSearchParams(useLocation().search);
   // const {id} = useParams();
@@ -38,10 +40,10 @@ const Concert = () => {
 
   const onAreYouRegistered = (tickets) => {
     if (maxTickets === 0 ) {
-      alert("entradas agotadas");
+         setShowAlertSpend(true);
       //Comprobar si es usuario
     }else if(maxTickets < tickets){
-      alert("No hay suficientes entradas")
+         setShowAlertMaxLimit(true);
     } else if (localStorage.getItem("user") && localStorage.getItem("token")) {
       //mostrar modal para intoducir datos de pago
       setShowModalToBuyTickets(true);
@@ -60,8 +62,8 @@ const Concert = () => {
       createSale({quantity: numTickets,unitPrice: concert.ticketPrice,concertId: concert._id,userId: user._id,})
         .then((resp) => {
           setShowModalToBuyTickets(false);
-          // setMaxTickets(maxTickets - numTickets);
-          setShowThanks(true);
+          setMaxTickets(maxTickets - numTickets);
+          setShowAlertThanks(true);
         })
         .catch((err) => {
           console.warn(err);
@@ -121,15 +123,14 @@ const Concert = () => {
           adolescens ut. Offendit reprimique et has, eu mei homero imperdiet.
         </p>
       </div>
-      <div id="entrada">
-        <BuyTicketTarget
+      <div id="entrada"></div>
+        <BuyTicketTarget i
           setNumTickets={setNumTickets}
           maxTickets={maxTickets}
           onAreYouRegistered={onAreYouRegistered}
           numTickets={numTickets}
           concert={concert}
         />
-      </div>
       <CarouselConcert imagesUrl={concert && concert.images}/>
       <BuyTicketModal
         show={showModalToBuyTickets}
@@ -138,7 +139,9 @@ const Concert = () => {
         numTickets={numTickets}
         ticketPrice={concert && concert.ticketPrice}
       />
-      <Modalthanks show={showThanks} setShowThanks={setShowThanks}/>
+      <ModalAlert tittle="Gracias por su compra!" show={showAlertThanks} setShowAlert={setShowAlertThanks}/>
+      <ModalAlert tittle="Entadas agotadas" show={showAlertSpend} setShowAlert={setShowAlertSpend}/>
+      <ModalAlert tittle="No hay suficientes entradas" show={showAlertMaxLimit} setShowAlert={setShowAlertMaxLimit}/>
       <Footer />
     </div>
   );

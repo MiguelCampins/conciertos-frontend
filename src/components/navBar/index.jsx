@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import MenuIcon from '@material-ui/icons/Menu';
 import "./index.css";
 import logo from "../../assets/images/logo.png";
+import { useHistory } from "react-router-dom";
 
 const Navbar = ({ isLoggedIn, logOut, user }) => {
 
   const [ isOpen, setIsOpen ] = useState(false);
-
+  const history = useHistory();
   /**
    * Funcion para comprobar si el user del localstorage es admin o no 
    */
@@ -16,7 +17,10 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
     }
     return false;
   }
-
+  const logOutAndRedirect = () => {
+    logOut();
+    history.push("/");
+  }
 
   return (
     <div className="custom-navbar">
@@ -44,7 +48,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         ):(
          <>
           <a href="/user">{user.name}</a>
-          <button onClick={()=>logOut()}>Logout</button>
+          <button onClick={()=>logOutAndRedirect()}>Logout</button>
         </> 
         )}
       </div>
