@@ -11,6 +11,7 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
   useEffect(() => {
     console.warn(tickets);
   }, [tickets]);
+  
   const formatDay = (date) => {
     let splitString = date.split("-");
     return splitString[2];

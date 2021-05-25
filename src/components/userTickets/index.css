@@ -1,0 +1,51 @@
+.card-sale-ticket-container {
+    margin-bottom: 32px;
+    box-shadow: 0 0 5px grey;
+    padding: 10px;
+}
+
+.card-sale-ticket {
+    display: flex;
+    max-width: 100%;
+}
+
+.card-sale-ticket-date {
+    display: flex;
+    flex: 0 25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-sale-ticket-date > h3 {
+    color:var(--primary-color);
+    margin: auto;
+}
+
+.card-sale-ticket-date>span {
+    color: black;
+}
+
+.card-sale-ticket-info {
+    display: flex;
+    flex: 0 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-sale-ticket-info>span {
+    color: black;
+}
+
+.card-sale-ticket-price {
+    display: flex;
+    flex: 0 25%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-sale-ticket-price>span {
+    color: black;
+}

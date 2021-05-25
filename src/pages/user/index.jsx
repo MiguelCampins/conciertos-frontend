@@ -6,6 +6,9 @@ import UserTickets from "../../components/userTickets";
 import { getFilterSale, updateUser } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
+import PersonIcon from '@material-ui/icons/Person';
+import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const MODES = {
   conciertos: "conciertos",
@@ -69,14 +72,17 @@ const User = () => {
       </div>
       <div className="user-body">
         <div className="user-body-left-container">
-          <div className="user-body-left">
+          <div className="user-body-left"> 
             <button onClick={() => setMode(MODES.editarPerfil)}>
+            <PersonIcon/>
               <span>Editar perfil</span>
             </button>
             <button onClick={() => setMode(MODES.entradas)}>
+            <ConfirmationNumberIcon/>
               <span>Entradas</span>
             </button>
             <button onClick={() => logOut()}>
+             <ExitToAppIcon/>
               <span>Cerrar sesión</span>
             </button>
           </div>
@@ -85,7 +91,9 @@ const User = () => {
           {mode === MODES.editarPerfil && (
             <EditUser onUpdateUser={onUpdateUser} user={user && user} />
           )}
-          {mode === MODES.entradas && <UserTickets />}
+          {mode === MODES.entradas && sales.map((sale, index) => (
+            <UserTickets key={index} sale={sale}/>
+          ))}
         </div>
       </div>
       <Footer />
