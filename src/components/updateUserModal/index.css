@@ -18,6 +18,17 @@
 .update-form-body {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.update-form-body .error {
+    border: 2px solid red;
+}
+
+.update-form-body > span {
+    color: red;
+    font-size: 15px;
+    margin-top: -15px;
 }
 
 .update-form-body > input,select {

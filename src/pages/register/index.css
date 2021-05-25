@@ -31,6 +31,17 @@
     padding-left: 16px;
     font-size: 18px;
     transition: all 0.5s;
+    margin-bottom: 16px;
+}
+
+.register-form .error {
+    border: 2px solid red;
+}
+
+.register-form span {
+    color: red;
+    font-size: 15px;
+    margin-top: -15px;
 }
 
 .register-form input:focus{

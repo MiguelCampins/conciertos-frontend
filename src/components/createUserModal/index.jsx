@@ -2,8 +2,9 @@ import { getRoles } from "../../utils/api/apiConcert";
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./index.css";
+import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
 
-const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
+const CreateUserModal = ({ show, onCloseModal, onCreateUser, emailDuplicate }) => {
   const [name, setName] = useState();
   const [surnames, setSurnames] = useState();
   const [email, setEmail] = useState();
@@ -12,7 +13,7 @@ const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
   const [city, setCity] = useState();
   const [rol, setRol] = useState();
   const [roles, setRoles] = useState([]);
-  const [validationError, setValidationError ] = useState(false);
+  const [errors, seterrors] = useState({});
 
   useEffect(() => {
     getRoles()
@@ -24,17 +25,40 @@ const CreateUserModal = ({ show, onCloseModal, onCreateUser }) => {
       });
   }, []);
 
-
-
 const validateUserAndSave = () => {
-  let hasError = false;
+  const errs = {};
   // validamos que están todos los campos
-  if(!name || !surnames || !email || !password || !phone || !city || !rol) {
-    hasError = true;
+  if(!name || !isValidstring(name)){
+    errs.hasError = true;
+    errs.name = true;
+  }
+  if(!surnames ||!isValidstring(surnames)){
+    errs.hasError = true;
+    errs.surnames = true;
+  }
+  if(!city || !isValidstring(city)){
+    errs.hasError = true;
+    errs.city = true;
+  }
+  if(!phone || !isValidPhone(phone)){
+    errs.hasError = true;
+    errs.phone = true;
+  }
+  if(!email || !isValidEmail(email)){
+    errs.hasError = true;
+    errs.email = true;
+  }
+  if(!password){
+    errs.hasError = true;
+    errs.password = true;
+  }
+  if(!rol){
+    errs.hasError = true;
+    errs.rol = true;
   }
   // si hay alguno que falta ponemos que hay un error de validacion
-  if(hasError) {
-    setValidationError(true);
+  if(errs.hasError) {
+    seterrors(errs);
   } else {
     // si no hay error, guardamos
     onCreateUser({name, surnames, email, password, phone, city, userRoleId: rol});
@@ -48,13 +72,14 @@ const validateUserAndSave = () => {
             <h1>Crear usuario</h1>
             <hr/>
             <div className="create-form-body">
-              <input placeholder="Nombre" type="text" onChange={(e) => setName(e.target.value)}/>
-              <input placeholder="Apellidos" type="text" onChange={(e) => setSurnames(e.target.value)}/>
-              <input placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>
-              <input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
-              <input placeholder="Telefono" type="text" onChange={(e) => setPhone(e.target.value)}/>
-              <input placeholder="Ciudad" type="text" onChange={(e) => setCity(e.target.value)}/>
-              <select onChange={(e) => setRol(e.currentTarget.value)}>
+              <input className={errors.name && 'error'} placeholder="Nombre" type="text" onChange={(e) => setName(e.target.value)}/>
+              <input className={errors.surnames && 'error'} placeholder="Apellidos" type="text" onChange={(e) => setSurnames(e.target.value)}/>
+              <input className={errors.email && 'error'} placeholder="Email" type="email" onChange={(e) => setEmail(e.target.value)}/>
+                {emailDuplicate && <span>Email en uso</span>}
+              <input className={errors.password && 'error'} placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+              <input className={errors.phone && 'error'} placeholder="Telefono" type="text" onChange={(e) => setPhone(e.target.value)}/>
+              <input className={errors.city && 'error'} placeholder="Ciudad" type="text" onChange={(e) => setCity(e.target.value)}/>
+              <select className={errors.rol && 'error'} onChange={(e) => setRol(e.target.value)}>
                 <option disabled selected>-- Tipo de usuario --</option>
                 {roles &&
                   roles.map((role, index) => (
@@ -62,7 +87,6 @@ const validateUserAndSave = () => {
                   ))}
               </select>
             </div>
-            {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
             <hr/>
             <div className="create-form-footer">
               <button variant="secondary" onClick={() => onCloseModal()}>Cerrar</button>

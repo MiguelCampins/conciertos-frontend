@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createUser, deleteUser, getUsers, getRoles, updateUser } from "../../utils/api/apiConcert";
+import { deleteUser, getUsers, getRoles, updateUser, registerUser } from "../../utils/api/apiConcert";
 import CreateUserModal from "../../components/createUserModal";
 import TableUsers from "../../components/tableUser/tableUser";
 import UpdateUserModal from "../../components/updateUserModal";
@@ -11,6 +11,7 @@ const BackofficeUser = () => {
   const [showCreateUserModal, setShowCreateUserModal] = useState(false);
   const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState();
+  const [emailDuplicate, setEmailDuplicated] = useState(false);
 
   useEffect(() => {
     //Llamada a la base de datos de los usuarios y de los roles
@@ -24,7 +25,7 @@ const BackofficeUser = () => {
         .catch((err) => {
           console.warn(err);
         });
-  }, [users]);
+  }, [showUpdateUserModal]);
 
 /**
  * Funcion para cerrar los modals. Esto cierra el estate de los dos modales y te limpia el usuario seleccionado.
@@ -32,6 +33,7 @@ const BackofficeUser = () => {
 const onCloseModal = () => {
   setShowCreateUserModal(false);
   setShowUpdateUserModal(false);
+  setEmailDuplicated(false)
   setSelectedUser();
 };
 
@@ -45,7 +47,7 @@ const onCloseModal = () => {
     if (!name || !surnames || !email || !password || !phone || !city || !userRoleId ) {
       
     } else {
-      createUser(user)
+      registerUser(user)
         .then((resp) => {
           //Hacemos una copia de los usuarios
           const newUsers = [...users];
@@ -57,7 +59,11 @@ const onCloseModal = () => {
           setShowCreateUserModal(false);
         })
         .catch((err) => {
-          console.warn(err);
+          if(err.response.data.message.includes('email')){
+            setEmailDuplicated(true);
+          } else {
+            console.warn(err);
+          }
         });
     }
   };
@@ -104,7 +110,11 @@ const onCloseModal = () => {
           setUsers(newUsers);
         })
         .catch((err) => {
-          console.warn(err);
+          if(err.response.data.message.includes('email')){
+            setEmailDuplicated(true);
+          } else {
+            console.warn(err);
+          }
         });
      } 
   }
@@ -122,6 +132,7 @@ const onCloseModal = () => {
           show={showCreateUserModal}
           onCloseModal={onCloseModal}
           onCreateUser={onCreateUser}
+          emailDuplicate={emailDuplicate}
         />
       )}
       {showUpdateUserModal && (
@@ -130,6 +141,7 @@ const onCloseModal = () => {
           onCloseModal={onCloseModal}
           user={selectedUser}
           onUpdateUser={onUpdateUser}
+          emailDuplicate={emailDuplicate}
         />
       )}
         <div className="table table-bordered table-hover ">

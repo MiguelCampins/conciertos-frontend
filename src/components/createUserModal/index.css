@@ -17,7 +17,12 @@
 
 .create-form-body {
     display: flex;
+    align-items: center;
     flex-direction: column;
+}
+
+.create-form-body .error {
+    border: 2px solid red;
 }
 
 .create-form-body > input {
@@ -29,6 +34,13 @@
 .create-form-body > select {
     width: 246px;
     margin: auto;
+    margin-bottom: 16px;
+}
+
+.create-form-body > span {
+    color: red;
+    font-size: 15px;
+    margin-top: -15px;
 }
 
 .create-form-footer {

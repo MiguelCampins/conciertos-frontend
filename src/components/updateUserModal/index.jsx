@@ -1,17 +1,24 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getRoles } from "../../utils/api/apiConcert";
 import { Modal } from "react-bootstrap";
 import "./index.css";
+import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
 
-const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
+const UpdateUserModal = ({
+  show,
+  onCloseModal,
+  user,
+  onUpdateUser,
+  emailDuplicate,
+}) => {
   const [name, setName] = useState(user.name);
   const [surnames, setSurnames] = useState(user.surnames);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
   const [roles, setRoles] = useState([]);
-  const [role, setRole] = useState();
-  const [validationError, setValidationError ] = useState(false);
+  const [rol, setRol] = useState();
+  const [errors, seterrors] = useState({});
 
   useEffect(() => {
     getRoles()
@@ -24,20 +31,49 @@ const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
   }, []);
 
   const validateUserAndSave = () => {
-    let hasError = false;
+    const errs = {};
     // validamos que están todos los campos
-    if(!name || !surnames || !email || !phone || !city || !role) {
-      hasError = true;
+    if (!name || !isValidstring(name)) {
+      errs.hasError = true;
+      errs.name = true;
+    }
+    if (!surnames || !isValidstring(surnames)) {
+      errs.hasError = true;
+      errs.surnames = true;
+    }
+    if (!city || !isValidstring(city)) {
+      errs.hasError = true;
+      errs.city = true;
+    }
+    if (!phone || !isValidPhone(phone)) {
+      errs.hasError = true;
+      errs.phone = true;
+    }
+    if (!email || !isValidEmail(email)) {
+      errs.hasError = true;
+      errs.email = true;
+    }
+    if (!rol) {
+      errs.hasError = true;
+      errs.rol = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
-    if(hasError) {
-      setValidationError(true);
+    if (errs.hasError) {
+      seterrors(errs);
     } else {
       // si no hay error, guardamos
-      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id, userRoleId: role })
+      onUpdateUser({
+        name,
+        surnames,
+        email,
+        phone,
+        city,
+        _id: user?._id,
+        userRoleId: rol,
+      });
     }
-  }; 
-  
+  };
+
   return (
     <div>
       <Modal show={show}>
@@ -45,35 +81,22 @@ const UpdateUserModal = ({ show, onCloseModal, user, onUpdateUser }) => {
           <h1>Actualizar usuario</h1>
           <hr />
           <div className="update-form-body">
-            <input
-              defaultValue={user.name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              defaultValue={user.surnames}
-              onChange={(e) => setSurnames(e.target.value)}
-            />
-            <input
-              defaultValue={user.email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              defaultValue={user.phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <input
-              defaultValue={user.city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <select onChange={(e) => setRole(e.currentTarget.value)}>
+            <input className={errors.name && 'error'} defaultValue={user.name} onChange={(e) => setName(e.target.value)}/>
+            <input className={errors.surnames && 'error'} defaultValue={user.surnames} onChange={(e) => setSurnames(e.target.value)}/>
+            <input className={errors.email && 'error'} defaultValue={user.email} onChange={(e) => setEmail(e.target.value)}/>
+            {emailDuplicate && <span>El email ya esta en uso</span>}
+            <input className={errors.phone && 'error'} defaultValue={user.phone} onChange={(e) => setPhone(e.target.value)}/>
+            <input className={errors.city && 'error'} defaultValue={user.city} onChange={(e) => setCity(e.target.value)}/>
+            <select className={errors.rol && 'error'} onChange={(e) => setRol(e.currentTarget.value)}>
               <option disabled selected>--Tipo de usuario</option>
               {roles &&
-                  roles.map((role, index) => (
-                    <option key={index} value={role._id}>{role.name}</option>
-                  ))}
+                roles.map((role, index) => (
+                  <option key={index} value={role._id}>
+                    {role.name}
+                  </option>
+                ))}
             </select>
           </div>
-          {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
           <hr />
           <div className="update-form-footer">
             <button onClick={() => onCloseModal()}>Cerrar</button>
