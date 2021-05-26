@@ -10,5 +10,10 @@ export const isValidPhone = (phone) => {
 
 export const isValidstring = (string) => {
     const regex = new RegExp(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/);
-    return regex.test(string)
+    return regex.test(string);
+}
+
+export const isValidNumber = (num) => {
+    const regex = new RegExp(/^[0-9]*$/);
+    return regex.test(num);
 }

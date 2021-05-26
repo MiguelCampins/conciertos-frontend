@@ -6,6 +6,7 @@ const ModalAlert = ({ show, setShowAlert, tittle }) => {
 
   const redirect = () => {
     setShowAlert(false);
+    window.location.reload();
   }
 
   return (

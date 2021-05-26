@@ -7,10 +7,6 @@ const moths = [ "ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "
 
 const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
   const [tickets, setTickets] = useState(1);
-
-  useEffect(() => {
-    console.warn(tickets);
-  }, [tickets]);
   
   const formatDay = (date) => {
     let splitString = date.split("-");

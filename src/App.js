@@ -74,7 +74,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Navbar isLoggedIn={isLoggedIn()} user={user && user} logOut={logOut}/>
+      <Navbar isLoggedIn={isLoggedIn()} user={user} logOut={logOut}/>
       <ScrollRestoration />
       <Switch>
         <Route exact path="/" component={Home}/>

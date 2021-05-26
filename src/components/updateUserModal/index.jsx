@@ -81,12 +81,12 @@ const UpdateUserModal = ({
           <h1>Actualizar usuario</h1>
           <hr />
           <div className="update-form-body">
-            <input className={errors.name && 'error'} defaultValue={user.name} onChange={(e) => setName(e.target.value)}/>
-            <input className={errors.surnames && 'error'} defaultValue={user.surnames} onChange={(e) => setSurnames(e.target.value)}/>
-            <input className={errors.email && 'error'} defaultValue={user.email} onChange={(e) => setEmail(e.target.value)}/>
+            <input className={errors.name && 'error'} defaultValue={name} onChange={(e) => setName(e.target.value)}/>
+            <input className={errors.surnames && 'error'} defaultValue={surnames} onChange={(e) => setSurnames(e.target.value)}/>
+            <input className={errors.email && 'error'} defaultValue={email} onChange={(e) => setEmail(e.target.value)}/>
             {emailDuplicate && <span>El email ya esta en uso</span>}
-            <input className={errors.phone && 'error'} defaultValue={user.phone} onChange={(e) => setPhone(e.target.value)}/>
-            <input className={errors.city && 'error'} defaultValue={user.city} onChange={(e) => setCity(e.target.value)}/>
+            <input className={errors.phone && 'error'} defaultValue={phone} onChange={(e) => setPhone(e.target.value)}/>
+            <input className={errors.city && 'error'} defaultValue={city} onChange={(e) => setCity(e.target.value)}/>
             <select className={errors.rol && 'error'} onChange={(e) => setRol(e.currentTarget.value)}>
               <option disabled selected>--Tipo de usuario</option>
               {roles &&

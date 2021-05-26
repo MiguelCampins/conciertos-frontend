@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { isValidNumber, isValidstring } from "../../utils/functions";
 import "./index.css";
 
 const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => {
@@ -10,17 +11,42 @@ const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => 
   const [tickets, setTickets] = useState(concert.maxTickets);
   const [price, setPrice] = useState(concert.ticketPrice);
   const [artists, setArtists] = useState(concert.artists.join(","));
-  const [validationError, setValidationError ] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const validateConcertAndSave = () => {
-    let hasError = false;
+    const errs = {};
     // validamos que están todos los campos
-    if(!name || !date || !city || !tickets || !price || !artists || !hour) {
-      hasError = true;
+    if(!name) {
+      errs.hasError = true;
+      errs.name = true;
+    }
+    if(!date) {
+      errs.hasError = true;
+      errs.date = true;
+    }
+    if(!hour) {
+      errs.hasError = true;
+      errs.hour = true;
+    }
+    if(!city || !isValidstring(city)) {
+      errs.hasError = true;
+      errs.city = true;
+    }
+    if(!tickets || !isValidNumber(tickets)) {
+      errs.hasError = true;
+      errs.tickets = true;
+    }
+    if(!price || !isValidNumber(price)) {
+      errs.hasError = true;
+      errs.price = true;
+    }
+    if(!artists){
+      errs.hasError = true;
+      errs.artists = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
-    if(hasError) {
-      setValidationError(true);
+    if(errs.hasError) {
+      setErrors(errs);
     } else {
       // si no hay error, guardamos
       onUpdateconcert({ name, date,hour, city, maxTickets:tickets, ticketPrice:price, artists:artists.split(","), _id: concert?._id})
@@ -34,15 +60,14 @@ const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => 
           <h1>Actualizar concierto</h1>
           <hr />
           <div className="update-form-body">
-              <input defaultValue={name} onChange={(e) => setName(e.target.value)}/>
-              <input defaultValue={date} type="date" onChange={(e) => setDate(e.target.value)} />
-              <input defaultValue={hour} type="time" onChange={(e)=> setHour(e.target.value)}/>
-              <input defaultValue={city} onChange={(e) => setCity(e.target.value)} />
-              <input defaultValue={tickets} onChange={(e) => setTickets(e.target.value)} />
-              <input defaultValue={price} onChange={(e) => setPrice(e.target.value)} />
-              <input defaultValue={artists} onChange={(e) => setArtists(e.target.value)} />
+              <input className={errors.name && 'error'} defaultValue={name} onChange={(e) => setName(e.target.value)}/>
+              <input className={errors.date && 'error'} defaultValue={date} type="date" onChange={(e) => setDate(e.target.value)} />
+              <input className={errors.hour && 'error'} defaultValue={hour} type="time" onChange={(e)=> setHour(e.target.value)}/>
+              <input className={errors.city && 'error'} defaultValue={city} onChange={(e) => setCity(e.target.value)} />
+              <input className={errors.tickets && 'error'} defaultValue={tickets} onChange={(e) => setTickets(e.target.value)} />
+              <input className={errors.price && 'error'} defaultValue={price} onChange={(e) => setPrice(e.target.value)} />
+              <input className={errors.artists && 'error'} defaultValue={artists} onChange={(e) => setArtists(e.target.value)} />
           </div>
-          {validationError && <p style={{color:'red'}}>Error de validacion!!</p>}
           <hr />
           <div className="update-form-footer">
             <button onClick={() => onCloseModal()}>Cerrar</button>

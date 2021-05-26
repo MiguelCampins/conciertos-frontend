@@ -20,6 +20,10 @@
     flex-direction: column;
 }
 
+.update-form-body .error {
+    border: 2px solid red;
+}
+
 .update-form-body > input {
     width: 246px;
     margin: auto;

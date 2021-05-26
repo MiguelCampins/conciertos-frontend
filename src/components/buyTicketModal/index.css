@@ -27,6 +27,10 @@
     color: gray;
 }
 
+.buy-form-body-inputs .error {
+    border: 2px solid red;
+}
+
 .buy-form-body-total {
     width: 100%;
     display: flex;

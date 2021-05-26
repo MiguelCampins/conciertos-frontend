@@ -117,7 +117,7 @@ const onCloseModal = () => {
           }
         });
      } 
-  }
+  };
 
   return (
     <div className="users-container">

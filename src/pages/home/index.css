@@ -36,11 +36,21 @@ body{
     color: white;
 }
 
-.tag-entradas > a {
-    color: white;
+.tag-entradas > button {
     background-color: var(--primary-color);
-    width: 72px;
-    padding: 5px;
+    width: 85px;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+
+.tag-entradas > button:hover {
+    background: var(--secondary-color);
+}
+
+.tag-entradas button a {
+    text-decoration: none;
+    color: white;
 }
 
 .home-body {
@@ -85,6 +95,12 @@ body{
 .home-about-us-text > a {
     color: white;
     background-color: var(--primary-color);
-
     padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.4s;
+}
+
+.home-about-us-text > a:hover {
+    background-color: var(--secondary-color);
 }

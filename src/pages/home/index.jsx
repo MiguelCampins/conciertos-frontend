@@ -26,7 +26,7 @@ const Home = () => {
           <p>
             Con Armin van Buuren, David Guetta, Bob Sinclair, Mónica naranjo,Texas y Don Diablo
           </p>
-          <Link to="/concert?id=60a3a6f56b22992280922b39">Entradas</Link>
+          <button><Link to="/concert?id=60a3a6f56b22992280922b39">Entradas</Link></button>
         </div>
       </div>
       <div className="home-body">

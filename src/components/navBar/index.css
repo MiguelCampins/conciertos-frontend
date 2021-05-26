@@ -46,11 +46,6 @@
   width: 100%;
 }
 
-.custom-navbar .navbar-links > span {
-  color: white;
-  padding: 0px 8px;
-}
-
 .custom-navbar .navbar-links > button {
   border: transparent;
   background: none;

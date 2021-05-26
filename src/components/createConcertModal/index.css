@@ -16,6 +16,10 @@
     flex-direction: column;
 }
 
+.concert-body .error {
+    border: 2px solid red;
+}
+
 .concert-body > input {
     width: 246px;
     margin: auto;

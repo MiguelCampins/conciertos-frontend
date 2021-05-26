@@ -24,6 +24,10 @@
     width: 612px;
 }
 
+.edit-user-form .error {
+    border: 2px solid red;
+}
+
 .edit-user-form > button {
     background-color: var(--primary-color);
     color: white;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import Footer from "../../components/footer";
-import EditUser from "../../components/userEdit";
+import UserEdit from "../../components/userEdit";
 import UserTickets from "../../components/userTickets";
 import { getFilterSale, updateUser } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
@@ -9,6 +9,7 @@ import logo from "../../assets/images/logo.png";
 import PersonIcon from '@material-ui/icons/Person';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ModalAlert from "../../components/modalAlert";
 
 const MODES = {
   conciertos: "conciertos",
@@ -20,6 +21,8 @@ const User = () => {
   const [mode, setMode] = useState(MODES.editarPerfil);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [sales, setSales] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [emailDuplicate, setEmailDuplicate] = useState(false);
 
   const history = useHistory();
 
@@ -33,10 +36,6 @@ const User = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(sales);
-  }, [sales]);
-
   const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -48,9 +47,17 @@ const User = () => {
     const { name, surnames, email, phone, city, _id } = user;
     if (name && surnames && email && phone && city && _id) {
       updateUser(user)
-        .then((resp) => {})
+        .then((resp) => {
+          setUser(resp);
+          localStorage.setItem('user', JSON.stringify(resp));
+          setShowModal(true);
+        })
         .catch((err) => {
-          console.warn(err);
+          if(err.response.data.message.includes('email')){
+            setEmailDuplicate(true);
+          } else {
+            console.warn(err);
+          }
         });
     }
   };
@@ -89,13 +96,14 @@ const User = () => {
         </div>
         <div className="user-body-right">
           {mode === MODES.editarPerfil && (
-            <EditUser onUpdateUser={onUpdateUser} user={user && user} />
+            <UserEdit onUpdateUser={onUpdateUser} user={user && user} emailDuplicate={emailDuplicate}/>
           )}
           {mode === MODES.entradas && sales.map((sale, index) => (
             <UserTickets key={index} sale={sale}/>
           ))}
         </div>
       </div>
+      <ModalAlert tittle="Usuario actualizado" show={showModal} setShowAlert={setShowModal} />
       <Footer />
     </div>
   );
