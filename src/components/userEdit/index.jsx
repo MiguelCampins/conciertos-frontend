@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
+import {
+  isValidEmail,
+  isValidPhone,
+  isValidstring,
+} from "../../utils/functions";
 import "./index.css";
+import image from "../../assets/images/pngegg.png";
 
 const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
   const [name, setName] = useState(user.name);
@@ -8,63 +13,122 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
+  const [password, setPassword] = useState(user.password);
   const [errors, setErrors] = useState({});
+  const [dissabled, setDissabled] = useState(true);
 
   const validateUserAndSave = () => {
     const errs = {};
     // validamos que están todos los campos
-    if(!name || !isValidstring(name)) {
+    if (!name || !isValidstring(name)) {
       errs.hasError = true;
       errs.name = true;
     }
-    if(!surnames || !isValidstring(surnames)){
+    if (!surnames || !isValidstring(surnames)) {
       errs.hasError = true;
       errs.surnames = true;
     }
-    if(!city || !isValidstring(city)){
+    if (!city || !isValidstring(city)) {
       errs.hasError = true;
       errs.city = true;
     }
-    if(!phone || !isValidPhone(phone)){
+    if (!phone || !isValidPhone(phone)) {
       errs.hasError = true;
       errs.phone = true;
     }
-    if(!email || !isValidEmail(email)){
+    if (!email || !isValidEmail(email)) {
       errs.hasError = true;
       errs.email = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
-    if(errs.hasError) {
+    if (errs.hasError) {
       setErrors(errs);
     } else {
       // si no hay error, guardamos
       setErrors({});
-      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id })
+      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id, password });
     }
-  }; 
+  };
 
   return (
-    <div className="edit-user-container">
-      <h2>Editar mi perfil</h2>
-      <p>
-        La dirección de correo proporcionada será la dirección de facturación y envío de
-        las entradas.
-      </p>
-      <div className="edit-user-form">
-        <label>Nombre*</label>
-        <input className={errors.name && 'error'} defaultValue={name} onChange={(e)=>setName(e.target.value)}></input>
-        <label>Apellidos*</label>
-        <input className={errors.surnames && 'error'} defaultValue={surnames} onChange={(e)=>setSurnames(e.target.value)}></input>
-        <label>Telefono*</label>
-        <input className={errors.phone && 'error'} defaultValue={phone} onChange={(e)=>setPhone(e.target.value)}></input>
-        <label>Ciudad*</label>
-        <input className={errors.city && 'error'} defaultValue={city} onChange={(e)=>setCity(e.target.value)}></input>
-        <label>Email*</label>
-        <input className={errors.email && 'error'} defaultValue={email} onChange={(e)=>setEmail(e.target.value)}></input>
-        {emailDuplicate && <span style={{color:"red"}}>El email ya existe</span>}
-        <button onClick={validateUserAndSave}>Enviar</button>
+    <>
+      <div className="edit-user-container">
+        <div className="edit-user-top">
+          <div className="edit-user-img">
+            <img alt="img" src={image} />
+          </div>
+          <div className="edit-user-text">
+            <h2>Editar mi perfil</h2>
+            <p>
+              La dirección de correo proporcionada será la dirección de
+              facturación y envío de las entradas.
+            </p>
+          </div>
+        </div>
+
+        <div className="edit-user-form">
+          <div className="edit-user-form-left">
+            <label htmlFor="name">Nombre*</label>
+            <input
+              disabled={dissabled}
+              id="name"
+              className={errors.name && "error"}
+              defaultValue={name}
+              onChange={(e) => setName(e.target.value)}
+            ></input>
+            <label htmlFor="surnames">Apellidos</label>
+            <input
+              disabled={dissabled}
+              id="surnames"
+              className={errors.surnames && "error"}
+              defaultValue={surnames}
+              onChange={(e) => setSurnames(e.target.value)}
+            ></input>
+            <label htmlFor="phone">Telefono</label>
+            <input
+              disabled={dissabled}
+              id="phone"
+              className={errors.phone && "error"}
+              defaultValue={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            ></input>
+          </div>
+          <div className="edit-user-form-right">
+            <label htmlFor="city">Ciudad*</label>
+            <input
+              disabled={dissabled}
+              id="city"
+              className={errors.city && "error"}
+              defaultValue={city}
+              onChange={(e) => setCity(e.target.value)}
+            ></input>
+            <label htmlFor="email">Email*</label>
+            <input
+              disabled={dissabled}
+              id="email"
+              className={errors.email && "error"}
+              defaultValue={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+            {emailDuplicate && (
+              <span>El email ya existe</span>
+            )}
+            <label htmlFor="password">Contraseña*</label>
+            <input disabled={dissabled} id="password" type="password" onChange={(e)=>setPassword(e.target.value)}></input>
+          </div>
+        </div>
+        <div className="edit-user-form-buttons">
+          {!dissabled ? (
+            <>
+              <button className="button-confirm" onClick={validateUserAndSave}>Enviar</button>
+              <button className="button-cancel" onClick={() => setDissabled(true)}>Cancelar</button>
+            </>
+          ) : (
+            <button className="button-edit" onClick={()=> setDissabled(false)}>Editar</button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -13,8 +13,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20rem;
-    height: 20rem;
+    width: 22rem;
+    height: 26rem;
     margin-left: 10rem;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
     border-radius: 5px;
@@ -25,10 +25,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+}
+
+.login-form > img {
+    width: 33%;
+    padding-bottom: 40px;
+}
+
+.login-form .error-login {
+    border: 1px solid red;
+    border-radius: 4px;
+    width: 62%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background: rgba(255, 0, 0,0.1);
 }
 
 .login-form input{
-    width: 150px;
     height: 40px;
     border-radius: 60px;
     border: 1px solid #868686;
@@ -38,10 +52,8 @@
     margin-bottom: 16px;
 }
 
-.login-form span {
-    color: red;
-    font-size: 15px;
-    margin-top: -15px;
+.login-form .error {
+    border: 2px solid red;
 }
 
 .login-form input:focus{
@@ -50,7 +62,7 @@
 }
 
 .login-form button{
-    width: 150px;
+    width: 67%;
     height: 40px;
     border-radius: 60px;
     font-size: 18px;
@@ -61,7 +73,7 @@
 }
 
 .login-form button:hover{
-    box-shadow: 0 10px 6px -6px gray;
+    background-color: var(--secondary-color);
 }
 
 .login-form button:active{
@@ -73,7 +85,7 @@
 
 @media screen and (max-width: 768px) {
     .login-container {
-        background-position-x: 111vw;
+        background-position-x: 200vw;
     }
     .login-container-form{
         margin: auto;
