@@ -18,6 +18,8 @@ export const getConcerts = () =>
       });
   });
 
+
+
 export const getConcert = (_id) =>
   new Promise((resolve, reject) => {
     axios
@@ -241,6 +243,18 @@ export const createSale = (sale) =>
     new Promise((resolve, reject) => {
       axios
         .post(`${baseURL}/sale/filter`, {userId})
+        .then((resp) => {
+          resolve(resp.data)
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    })
+
+    export const getFilterConcert = () => 
+    new Promise((resolve, reject) => {
+      axios
+        .get(`${baseURL}/concert/filter?published=true`)
         .then((resp) => {
           resolve(resp.data)
         })

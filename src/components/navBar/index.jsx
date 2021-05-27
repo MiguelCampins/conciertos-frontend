@@ -27,9 +27,9 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
       <img alt="logo" src={logo}></img>
       <span>TICKETCLICK</span>
       <div className={`navbar-links ${isOpen ? 'navbarOpen' : ''}`}>
+      <a href="/">Inicio</a>
         {!isUserAdmin() ? (
         <>
-          <a href="/">Inicio</a>
           <a href="/aboutUs">Sobre nosotros</a>
           <a href="/contact">Contacto</a>
           <a href="/user">{user && user.name}</a>

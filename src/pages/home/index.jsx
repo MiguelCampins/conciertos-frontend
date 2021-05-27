@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardConcert from "../../components/cardConcert";
 import Footer from "../../components/footer";
-import { getConcerts } from "../../utils/api/apiConcert";
+import { getFilterConcert } from "../../utils/api/apiConcert";
 import { Link } from "react-router-dom";
 import "./index.css";
 
@@ -9,7 +9,7 @@ const Home = () => {
   const[concerts, setConcerts] = useState();
 
   useEffect(()=> {
-    getConcerts()
+    getFilterConcert()
       .then((resp) => {
         setConcerts(resp);
       })

@@ -2,20 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getConcert } from "../../utils/api/apiConcert";
 import "./index.css";
 
-const moths = [
-  "ene",
-  "feb",
-  "mar",
-  "abr",
-  "may",
-  "jun",
-  "jul",
-  "ago",
-  "sep",
-  "oct",
-  "nov",
-  "dic",
-];
+const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
 
 const UserTickets = ({ sale }) => {
   if (!sale) {
@@ -34,6 +21,10 @@ const UserTickets = ({ sale }) => {
       });
   }, []);
 
+  useEffect(()=>{
+    console.warn(concert)
+  },[concert])
+
   const formatDay = (date) => {
     let splitString = date.split("-");
     return splitString[2];
@@ -48,6 +39,10 @@ const UserTickets = ({ sale }) => {
   const totalPrice = () => {
     return concert.ticketPrice * sale.quantity;
   };
+
+  if(!concert || !concert.published){
+    return null;
+  }
 
   return (
     <div className="card-sale-ticket-container">

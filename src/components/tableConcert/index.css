@@ -2,3 +2,15 @@ button {
     border: transparent;
     background: transparent;
 }
+
+.publish {
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 74px;
+    transition: all 0.4s;
+}
+
+.publish:hover {
+    background-color: black;
+    color: white;
+}

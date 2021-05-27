@@ -51,15 +51,15 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
         las entradas.
       </p>
       <div className="edit-user-form">
-        <span>Nombre*</span>
+        <label>Nombre*</label>
         <input className={errors.name && 'error'} defaultValue={name} onChange={(e)=>setName(e.target.value)}></input>
-        <span>Apellidos*</span>
+        <label>Apellidos*</label>
         <input className={errors.surnames && 'error'} defaultValue={surnames} onChange={(e)=>setSurnames(e.target.value)}></input>
-        <span>Telefono*</span>
+        <label>Telefono*</label>
         <input className={errors.phone && 'error'} defaultValue={phone} onChange={(e)=>setPhone(e.target.value)}></input>
-        <span>Ciudad*</span>
+        <label>Ciudad*</label>
         <input className={errors.city && 'error'} defaultValue={city} onChange={(e)=>setCity(e.target.value)}></input>
-        <span>Email*</span>
+        <label>Email*</label>
         <input className={errors.email && 'error'} defaultValue={email} onChange={(e)=>setEmail(e.target.value)}></input>
         {emailDuplicate && <span style={{color:"red"}}>El email ya existe</span>}
         <button onClick={validateUserAndSave}>Enviar</button>

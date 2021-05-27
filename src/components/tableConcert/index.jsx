@@ -1,8 +1,20 @@
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
+import { updateConcert } from "../../utils/api/apiConcert";
 
 const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
+
+  const onPublicConcert = (concert) => {
+    const {published, _id} = concert;
+       updateConcert(concert)
+       .then((resp) => {
+
+       })
+       .catch((err) => {
+        console.warn(err);
+      });
+  };
 
   return (
     <table>
@@ -35,6 +47,9 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
                 <button onClick={()=> onSelectConcert(concert)}>
                   <EditIcon />
                 </button>
+              </td>
+              <td>
+                <button className="publish" onClick={() => onPublicConcert({_id:concert._id, published:!concert.published})}>{!concert.published ? 'publicar' : 'quitar'}</button>
               </td>
             </tr>
           ))}
