@@ -1,0 +1,21 @@
+.my-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 52%;
+    text-align: center;
+    margin: auto;
+    margin-top: 48px;
+}
+
+.my-container > button {
+    background: var(--primary-color);
+    padding: 6px 67px;
+    color: white;
+    border-radius: 4px;
+    transition: all 0.4s;
+}
+
+.my-container > button:hover{
+    background: var(--secondary-color);
+}

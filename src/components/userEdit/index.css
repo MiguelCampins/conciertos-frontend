@@ -11,7 +11,7 @@
     flex: 0 20%;
 }
 
-.edit-user-img > img {
+.edit-user-img>img {
     width: 123px;
 }
 
@@ -20,10 +20,6 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
-}
-
-.edit-user-text > p {
-    color: black;
 }
 
 .edit-user-form {
@@ -56,7 +52,7 @@
     margin-top: -13px;
 }
 
-.edit-user-form-bottons{
+.edit-user-form-bottons {
     display: flex;
 }
 
@@ -67,6 +63,7 @@
     padding: 6px 26px;
     border-radius: 4px;
     color: white;
+    transition: all 0.4s;
 }
 
 .edit-user-form-buttons .button-edit {
@@ -74,7 +71,13 @@
     margin-top: 20px;
     padding: 6px 26px;
     border-radius: 4px;
-    color:white;
+    color: white;
+    transition: all 0.4s;
+}
+
+.edit-user-form-buttons .button-edit:hover {
+    background-color: rgb(182, 182, 182);
+    cursor: pointer;
 }
 
 .edit-user-form-buttons .button-cancel {
@@ -82,7 +85,8 @@
     margin-top: 20px;
     padding: 6px 18px;
     border-radius: 4px;
-    color:white;
+    color: white;
+    transition: all 0.4s;
 }
 
 .edit-user-container input {
@@ -94,4 +98,23 @@
 
 .edit-user-container .error {
     border: 2px solid red;
+}
+
+@media screen and (max-width: 768px) {
+    .edit-user-form {
+        flex-direction: column;
+        padding: 0px 20px;
+    }
+    .edit-user-top {
+        flex-direction: column;
+        align-items: center;
+    }
+    .edit-user-text {
+        align-items: center;
+        padding: 0px 20px;
+    }
+    .edit-user-form-buttons {
+        display: flex;
+        justify-content: center;
+    }
 }

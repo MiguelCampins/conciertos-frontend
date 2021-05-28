@@ -10,6 +10,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ModalAlert from "../../components/modalAlert";
+import ThereAreNotTickets from "../../components/thereAreNotTickets";
 
 const MODES = {
   conciertos: "conciertos",
@@ -20,7 +21,7 @@ const MODES = {
 const User = () => {
   const [mode, setMode] = useState(MODES.editarPerfil);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [sales, setSales] = useState();
+  const [sales, setSales] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [emailDuplicate, setEmailDuplicate] = useState(false);
 
@@ -62,6 +63,17 @@ const User = () => {
     }
   };
 
+  const renderSales = () => {
+
+    if(sales?.length){
+      return sales.map((sale, index) => (
+        <UserTickets key={index} sale={sale}/>
+      ));
+    }
+
+    return <ThereAreNotTickets />
+  }
+
   return (
     <div className="user-container">
       <div className="user-header">
@@ -98,9 +110,7 @@ const User = () => {
           {mode === MODES.editarPerfil && (
             <UserEdit onUpdateUser={onUpdateUser} user={user && user} emailDuplicate={emailDuplicate}/>
           )}
-          {mode === MODES.entradas && sales.map((sale, index) => (
-            <UserTickets key={index} sale={sale}/>
-          ))}
+          {mode === MODES.entradas && ( renderSales())}
         </div>
       </div>
       <ModalAlert tittle="Usuario actualizado" show={showModal} setShowAlert={setShowModal} />

@@ -29,7 +29,11 @@ html {
     flex-direction: column;
 }
 
-.event-header .event-header-left-info > h1, span{
+.event-header .event-header-left-info  h1 {
+    color: white;
+}
+
+.event-header .event-header-left-info span{
     color: white;
 }
 
@@ -73,3 +77,12 @@ html {
     margin-bottom: 20px;
 }
 
+@media screen and (max-width: 768px) {
+    .event-header .event-header-right > img {
+        width: 300px;
+    }
+    .event-body-info {
+        max-width: 85vw;
+        text-align: center;
+    }
+}

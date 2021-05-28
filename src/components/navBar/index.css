@@ -13,9 +13,7 @@
 .custom-navbar > img {
   height: 36px;
 }
-.custom-navbar > span{
-  color: black;
-}
+
 .custom-navbar .navbar-links {
   display: flex;
   flex: 1;
@@ -103,19 +101,23 @@
     justify-content: center;
   }
 
+  .navbar-links.navbarOpen {
+    background: var(--secondary-color);
+  }
+
   .navbar-links.navbarOpen > a {
-    height: 30px;
+    height: 43px;
     display: flex;
   }
-  
+
   .navbar-links.navbarOpen > span {
     height: 30px;
     display: flex;
   }
 
   .navbar-links.navbarOpen > button {
-    height: 30px;
     display: flex;
+    padding: 10px 0px;
   }
   
 }

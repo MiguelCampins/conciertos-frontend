@@ -16,7 +16,7 @@
     flex: 0 25%;
 }
 
-.footer-logo > img {
+.footer-logo>img {
     width: 100px;
 }
 
@@ -26,16 +26,27 @@
     flex-direction: column;
 }
 
-.footer-info .iconos > a {
-    color: blanchedalmond;
+.footer-info .iconos>a {
+    color: white;
     margin-right: 6px;
     transition: all 0.4s;
 }
 
-.footer-info .iconos > a:hover {
+.footer-info .iconos>a:hover {
     color: var(--primary-color);
 }
 
-.footer-info > p {
+.footer-container span {
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-info {
+        align-items: center;
+        padding-top: 18px;
+    }
 }

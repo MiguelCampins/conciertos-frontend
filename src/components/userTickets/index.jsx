@@ -5,10 +5,7 @@ import "./index.css";
 const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
 
 const UserTickets = ({ sale }) => {
-  if (!sale) {
-    <div>Cargando...</div>;
-  }
-
+ 
   const [concert, setConcert] = useState();
 
   useEffect(() => {
@@ -20,10 +17,6 @@ const UserTickets = ({ sale }) => {
         console.warn(err);
       });
   }, []);
-
-  useEffect(()=>{
-    console.warn(concert)
-  },[concert])
 
   const formatDay = (date) => {
     let splitString = date.split("-");
