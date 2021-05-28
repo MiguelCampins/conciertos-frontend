@@ -12,6 +12,7 @@ import Register from "./pages/register";
 import Concert from "./pages/concert";
 import AboutUs from "./pages/aboutUs";
 import ScrollRestoration from 'react-scroll-restoration';
+import "./styles/index.css";
 
 const App = () => {
 

@@ -70,6 +70,7 @@
     border-color: transparent;
     color: #fff;
     transition: all 0.5s;
+    outline: none;
 }
 
 .login-form button:hover{

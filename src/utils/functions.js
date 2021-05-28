@@ -9,7 +9,7 @@ export const isValidPhone = (phone) => {
 }
 
 export const isValidstring = (string) => {
-    const regex = new RegExp(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/);
+    const regex = new RegExp(/^[a-zA-Z]+(([',. -ñ][a-zA-Z ])?[a-zA-Z]*)*$/);
     return regex.test(string);
 }
 

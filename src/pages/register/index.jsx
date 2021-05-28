@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { registerUser } from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import "./index.css";
+import logo from "../../assets/images/logo.png";
 import { getRoles } from "../../utils/api/apiConcert";
 import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
 
@@ -84,7 +85,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="register-form">
-        <h1>Registro</h1>
+        <img alt="img" src={logo}/>
         <input className={errors.name && 'error'} placeholder="nombre" onChange={(e)=>setName(e.target.value)} />
         <input className={errors.surnames && 'error'} placeholder="apellidos" onChange={(e)=>setSurnames(e.target.value)} />
         <input className={errors.city && 'error'} placeholder="ciudad" onChange={(e)=>setCity(e.target.value)} />

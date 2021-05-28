@@ -2,6 +2,8 @@
     margin-bottom: 32px;
     box-shadow: 0 0 5px grey;
     padding: 10px;
+    width: 100%;
+    height: 105px;
 }
 
 .card-sale-ticket {
