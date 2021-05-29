@@ -46,6 +46,11 @@ html {
     cursor: pointer;
     text-decoration: none;
     width: 180px;
+    transition: all 0.4s;
+}
+
+.event-header .event-header-left-info > a:hover {
+    background: rgb(59, 59, 59);
 }
 
 .event-header .event-header-right {

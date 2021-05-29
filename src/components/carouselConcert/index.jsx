@@ -5,7 +5,7 @@ import imageDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.j
 import "./index.css";
 
 const CarouselConcert = ({ imagesUrl }) => {
-  if (!imagesUrl) {
+  if (!imagesUrl || !imagesUrl.length) {
     const imagesdefault = [
       imageDefault,
       imageDefault,

@@ -22,9 +22,9 @@ const Home = () => {
     <div className="home-container">
       <div className="home-header">
         <div className="tag-entradas">
-          <h2>RockFestival</h2>
+          <h2>Metallica</h2>
           <p>
-            Con Armin van Buuren, David Guetta, Bob Sinclair, Mónica naranjo,Texas y Don Diablo
+          Legacy Beast Tour 2022
           </p>
           <button><Link to="/concert?id=60a3a6f56b22992280922b39">Entradas</Link></button>
         </div>

@@ -84,7 +84,7 @@ const Concert = () => {
             <h1>{concert && concert.name}</h1>
             <span>{concert && formatDate(concert.date)}</span>
             <span>Precio € {concert && concert.ticketPrice}</span>
-            <a href="#entrada">Comprar entradas</a>
+            <a href="#entrada" onClick>Comprar entradas</a>
           </div>
         </div>
         <div className="event-header-right">
@@ -117,7 +117,7 @@ const Concert = () => {
           adolescens ut. Offendit reprimique et has, eu mei homero imperdiet.
         </p>
       </div>
-      <div id="entrada"></div>
+      <div id={'entrada'}></div>
         <BuyTicketTarget i
           setNumTickets={setNumTickets}
           maxTickets={maxTickets}

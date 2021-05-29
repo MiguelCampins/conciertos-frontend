@@ -25,7 +25,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
   return (
     <div className="custom-navbar">
       <img alt="logo" src={logo}></img>
-      <span>TICKETCLICK</span>
+      <span><b style={{fontSize: '20px'}}>TICKETCLICK</b></span>
       <div className={`navbar-links ${isOpen ? 'navbarOpen' : ''}`}>
       <a href="/">Inicio</a>
         {!isUserAdmin() ? (

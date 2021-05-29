@@ -13,14 +13,26 @@ body{
 }
 
 .home-header{
-    background-image: url("../../assets/images/angad-singh-9POz8PXGWjM-unsplash.jpg");
+    background-image: url("../../assets/images/Metallica.jpg");
     width: 100%;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     min-height: 500px;
     margin-top: 64px;
     box-shadow: 0 6px 20px grey;
     display: flex;
     align-items: flex-end;
+    position: relative;
+}
+
+.home-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.3);
+    height: 100%;
+    width: 100%;
 }
 
 .tag-entradas {
@@ -29,6 +41,7 @@ body{
     flex-wrap: wrap;
     padding: 40px;
     width: 36vw;
+    z-index: 3;
 }
 
 .tag-entradas h2  {
@@ -113,5 +126,8 @@ body{
     .tag-entradas {
         width: 100%;
         align-items: center;
+    }
+    .home-header {
+        background-size: cover;
     }
 }
