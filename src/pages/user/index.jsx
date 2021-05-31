@@ -45,8 +45,8 @@ const User = () => {
   };
 
   const onUpdateUser = (user) => {
-    const { name, surnames, email, phone, city, _id, password } = user;
-    if (name && surnames && email && phone && city && _id && password) {
+    const { name, surnames, email, phone, city, _id} = user;
+    if (name && surnames && email && phone && city && _id) {
       updateUser(user)
         .then((resp) => {
           setUser(resp);

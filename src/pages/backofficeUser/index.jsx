@@ -4,6 +4,7 @@ import CreateUserModal from "../../components/createUserModal";
 import TableUsers from "../../components/tableUser/tableUser";
 import UpdateUserModal from "../../components/updateUserModal";
 import "./index.css";
+import ModalConfirmDelete from "../../components/modalConfirmDelete";
 
 const BackofficeUser = () => {
   const [users, setUsers] = useState([]);

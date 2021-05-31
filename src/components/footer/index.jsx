@@ -15,7 +15,7 @@ const Footer = () => {
       </div>
       <div className="footer-info">
         <h5>Contáctanos</h5>
-        <span>Lamar:+34871000000</span>
+        <span>Llamar:+34871000000</span>
         <span>Móvil:+34648934000</span>
         <span>Email: sales@TicketClick.com</span>
       </div>

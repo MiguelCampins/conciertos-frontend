@@ -13,7 +13,6 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.city);
-  const [password, setPassword] = useState(user.password);
   const [errors, setErrors] = useState({});
   const [dissabled, setDissabled] = useState(true);
 
@@ -46,8 +45,13 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
     } else {
       // si no hay error, guardamos
       setErrors({});
-      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id, password });
+      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id});
     }
+  };
+
+  const onCancel = () => {
+    setDissabled(true);
+    window.location.reload();
   };
 
   return (
@@ -110,21 +114,24 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
               defaultValue={email}
               onChange={(e) => setEmail(e.target.value)}
             ></input>
-            {emailDuplicate && (
-              <span>El email ya existe</span>
-            )}
+            {emailDuplicate && <span>El email ya existe</span>}
             <label htmlFor="password">Contraseña*</label>
-            <input disabled={dissabled} id="password" type="password" onChange={(e)=>setPassword(e.target.value)}></input>
           </div>
         </div>
         <div className="edit-user-form-buttons">
           {!dissabled ? (
             <>
-              <button className="button-confirm" onClick={validateUserAndSave}>Enviar</button>
-              <button className="button-cancel" onClick={() => setDissabled(true)}>Cancelar</button>
+              <button className="button-confirm" onClick={validateUserAndSave}>
+                Enviar
+              </button>
+              <button className="button-cancel" onClick={onCancel}>
+                Cancelar
+              </button>
             </>
           ) : (
-            <button className="button-edit" onClick={()=> setDissabled(false)}>Editar</button>
+            <button className="button-edit" onClick={() => setDissabled(false)}>
+              Editar
+            </button>
           )}
         </div>
       </div>

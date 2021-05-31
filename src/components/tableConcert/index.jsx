@@ -1,9 +1,15 @@
+import React, { useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
 import { updateConcert } from "../../utils/api/apiConcert";
+import ModalConfirmDelete from "../modalConfirmDelete";
 
 const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
+
+  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
+  const [concertSelect, setUserSelect] = useState();
+  const [index, setIndex] = useState();
 
   const onPublicConcert = (concert) => {
     const {published, _id} = concert;
@@ -16,7 +22,19 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
       });
   };
 
+  const confirmDelete = (user, index) => {
+    onDeleteConcert(user, index);
+    setShowDeleteUserModal(false);
+};
+
+const sunmitDelete = (user,index) =>{
+  setShowDeleteUserModal(true)
+  setUserSelect(user);
+  setIndex(index);
+}
+
   return (
+    <>
     <table>
       <tbody>
         <tr>
@@ -39,7 +57,7 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
               <td>{concert.ticketPrice}</td>
               <td>{concert.artists.map(artist => (artist + " / "))}</td>
               <td>
-                <button onClick={()=> { if (window.confirm('Estas seguro que quieres borrar el usuario?')) onDeleteConcert(concert, index)}}>
+                <button onClick={()=> sunmitDelete(concert, index)}>
                   <DeleteIcon />
                 </button>
               </td>
@@ -55,6 +73,14 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert }) => {
           ))}
       </tbody>
     </table>
+    <ModalConfirmDelete
+        show={showDeleteUserModal}
+        setShowDeleteUserModal={setShowDeleteUserModal}
+        confirmDelete={confirmDelete}
+        item={concertSelect}
+        index={index}        
+      />
+    </>
   );
 };
 
