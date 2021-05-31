@@ -54,6 +54,9 @@
 }
 
 .register-form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 61%;
     height: 40px;
     border-radius: 60px;

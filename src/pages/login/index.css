@@ -62,6 +62,9 @@
 }
 
 .login-form button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 67%;
     height: 40px;
     border-radius: 60px;

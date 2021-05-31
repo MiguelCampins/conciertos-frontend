@@ -5,6 +5,7 @@ import "./index.css";
 import logo from "../../assets/images/logo.png";
 import { getRoles } from "../../utils/api/apiConcert";
 import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
+import CustomSpinner from "../../components/spinner";
 
 const Register = () => {
   const [name, setName] = useState();
@@ -16,6 +17,7 @@ const Register = () => {
   const [roles, setRoles] = useState([]);
   const [errors, setErrors] = useState({});
   const [emailDuplicate, setEmailDuplicate] = useState(false);
+  const [ loading, setLoading ] = useState(false);
 
   const history = useHistory();
 
@@ -65,9 +67,18 @@ const Register = () => {
   }
   };
 
+  const onSetLoading = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }
+
   const onRegister = (user) => {
     const {name, surnames, city, phone, email, password, userRoleId} = user;
     if(name && surnames && city && phone && email && password && userRoleId){
+      onSetLoading();
+      setLoading(true);
         registerUser(user)
         .then((resp) => {
             history.push("/login");
@@ -93,7 +104,7 @@ const Register = () => {
         <input className={errors.email && 'error'} placeholder="email" onChange={(e)=>setEmail(e.target.value)} />
         {emailDuplicate && <span>El email ya existe</span>}
         <input className={errors.password && 'error'} placeholder="password" type="password" onChange={(e)=>setPassword(e.target.value)} />
-        <button onClick={validateUserAndSave}>Registrar</button>
+        <button onClick={validateUserAndSave}>{loading && <CustomSpinner/>}Registrar</button>
       </div>
     </div>
   );
