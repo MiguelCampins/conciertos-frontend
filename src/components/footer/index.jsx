@@ -5,6 +5,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import { ExternalLink } from 'react-external-link';
 
 const Footer = () => {
   return (
@@ -23,10 +24,10 @@ const Footer = () => {
         <h5>Dónde nos encontrarás?</h5>
         <span>Calle Wallaby 42, sidney</span>
         <div className="iconos">
-        <a href="https://es-es.facebook.com"><FacebookIcon/></a>
-        <a href="https://www.instagram.com"><InstagramIcon/></a>
-        <a href="https://outlook.live.com"><MailOutlineIcon/></a>
-        <a href="https://github.com"><GitHubIcon/></a>  
+        <ExternalLink href="https://es-es.facebook.com"><FacebookIcon/></ExternalLink>
+        <ExternalLink href="https://www.instagram.com"><InstagramIcon/></ExternalLink>
+        <ExternalLink href="https://outlook.live.com"><MailOutlineIcon/></ExternalLink>
+        <ExternalLink href="https://github.com"><GitHubIcon/></ExternalLink>  
         </div>
       </div>
       <div className="footer-info">

@@ -1,0 +1,57 @@
+
+.modal-content > h3 {
+    padding-top: 8px;
+    text-align: center;
+}
+
+.modal-content > hr {
+    width: 100%;
+    background: var(--primary-color);
+}
+
+.my-modal-body {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    padding: 13px 0px;
+}
+
+.my-modal-body .error {
+    border: 2px solid red;
+}
+
+.my-modal-body > label {
+    color:gray;
+    display: inline-block;
+    padding-top: 6px;
+    font-size: 14px;
+    margin-bottom: 1px;
+}
+
+.my-modal-body > span {
+    color: red;
+    font-size: 13px;
+    margin-bottom: -5px;
+}
+
+.my-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.my-modal-footer > button:first-child {
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    padding: 6px 18px;
+    margin-right: 6px;
+}
+
+.my-modal-footer > button:last-child {
+    background: black;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 18px;
+}

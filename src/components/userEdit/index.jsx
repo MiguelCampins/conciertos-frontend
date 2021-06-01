@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import {
-  isValidEmail,
-  isValidPhone,
-  isValidstring,
-} from "../../utils/functions";
+import {isValidEmail,isValidPhone,isValidstring,} from "../../utils/functions";
 import "./index.css";
 import image from "../../assets/images/pngegg.png";
+import PasswordModal from "../passwordModal";
+import { updatePassword } from "../../utils/api/apiConcert";
 
-const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
+const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
   const [name, setName] = useState(user.name);
   const [surnames, setSurnames] = useState(user.surnames);
   const [email, setEmail] = useState(user.email);
@@ -15,6 +13,8 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
   const [city, setCity] = useState(user.city);
   const [errors, setErrors] = useState({});
   const [dissabled, setDissabled] = useState(true);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passworInvalid, setPassworInvalid] = useState(false);
 
   const validateUserAndSave = () => {
     const errs = {};
@@ -44,15 +44,36 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
       setErrors(errs);
     } else {
       // si no hay error, guardamos
+      setDissabled(true);
       setErrors({});
-      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id});
+      onUpdateUser({ name, surnames, email, phone, city, _id: user?._id });
     }
   };
 
-  const onCancel = () => {
+  const onDisable = () => {
     setDissabled(true);
-    window.location.reload();
   };
+
+  const onCancelPasswordModal = () => {
+    setShowPasswordModal(false);
+    setPassworInvalid(false);
+  };
+
+  const onUpdatePassword = (id, password, newPasword) => {
+    updatePassword(id, password, newPasword)
+      .then((resp) => {
+        setShowPasswordModal(false);
+        setPassworInvalid(false);
+      })
+      .catch((err) => {
+        if (err.response.data.message.includes("Invalid params")) {
+          setPassworInvalid(true);
+        } else {
+          console.warn(err);
+        }
+      });
+  };
+
 
   return (
     <>
@@ -76,7 +97,7 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
             <input
               disabled={dissabled}
               id="name"
-              className={errors.name && "error"}
+              className={errors.name ? "error" : ""}
               defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             ></input>
@@ -84,7 +105,7 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
             <input
               disabled={dissabled}
               id="surnames"
-              className={errors.surnames && "error"}
+              className={errors.surnames ? "error" : ""}
               defaultValue={surnames}
               onChange={(e) => setSurnames(e.target.value)}
             ></input>
@@ -92,7 +113,7 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
             <input
               disabled={dissabled}
               id="phone"
-              className={errors.phone && "error"}
+              className={errors.phone ? "error" : ""}
               defaultValue={phone}
               onChange={(e) => setPhone(e.target.value)}
             ></input>
@@ -102,7 +123,7 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
             <input
               disabled={dissabled}
               id="city"
-              className={errors.city && "error"}
+              className={errors.city ? "error" : ""}
               defaultValue={city}
               onChange={(e) => setCity(e.target.value)}
             ></input>
@@ -110,12 +131,18 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
             <input
               disabled={dissabled}
               id="email"
-              className={errors.email && "error"}
+              className={errors.email ? "error" : ""}
               defaultValue={email}
               onChange={(e) => setEmail(e.target.value)}
             ></input>
             {emailDuplicate && <span>El email ya existe</span>}
-            <label htmlFor="password">Contraseña*</label>
+            <PasswordModal
+              show={showPasswordModal}
+              onCancel={onCancelPasswordModal}
+              onUpdatePassword={onUpdatePassword}
+              id={user._id}
+              passworInvalid={passworInvalid}
+            />
           </div>
         </div>
         <div className="edit-user-form-buttons">
@@ -124,14 +151,19 @@ const UserEdit = ({ user, onUpdateUser, emailDuplicate }) => {
               <button className="button-confirm" onClick={validateUserAndSave}>
                 Enviar
               </button>
-              <button className="button-cancel" onClick={onCancel}>
+              <button className="button-cancel" onClick={onDisable}>
                 Cancelar
               </button>
             </>
           ) : (
+            <>
             <button className="button-edit" onClick={() => setDissabled(false)}>
-              Editar
+              Editar perfil
             </button>
+            <button className="button-password" onClick={() => setShowPasswordModal(true)}>
+              Cambiar contraseña
+            </button>
+            </>
           )}
         </div>
       </div>

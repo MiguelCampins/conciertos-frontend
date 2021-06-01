@@ -13,6 +13,7 @@ import Concert from "./pages/concert";
 import AboutUs from "./pages/aboutUs";
 import ScrollRestoration from 'react-scroll-restoration';
 import "./styles/index.css";
+import Contact from "./pages/contact";
 
 const App = () => {
 
@@ -86,7 +87,8 @@ const App = () => {
         <Route exact path="/backofficeConcert" render={() => redirectAdmin(<BackofficeConcerts />)}/>
         <Route exact path="/backofficeSale" render={() => redirectAdmin(<BackofficeSale />)}/>
         <Route path="/concert" component={Concert}/>
-        <Route path="/aboutUs" component={AboutUs}/>
+        <Route exact path="/aboutUs" component={AboutUs}/>
+        <Route exact path="/contact" component={Contact}/>
       </Switch>
     </BrowserRouter>
   );

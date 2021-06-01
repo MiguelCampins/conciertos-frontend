@@ -63,7 +63,7 @@ const TableUsers = ({ users, roles, onDeleteUser, onSelectUser }) => {
         show={showDeleteUserModal}
         setShowDeleteUserModal={setShowDeleteUserModal}
         confirmDelete={confirmDelete}
-        user={userSelect}
+        item={userSelect}
         index={index}        
       />
     </>

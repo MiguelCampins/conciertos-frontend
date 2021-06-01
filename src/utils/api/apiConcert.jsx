@@ -262,3 +262,15 @@ export const createSale = (sale) =>
           reject(err);
         });
     })
+
+    export const updatePassword = (_id, password, newPassword) => 
+    new Promise((resolve, reject) => {
+      axios
+        .post(`${baseURL}/user/changePassword`,{_id, password, newPassword})
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    })

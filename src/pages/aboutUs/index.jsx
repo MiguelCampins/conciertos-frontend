@@ -1,13 +1,11 @@
 import React from "react";
 import "./index.css";
-import image from "../../assets/images/georgie-cobbs-bKjHgo_Lbpo-unsplash.jpg";
-import imgTeam from "../../assets/images/jeshoots-com--2vD8lIhdnw-unsplash.jpg";
 import Footer from "../../components/footer";
 
 const AboutUs = () => {
   return (
     <div className="aboutUs-container">
-      <img alt="img" src={image} />
+      <div className="aboutUs-img" />
       <div className="aboutUs">
         <h3>Sobre nosotros</h3>
         <p>

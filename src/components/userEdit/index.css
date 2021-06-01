@@ -52,6 +52,14 @@
     margin-top: -13px;
 }
 
+.edit-user-form-right button {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    margin-top: 23px;
+    padding: 5px;
+    color: white;
+}
+
 .edit-user-form-bottons {
     display: flex;
 }
@@ -80,6 +88,19 @@
     cursor: pointer;
 }
 
+.edit-user-form-buttons .button-password {
+    background: var(--primary-color);
+    border-radius: 4px;
+    color: white; 
+    padding: 6px 26px;
+    margin-left: 12px;
+    transition: all 0.4s;  
+}
+
+.edit-user-form-buttons .button-password:hover {
+    background-color: var(--secondary-color);
+}
+
 .edit-user-form-buttons .button-cancel {
     background: black;
     margin-top: 20px;
@@ -99,6 +120,7 @@
 .edit-user-container .error {
     border: 2px solid red;
 }
+
 
 @media screen and (max-width: 768px) {
     .edit-user-form {

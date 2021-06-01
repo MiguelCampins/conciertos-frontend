@@ -3,12 +3,16 @@ import "./index.css";
 import Footer from "../../components/footer";
 import UserEdit from "../../components/userEdit";
 import UserTickets from "../../components/userTickets";
-import { getFilterSale, updateUser } from "../../utils/api/apiConcert";
+import {
+  getFilterSale,
+  updatePassword,
+  updateUser,
+} from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import PersonIcon from '@material-ui/icons/Person';
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from "@material-ui/icons/Person";
+import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ModalAlert from "../../components/modalAlert";
 import ThereAreNotTickets from "../../components/thereAreNotTickets";
 
@@ -19,7 +23,7 @@ const MODES = {
 };
 
 const User = () => {
-  const [mode, setMode] = useState(MODES.editarPerfil);
+  const [mode, setMode] = useState(MODES.entradas);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [sales, setSales] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -37,6 +41,12 @@ const User = () => {
       });
   }, []);
 
+  useEffect(() =>{
+    if(user){
+      localStorage.setItem("user", JSON.stringify(user))
+    }
+  },[user])
+
   const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -45,16 +55,15 @@ const User = () => {
   };
 
   const onUpdateUser = (user) => {
-    const { name, surnames, email, phone, city, _id} = user;
+    const { name, surnames, email, phone, city, _id } = user;
     if (name && surnames && email && phone && city && _id) {
       updateUser(user)
         .then((resp) => {
           setUser(resp);
-          localStorage.setItem('user', JSON.stringify(resp));
           setShowModal(true);
         })
         .catch((err) => {
-          if(err.response.data.message.includes('email')){
+          if (err.response.data.message.includes("email")) {
             setEmailDuplicate(true);
           } else {
             console.warn(err);
@@ -64,15 +73,14 @@ const User = () => {
   };
 
   const renderSales = () => {
-
-    if(sales?.length){
+    if (sales?.length) {
       return sales.map((sale, index) => (
-        <UserTickets key={index} sale={sale}/>
+        <UserTickets key={index} sale={sale} />
       ));
     }
 
-    return <ThereAreNotTickets />
-  }
+    return <ThereAreNotTickets />;
+  };
 
   return (
     <div className="user-container">
@@ -91,29 +99,37 @@ const User = () => {
       </div>
       <div className="user-body">
         <div className="user-body-left-container">
-          <div className="user-body-left"> 
+          <div className="user-body-left">
             <button onClick={() => setMode(MODES.editarPerfil)}>
-            <PersonIcon/>
+              <PersonIcon />
               <span>Editar perfil</span>
             </button>
             <button onClick={() => setMode(MODES.entradas)}>
-            <ConfirmationNumberIcon/>
+              <ConfirmationNumberIcon />
               <span>Entradas</span>
             </button>
             <button onClick={() => logOut()}>
-             <ExitToAppIcon/>
+              <ExitToAppIcon />
               <span>Cerrar sesión</span>
             </button>
           </div>
         </div>
         <div className="user-body-right">
           {mode === MODES.editarPerfil && (
-            <UserEdit onUpdateUser={onUpdateUser} user={user && user} emailDuplicate={emailDuplicate}/>
+            <UserEdit
+              onUpdateUser={onUpdateUser}
+              user={user && user}
+              emailDuplicate={emailDuplicate}
+            />
           )}
-          {mode === MODES.entradas && ( renderSales())}
+          {mode === MODES.entradas && renderSales()}
         </div>
       </div>
-      <ModalAlert tittle="Usuario actualizado" show={showModal} setShowAlert={setShowModal} />
+      <ModalAlert
+        tittle="Usuario actualizado"
+        show={showModal}
+        setShowAlert={setShowModal}
+      />
       <Footer />
     </div>
   );

@@ -6,9 +6,12 @@
     justify-content: center;
 }
 
-.aboutUs-container > img {
+.aboutUs-img {
+    background-image: url(../../assets/images/georgie-cobbs-bKjHgo_Lbpo-unsplash.jpg);
+    background-size: cover;
     width: 100%;
-    height: 70vh;
+    min-height: 400px;
+    background-position-y: -416px;
 }
 
 .aboutUs {
