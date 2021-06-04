@@ -4,7 +4,6 @@ import CreateUserModal from "../../components/createUserModal";
 import TableUsers from "../../components/tableUser/tableUser";
 import UpdateUserModal from "../../components/updateUserModal";
 import "./index.css";
-import ModalConfirmDelete from "../../components/modalConfirmDelete";
 
 const BackofficeUser = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +12,7 @@ const BackofficeUser = () => {
   const [showUpdateUserModal, setShowUpdateUserModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState();
   const [emailDuplicate, setEmailDuplicated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     //Llamada a la base de datos de los usuarios y de los roles
@@ -48,6 +48,7 @@ const onCloseModal = () => {
     if (!name || !surnames || !email || !password || !phone || !city || !userRoleId ) {
       
     } else {
+      setLoading(true);
       registerUser(user)
         .then((resp) => {
           //Hacemos una copia de los usuarios
@@ -65,7 +66,10 @@ const onCloseModal = () => {
           } else {
             console.warn(err);
           }
-        });
+        })
+        .finally(()=>{
+          setLoading(false);
+        })
     }
   };
 
@@ -98,6 +102,7 @@ const onCloseModal = () => {
   const onUpdateUser = (user) =>{
     const {name, surnames, email, phone, city, _id, userRoleId} = user;
      if(name && surnames && email && phone && city && _id && userRoleId){
+       setLoading(true);
         updateUser(user)
         .then((resp) => {
           setShowUpdateUserModal(false);
@@ -116,7 +121,10 @@ const onCloseModal = () => {
           } else {
             console.warn(err);
           }
-        });
+        })
+        .finally(()=>{
+          setLoading(false);
+        })
      } 
   };
 
@@ -134,6 +142,7 @@ const onCloseModal = () => {
           onCloseModal={onCloseModal}
           onCreateUser={onCreateUser}
           emailDuplicate={emailDuplicate}
+          loading={loading}
         />
       )}
       {showUpdateUserModal && (
@@ -143,6 +152,7 @@ const onCloseModal = () => {
           user={selectedUser}
           onUpdateUser={onUpdateUser}
           emailDuplicate={emailDuplicate}
+          loading={loading}
         />
       )}
         <div className="table table-bordered table-hover ">

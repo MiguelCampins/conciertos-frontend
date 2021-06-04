@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
@@ -9,6 +9,11 @@ const TableUsers = ({ users, roles, onDeleteUser, onSelectUser }) => {
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
   const [userSelect, setUserSelect] = useState();
   const [index, setIndex] = useState();
+  const [loggedUser, setLoggedUser] = useState();
+
+  useEffect(()=>{
+    setLoggedUser(JSON.parse(localStorage.getItem("user")));
+  },[]);
   /**
    * Funcion que compara el rolId de la tabla roles y el rolId de cada usuario  para mostrar nombre del rol
    */
@@ -50,11 +55,12 @@ const TableUsers = ({ users, roles, onDeleteUser, onSelectUser }) => {
                 <td>{user.city}</td>
                 <td>{rolIdToName(user.userRoleId)}</td>
                 <td>
-                  <button onClick={() => sunmitDelete(user, index)}><DeleteIcon /></button>
-                </td>
-                <td>
                   <button onClick={() => onSelectUser(user)}><EditIcon /></button>
                 </td>
+                { loggedUser._id !== user._id && (
+                 <td>
+                  <button onClick={() => sunmitDelete(user, index)}><DeleteIcon /></button>
+                </td>)}
               </tr>
             ))}
         </tbody>

@@ -25,7 +25,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
   return (
     <div className="custom-navbar">
       <img alt="logo" src={logo}></img>
-      <span><b style={{fontSize: '20px'}}>TICKETCLICK</b></span>
+      <a className="tittle" href="/"><b>ticketclick</b></a>
       <div className={`navbar-links ${isOpen ? 'navbarOpen' : ''}`}>
       <a href="/">Inicio</a>
         {!isUserAdmin() ? (
@@ -48,7 +48,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         </>
         ):(
          <>
-          <button onClick={()=>logOutAndRedirect()}>Logout</button>
+          <button onClick={()=>logOutAndRedirect()}>Cerrar sesión</button>
         </> 
         )}
       </div>

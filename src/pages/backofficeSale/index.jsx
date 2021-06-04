@@ -37,8 +37,8 @@ const BackofficeSale = () => {
                   <tr>
                       <th>Concierto</th>
                       <th>Fecha</th>
-                      <th>Entradas</th>
-                      <th>Ventas</th>
+                      <th>Total entradas</th>
+                      <th>Total vendidas</th>
                   </tr>
                   {concerts && concerts.map((concert) => (
                       <tr>

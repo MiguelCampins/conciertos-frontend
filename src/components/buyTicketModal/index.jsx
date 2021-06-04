@@ -1,9 +1,23 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { isValidNumber, isValidstring } from "../../utils/functions";
+import {
+  isValidNumber,
+  isValidNumberTarget,
+  isValidstring,
+  isValidNumberCvv,
+} from "../../utils/functions";
+import CustomSpinner from "../../components/spinner";
 import "./index.css";
 
-const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseModal }) => {
+const BuyTicketModal = ({
+  show,
+  onBuyTickets,
+  numTickets,
+  ticketPrice,
+  onCloseModal,
+  loading,
+  disabled
+}) => {
   const [country, setCountry] = useState();
   const [street, setStreet] = useState();
   const [city, setCity] = useState();
@@ -59,7 +73,7 @@ const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseMo
       errs.hasError = true;
       errs.region = true;
     }
-    if (!targetNum || !isValidNumber(targetNum)) {
+    if (!targetNum || !isValidNumberTarget(targetNum)) {
       errs.hasError = true;
       errs.targetNum = true;
     }
@@ -67,7 +81,7 @@ const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseMo
       errs.hasError = true;
       errs.date = true;
     }
-    if (!cvv || !isValidNumber(cvv)) {
+    if (!cvv || !isValidNumberCvv(cvv)) {
       errs.hasError = true;
       errs.cvv = true;
     }
@@ -77,7 +91,16 @@ const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseMo
     } else {
       // si no hay error, guardamos
       resetModal();
-      onBuyTickets({ country, street, city, postalCode, region, targetNum, date, cvv });
+      onBuyTickets({
+        country,
+        street,
+        city,
+        postalCode,
+        region,
+        targetNum,
+        date,
+        cvv,
+      });
     }
   };
 
@@ -91,49 +114,64 @@ const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseMo
             <div className="buy-form-body-inputs">
               <span>País</span>
               <input
-                className={errors.country && 'error'}
+                className={errors.country && "error"}
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
+                disabled={disabled}
               />
               <span>Dirección</span>
               <input
-                className={errors.street && 'error'}
+                className={errors.street && "error"}
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
+                disabled={disabled}
               />
               <span>Ciudad</span>
               <input
-                className={errors.city && 'error'}  
-                value={city} 
-                onChange={(e) => setCity(e.target.value)} 
+                className={errors.city && "error"}
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                disabled={disabled}
               />
               <span>Código postal</span>
               <input
-                className={errors.postalCode && 'error'}
+                className={errors.postalCode && "error"}
                 value={postalCode}
                 onChange={(e) => setPostalCode(e.target.value)}
+                type="number"
+                disabled={disabled}
               />
               <span>Provincia</span>
               <input
-                className={errors.region && 'error'}
+                className={errors.region && "error"}
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
+                disabled={disabled}
               />
               <span>Número targeta</span>
               <input
-                className={errors.targetNum && 'error'}
+                className={errors.targetNum && "error"}
                 value={targetNum}
-                onChange={(e) => setTargetNum(e.target.value)}
+                onChange={(e) => setTargetNum(e.target.value.slice(0, 16))}
+                type="number"
+                disabled={disabled}
               />
               <span>Fecha caducidad</span>
               <input
-                className={errors.date && 'error'}
+                className={errors.date && "error"}
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                type="date"
+                type="month"
+                disabled={disabled}
               />
               <span>CVV</span>
-              <input className={errors.cvv && 'error'} value={cvv} onChange={(e) => setCvv(e.target.value)} />
+              <input
+                className={errors.cvv && "error"}
+                value={cvv}
+                onChange={(e) => setCvv(e.target.value.slice(0, 3))}
+                type="number"
+                disabled={disabled}
+              />
             </div>
           </div>
           <div className="buy-form-body-total">
@@ -143,8 +181,8 @@ const BuyTicketModal = ({ show, onBuyTickets, numTickets, ticketPrice, onCloseMo
           </div>
           <hr />
           <div className="buy-form-footer">
-            <button onClick={onCloseModalAndResetErrors}>Anular</button>
-            <button onClick={validateSaleAndSave}>Comprar</button>
+            <button disabled={disabled} onClick={onCloseModalAndResetErrors}>Anular</button>
+            <button disabled={disabled} onClick={validateSaleAndSave}>{ loading && <CustomSpinner/>}Comprar</button>
           </div>
         </div>
       </Modal>

@@ -10,6 +10,7 @@ const BackofficeConcerts = () => {
   const [showCreateConcertModal, setShowCreateConcertModal] = useState(false);
   const [showUpdateConcertModal, setShowUpdateConcertModal] = useState(false);
   const [selectedConcert, setSelectedConcert] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getConcerts()
@@ -31,6 +32,7 @@ const BackofficeConcerts = () => {
     
     const { name, date, city, maxTickets, ticketPrice, artists, hour } = concert;
     if (name && date && city && maxTickets && ticketPrice && artists && hour) {
+      setLoading(true);
       createConcert(concert)
         .then((resp) => {
           const newConcerts = [...concerts];
@@ -40,7 +42,10 @@ const BackofficeConcerts = () => {
         })
         .catch((err) => {
           console.warn(err);
-        });
+        })
+        .finally(()=> {
+          setLoading(false);
+        })
     }
   };
 
@@ -62,6 +67,7 @@ const BackofficeConcerts = () => {
   const onUpdateconcert = (concert) => {
     const {name, date,hour, city, maxTickets, ticketPrice, artists, _id} = concert;
       if(name && date && hour && city && maxTickets && ticketPrice && artists && _id){
+        setLoading(true);
         updateConcert(concert)
         .then((resp) => {
           setShowUpdateConcertModal(false);
@@ -72,7 +78,10 @@ const BackofficeConcerts = () => {
         })
         .catch((err) => {
           console.warn(err);
-        });
+        })
+        .finally(()=>{
+          setLoading(false);
+        })
       }
   };
 
@@ -99,6 +108,7 @@ const BackofficeConcerts = () => {
           show={showCreateConcertModal}
           onCloseModal={onCloseModal}
           onCreateConcert={onCreateConcert}
+          loading={loading}
         />
       )}
       {showUpdateConcertModal && (
@@ -107,6 +117,7 @@ const BackofficeConcerts = () => {
           onCloseModal={onCloseModal}
           concert={selectedConcert}
           onUpdateconcert={onUpdateconcert}
+          loading={loading}
         />
       )}
     </div>

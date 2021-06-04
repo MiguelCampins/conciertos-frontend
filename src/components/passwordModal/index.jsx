@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 import React, { useState } from "react";
 import "./index.css";
+import CustomSpinner from "../../components/spinner";
 
 const PasswordModal = ({
   show,
@@ -8,6 +9,7 @@ const PasswordModal = ({
   onUpdatePassword,
   id,
   passworInvalid,
+  loading
 }) => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewpassword] = useState("");
@@ -65,6 +67,7 @@ const PasswordModal = ({
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
           ></input>
           {passworInvalid && <span>Contraseña incorrecta</span>}
           <label htmlFor="password-two">Nueva contraseña*</label>
@@ -74,6 +77,7 @@ const PasswordModal = ({
             type="password"
             value={newPassword}
             onChange={(e) => setNewpassword(e.target.value)}
+            disabled={loading}
           ></input>
           <label htmlFor="password-confirm">Confirmar nueva contraseña*</label>
           <input
@@ -82,12 +86,13 @@ const PasswordModal = ({
             type="password"
             value={newPasswordConfirm}
             onChange={(e) => setNewPasswordConfirm(e.target.value)}
+            disabled={loading}
           />
         </div>
         <hr />
         <div className="my-modal-footer">
-          <button onClick={validatePassword}>Cambiar</button>
-          <button onClick={onCancelAndResetInput}>Cancelar</button>
+          <button disabled={loading} onClick={onCancelAndResetInput}>Cancelar</button>
+          <button disabled={loading} onClick={validatePassword}>{loading && <CustomSpinner/>}Cambiar</button>
         </div>
       </Modal>
     </>

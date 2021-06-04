@@ -10,8 +10,8 @@ const ModalConfirmDelete = ({ show, confirmDelete, setShowDeleteUserModal,item, 
         <h4>Seguro que quieres borrar</h4>
         <hr />
         <div className="botones">
-          <button onClick={()=>confirmDelete(item,index)}>Borrar</button>
           <button onClick={() => setShowDeleteUserModal(false)}>Cancelar</button>
+          <button onClick={()=>confirmDelete(item,index)}>Borrar</button>
         </div>
       </div>
     </Modal>

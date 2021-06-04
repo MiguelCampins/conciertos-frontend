@@ -22,11 +22,11 @@ const Home = () => {
     <div className="home-container">
       <div className="home-header">
         <div className="tag-entradas">
-          <h2>Metallica</h2>
+          <h2>AC/DC</h2>
           <p>
           Legacy Beast Tour 2022
           </p>
-          <button><Link to="/concert?id=60a3a6f56b22992280922b39">Entradas</Link></button>
+          <Link to="/concert?id=60a2a8a232b11c1c58ba7918">Entradas</Link>
         </div>
       </div>
       <div className="home-body">
@@ -40,14 +40,13 @@ const Home = () => {
           <div className="home-about-us-img" />
         </div>
         <div className="home-about-us-text">
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-          volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-          Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-          molestie consequat, vel illum dolore eu feugiat nulla facilisis at
-          vero eros et accumsan et iusto odio dignissim qui blandit praesent
-          luptatum zzril delenit augue duis dolore te feugait nulla faci</p>
+          <p>Ticketclick es la empresa española líder en la venta de entradas.
+          Somos referentes en el mundo del ocio y la cultura, y ofrecemos la
+          mayor variedad de enventos: música, teatro, musicales, cine, deporte,
+          parques, ocio infantil, museos, exposiciones, circo, shows y todo tipo
+          de espectáculos. Todas nuestras entradas son oficiales y distribuidas
+          según acuerdos comerciales directos con los promotores / organizadores
+          de los eventos.</p>
           <a href="/aboutUs">Mostrar mas</a>
         </div>
       </div>

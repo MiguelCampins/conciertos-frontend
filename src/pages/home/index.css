@@ -13,7 +13,7 @@ body{
 }
 
 .home-header{
-    background-image: url("../../assets/images/Metallica.jpg");
+    background-image: url("../../assets/images/acdc.jpg");
     width: 100%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -52,15 +52,18 @@ body{
     color: white;
 }
 
-.tag-entradas > button {
+.tag-entradas > a {
     background-color: var(--primary-color);
-    width: 85px;
+    width: 128px;
     padding: 6px 8px;
     border-radius: 4px;
     transition: all 0.4s;
+    color: white;
+    text-decoration: none;
+    text-align: center;
 }
 
-.tag-entradas > button:hover {
+.tag-entradas > a:hover {
     background: var(--secondary-color);
 }
 
@@ -91,8 +94,9 @@ body{
 }
 
 .home-about-us-img {
-    background-image: url(../../assets/images/jeshoots-com--2vD8lIhdnw-unsplash.jpg);
+    background-image: url(../../assets/images/leon-Oalh2MojUuk-unsplash.jpg);
     background-size: cover;
+    background-position-y: center;
     height: 100%;
     min-height: 300px;
 }
@@ -112,7 +116,7 @@ body{
 .home-about-us-text > a {
     color: white;
     background-color: var(--primary-color);
-    padding: 8px;
+    padding: 6px 18px;
     border-radius: 4px;
     text-decoration: none;
     transition: all 0.4s;

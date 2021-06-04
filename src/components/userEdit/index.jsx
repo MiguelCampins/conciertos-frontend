@@ -4,8 +4,9 @@ import "./index.css";
 import image from "../../assets/images/pngegg.png";
 import PasswordModal from "../passwordModal";
 import { updatePassword } from "../../utils/api/apiConcert";
+import CustomSpinner from "../../components/spinner";
 
-const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
+const UserEdit = ({user, onUpdateUser, emailDuplicate,setEmailDuplicate, loading, disabled}) => {
   const [name, setName] = useState(user.name);
   const [surnames, setSurnames] = useState(user.surnames);
   const [email, setEmail] = useState(user.email);
@@ -15,6 +16,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
   const [dissabled, setDissabled] = useState(true);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passworInvalid, setPassworInvalid] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const validateUserAndSave = () => {
     const errs = {};
@@ -52,6 +54,12 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
 
   const onDisable = () => {
     setDissabled(true);
+    setName(user.name);
+    setSurnames(user.surnames);
+    setEmail(user.email);
+    setPhone(user.phone);
+    setCity(user.city);
+    setEmailDuplicate(false);
   };
 
   const onCancelPasswordModal = () => {
@@ -60,6 +68,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
   };
 
   const onUpdatePassword = (id, password, newPasword) => {
+    setPasswordLoading(true)
     updatePassword(id, password, newPasword)
       .then((resp) => {
         setShowPasswordModal(false);
@@ -71,7 +80,10 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
         } else {
           console.warn(err);
         }
-      });
+      })
+      .finally(()=>{
+        setPasswordLoading(false);
+      })
   };
 
 
@@ -98,7 +110,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
               disabled={dissabled}
               id="name"
               className={errors.name ? "error" : ""}
-              defaultValue={name}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             ></input>
             <label htmlFor="surnames">Apellidos</label>
@@ -106,7 +118,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
               disabled={dissabled}
               id="surnames"
               className={errors.surnames ? "error" : ""}
-              defaultValue={surnames}
+              value={surnames}
               onChange={(e) => setSurnames(e.target.value)}
             ></input>
             <label htmlFor="phone">Telefono</label>
@@ -114,7 +126,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
               disabled={dissabled}
               id="phone"
               className={errors.phone ? "error" : ""}
-              defaultValue={phone}
+              value={phone}
               onChange={(e) => setPhone(e.target.value)}
             ></input>
           </div>
@@ -124,7 +136,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
               disabled={dissabled}
               id="city"
               className={errors.city ? "error" : ""}
-              defaultValue={city}
+              value={city}
               onChange={(e) => setCity(e.target.value)}
             ></input>
             <label htmlFor="email">Email*</label>
@@ -132,35 +144,37 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,}) => {
               disabled={dissabled}
               id="email"
               className={errors.email ? "error" : ""}
-              defaultValue={email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></input>
-            {emailDuplicate && <span>El email ya existe</span>}
+            {emailDuplicate ? (<span>El email ya existe</span>) : ""}
             <PasswordModal
               show={showPasswordModal}
               onCancel={onCancelPasswordModal}
               onUpdatePassword={onUpdatePassword}
               id={user._id}
               passworInvalid={passworInvalid}
+              loading={passwordLoading}
             />
           </div>
         </div>
         <div className="edit-user-form-buttons">
           {!dissabled ? (
             <>
-              <button className="button-confirm" onClick={validateUserAndSave}>
-                Enviar
-              </button>
               <button className="button-cancel" onClick={onDisable}>
                 Cancelar
+              </button>
+              <button className="button-confirm" onClick={validateUserAndSave}>
+                Enviar
               </button>
             </>
           ) : (
             <>
-            <button className="button-edit" onClick={() => setDissabled(false)}>
+            <button disabled={disabled} className="button-edit" onClick={() => setDissabled(false)}>
+            { loading && <CustomSpinner/>}
               Editar perfil
             </button>
-            <button className="button-password" onClick={() => setShowPasswordModal(true)}>
+            <button disabled={disabled} className="button-password" onClick={() => setShowPasswordModal(true)}>
               Cambiar contraseña
             </button>
             </>

@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { isValidNumber, isValidstring } from "../../utils/functions";
+import CustomSpinner from "../../components/spinner";
 import "./index.css";
 
-const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => {
+const UpdateconcertModal = ({
+  show,
+  onCloseModal,
+  concert,
+  onUpdateconcert,
+  loading,
+}) => {
   const [name, setName] = useState(concert.name);
   const [date, setDate] = useState(concert.date);
   const [hour, setHour] = useState(concert.hour);
@@ -16,42 +23,51 @@ const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => 
   const validateConcertAndSave = () => {
     const errs = {};
     // validamos que están todos los campos
-    if(!name) {
+    if (!name) {
       errs.hasError = true;
       errs.name = true;
     }
-    if(!date) {
+    if (!date) {
       errs.hasError = true;
       errs.date = true;
     }
-    if(!hour) {
+    if (!hour) {
       errs.hasError = true;
       errs.hour = true;
     }
-    if(!city || !isValidstring(city)) {
+    if (!city || !isValidstring(city)) {
       errs.hasError = true;
       errs.city = true;
     }
-    if(!tickets || !isValidNumber(tickets)) {
+    if (!tickets || !isValidNumber(tickets)) {
       errs.hasError = true;
       errs.tickets = true;
     }
-    if(!price || !isValidNumber(price)) {
+    if (!price || !isValidNumber(price)) {
       errs.hasError = true;
       errs.price = true;
     }
-    if(!artists){
+    if (!artists) {
       errs.hasError = true;
       errs.artists = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
-    if(errs.hasError) {
+    if (errs.hasError) {
       setErrors(errs);
     } else {
       // si no hay error, guardamos
-      onUpdateconcert({ name, date,hour, city, maxTickets:tickets, ticketPrice:price, artists:artists.split(","), _id: concert?._id})
+      onUpdateconcert({
+        name,
+        date,
+        hour,
+        city,
+        maxTickets: tickets,
+        ticketPrice: price,
+        artists: artists.split(","),
+        _id: concert?._id,
+      });
     }
-  }; 
+  };
 
   return (
     <div>
@@ -60,18 +76,60 @@ const UpdateconcertModal = ({ show, onCloseModal, concert, onUpdateconcert}) => 
           <h1>Actualizar concierto</h1>
           <hr />
           <div className="update-form-body">
-              <input className={errors.name && 'error'} defaultValue={name} onChange={(e) => setName(e.target.value)}/>
-              <input className={errors.date && 'error'} defaultValue={date} type="date" onChange={(e) => setDate(e.target.value)} />
-              <input className={errors.hour && 'error'} defaultValue={hour} type="time" onChange={(e)=> setHour(e.target.value)}/>
-              <input className={errors.city && 'error'} defaultValue={city} onChange={(e) => setCity(e.target.value)} />
-              <input className={errors.tickets && 'error'} defaultValue={tickets} onChange={(e) => setTickets(e.target.value)} />
-              <input className={errors.price && 'error'} defaultValue={price} onChange={(e) => setPrice(e.target.value)} />
-              <input className={errors.artists && 'error'} defaultValue={artists} onChange={(e) => setArtists(e.target.value)} />
+            <input
+              disabled={loading}
+              className={errors.name && "error"}
+              defaultValue={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.date && "error"}
+              defaultValue={date}
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.hour && "error"}
+              defaultValue={hour}
+              type="time"
+              onChange={(e) => setHour(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.city && "error"}
+              defaultValue={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.tickets && "error"}
+              defaultValue={tickets}
+              onChange={(e) => setTickets(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.price && "error"}
+              defaultValue={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.artists && "error"}
+              defaultValue={artists}
+              onChange={(e) => setArtists(e.target.value)}
+            />
           </div>
           <hr />
           <div className="update-form-footer">
-            <button onClick={() => onCloseModal()}>Cerrar</button>
-            <button onClick={validateConcertAndSave}>Actualizar</button>
+            <button disabled={loading} onClick={() => onCloseModal()}>
+              Cerrar
+            </button>
+            <button disabled={loading} onClick={validateConcertAndSave}>
+              {" "}
+              {loading && <CustomSpinner />}Actualizar
+            </button>
           </div>
         </div>
       </Modal>

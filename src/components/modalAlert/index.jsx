@@ -7,7 +7,7 @@ const ModalAlert = ({ show, setShowAlert, tittle }) => {
   const history = useHistory();
   const redirect = () => {
     setShowAlert(false);
-    history.push("/user");
+    history.push("/user",{redirectToTickets:true});
   }
 
   return (

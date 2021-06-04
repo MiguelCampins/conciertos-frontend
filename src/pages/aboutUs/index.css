@@ -49,11 +49,29 @@
     background-image: url(../../assets/images/jeshoots-com--2vD8lIhdnw-unsplash.jpg);
     background-size: cover;
     height: 100%;
-    min-height: 300px;
+    min-height: 340px;
+}
+
+.about-us-img2 {
+    background-image: url(../../assets/images/bench-accounting-C3V88BOoRoM-unsplash.jpg);
+    background-size: cover;
+    height: 100%;
+    min-height: 340px;
+}
+
+.about-us-img3 {
+    background-image: url(../../assets/images/brooke-cagle-uWVWQ8gF8PE-unsplash.jpg);
+    background-size: cover;
+    background-position-y: center;
+    height: 100%;
+    min-height: 340px;
 }
 
 .about-us-text {
     padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .about-us-text > p {
     color: grey;

@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-// import { useParams } from 'react-router-dom';
 import {createSale, getConcert, getRemainingTickets} from "../../utils/api/apiConcert";
 import { useHistory } from "react-router-dom";
 import imgDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.jpg";
@@ -19,9 +18,10 @@ const Concert = () => {
   const [numTickets, setNumTickets] = useState(1);
   const [showModalToBuyTickets, setShowModalToBuyTickets] = useState(false);
   const [showAlertThanks, setShowAlertThanks] = useState(false);
+  const [ loading, setLoading ] = useState(false);
+  const [ disabled, setDissabled ] = useState(false);
 
   const params = new URLSearchParams(useLocation().search);
-  // const {id} = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -43,13 +43,15 @@ const Concert = () => {
       setShowModalToBuyTickets(true);
       setNumTickets(tickets);
     } else {
-      history.push("/login");
+      history.push("/login",{previousUrl:`/concert/?id=${concert._id}`});
     }
   };
 
   const onBuyTickets = (sale) => {
     const { country, street, city, postalCode, region, targetNum, date, cvv } = sale;
     if ( country && street && city && postalCode && region && targetNum && date && cvv ) {
+      setLoading(true);
+      setDissabled(true);
       //cogemos el usuario del localStorage
       let user = JSON.parse(localStorage.getItem("user"));
       //Crear una venta en la base de datos
@@ -61,7 +63,11 @@ const Concert = () => {
         })
         .catch((err) => {
           console.warn(err);
-        });
+        })
+        .finally(()=>{
+          setLoading(false);
+          setDissabled(false);
+        })
     }
   };
 
@@ -82,7 +88,7 @@ const Concert = () => {
         <div className="event-header-left">
           <div className="event-header-left-info">
             <h1>{concert && concert.name}</h1>
-            <span>{concert && formatDate(concert.date)}</span>
+            <span>{concert && formatDate(concert.date)} a las {concert && concert.hour}h</span>
             <span>Precio € {concert && concert.ticketPrice}</span>
             <a href="#entrada" onClick>Comprar entradas</a>
           </div>
@@ -118,7 +124,7 @@ const Concert = () => {
         </p>
       </div>
       <div id={'entrada'}></div>
-        <BuyTicketTarget i
+        <BuyTicketTarget 
           setNumTickets={setNumTickets}
           maxTickets={maxTickets}
           onAreYouRegistered={onAreYouRegistered}
@@ -132,6 +138,8 @@ const Concert = () => {
         onBuyTickets={onBuyTickets}
         numTickets={numTickets}
         ticketPrice={concert && concert.ticketPrice}
+        loading={loading}
+        disabled={disabled}
       />
       <ModalAlert tittle="Gracias por su compra!" show={showAlertThanks} setShowAlert={setShowAlertThanks}/>
       <Footer />

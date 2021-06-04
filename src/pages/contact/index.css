@@ -4,3 +4,170 @@
     min-height: 100vh;
     text-align: center;
 }
+
+.contact-container .contact-img {
+    background-image: url(../../assets/images/damian-zaleski-RYyr-k3Ysqg-unsplash.jpg);
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+    min-height: 400px;
+    position: relative;
+}
+
+.contact-container .contact-img > h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+}
+
+.contact-body {
+    display: flex;
+    padding: 64px;
+}
+
+.contact-message {
+    flex: 0 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+}
+
+.contact-input {
+    width: 90%;
+    margin: 16px auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+}
+
+.contact-input > input {
+    width: 100%;
+    padding: 16px 4px 4px;
+    border: 0;
+    outline-width: 0;
+    font-size: 16px;
+}
+
+.error > input {
+    width: 100%;
+    padding: 16px 4px 4px;
+    border: 0;
+    outline-width: 0;
+    font-size: 16px;
+}
+
+.contact-input > textarea {
+    width: 100%;
+    padding: 16px 4px 4px;
+    resize: none;
+    line-height: 26px;
+    border: 0;
+    outline-width: 0;
+}
+
+.contact-message-send {
+    padding: 32px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 16px auto;
+    width: 90%;
+}
+
+.contact-message-send > a {
+    background-color: var(--primary-color);
+    width: 100%;
+    color: white;
+    padding: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.contact-info {
+    flex: 0 50%;
+    background-color: var(--primary-color);
+    padding: 32px 0;
+    margin: 0 32px;
+}
+
+.contact-info span {
+    color: white;
+    padding: 8px 16px;
+    text-transform: uppercase;
+}
+
+.contact-info-logo {
+    margin: 0 auto;
+    padding: 8px;
+}
+
+.contact-info-logo > img{
+    width: 86px;
+}
+
+.contact-info-telephones {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-info-telephone {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.contact-info-mobile {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.contact-info-mobile > a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+}
+
+.contact-info .icon {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.contact-info-email {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.contact-info-email > a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+}
+
+.contact-info-location {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-info-location > a{
+    padding: 6px;
+    text-decoration: none;
+}
+
+.contact-message .error {
+    width: 90%;
+    margin: 16px auto;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: red;
+}

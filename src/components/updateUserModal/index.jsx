@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { getRoles } from "../../utils/api/apiConcert";
 import { Modal } from "react-bootstrap";
 import "./index.css";
-import { isValidEmail, isValidPhone, isValidstring } from "../../utils/functions";
+import {
+  isValidEmail,
+  isValidPhone,
+  isValidstring,
+} from "../../utils/functions";
+import CustomSpinner from "../../components/spinner";
 
 const UpdateUserModal = ({
   show,
@@ -10,6 +15,7 @@ const UpdateUserModal = ({
   user,
   onUpdateUser,
   emailDuplicate,
+  loading,
 }) => {
   const [name, setName] = useState(user.name);
   const [surnames, setSurnames] = useState(user.surnames);
@@ -29,6 +35,13 @@ const UpdateUserModal = ({
         console.warn(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (user?.userRoleId) {
+      const found = roles.find((role) => role._id === user?.userRoleId);
+      setRol(found?._id);
+    }
+  }, [user, roles]);
 
   const validateUserAndSave = () => {
     const errs = {};
@@ -81,14 +94,46 @@ const UpdateUserModal = ({
           <h1>Actualizar usuario</h1>
           <hr />
           <div className="update-form-body">
-            <input className={errors.name && 'error'} defaultValue={name} onChange={(e) => setName(e.target.value)}/>
-            <input className={errors.surnames && 'error'} defaultValue={surnames} onChange={(e) => setSurnames(e.target.value)}/>
-            <input className={errors.email && 'error'} defaultValue={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input
+              disabled={loading}
+              className={errors.name && "error"}
+              defaultValue={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.surnames && "error"}
+              defaultValue={surnames}
+              onChange={(e) => setSurnames(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.email && "error"}
+              defaultValue={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             {emailDuplicate && <span>El email ya esta en uso</span>}
-            <input className={errors.phone && 'error'} defaultValue={phone} onChange={(e) => setPhone(e.target.value)}/>
-            <input className={errors.city && 'error'} defaultValue={city} onChange={(e) => setCity(e.target.value)}/>
-            <select className={errors.rol && 'error'} onChange={(e) => setRol(e.currentTarget.value)}>
-              <option disabled selected>--Tipo de usuario</option>
+            <input
+              disabled={loading}
+              className={errors.phone && "error"}
+              defaultValue={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <input
+              disabled={loading}
+              className={errors.city && "error"}
+              defaultValue={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <select
+              disabled={loading}
+              value={rol}
+              className={errors.rol && "error"}
+              onChange={(e) => setRol(e.currentTarget.value)}
+            >
+              <option disabled selected>
+                --Tipo de usuario
+              </option>
               {roles &&
                 roles.map((role, index) => (
                   <option key={index} value={role._id}>
@@ -99,8 +144,12 @@ const UpdateUserModal = ({
           </div>
           <hr />
           <div className="update-form-footer">
-            <button onClick={() => onCloseModal()}>Cerrar</button>
-            <button onClick={validateUserAndSave}>Actualizar</button>
+            <button disabled={loading} onClick={() => onCloseModal()}>
+              Cerrar
+            </button>
+            <button disabled={loading} onClick={validateUserAndSave}>
+              {loading && <CustomSpinner />}Actualizar
+            </button>
           </div>
         </div>
       </Modal>

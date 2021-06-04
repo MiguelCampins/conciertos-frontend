@@ -17,3 +17,18 @@ export const isValidNumber = (num) => {
     const regex = new RegExp(/^[0-9]*$/);
     return regex.test(num);
 }
+
+export const isValidNumberTarget = (num) => {
+    const regex = new RegExp(/^\d{16}$/);
+    return regex.test(num);
+}
+
+export const isValidNumberCvv = (num) => {
+    const regex = new RegExp(/^\d{3}$/);
+    return regex.test(num);
+}
+
+export const isValidPassword = (password) => {
+    const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/);
+    return regex.test(password);
+}

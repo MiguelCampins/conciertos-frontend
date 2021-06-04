@@ -41,17 +41,17 @@
     padding: 10px;
 }
 
-.my-modal-footer > button:first-child {
+.my-modal-footer > button:last-child {
     background: var(--primary-color);
     color: white;
     border-radius: 4px;
     padding: 6px 18px;
-    margin-right: 6px;
 }
 
-.my-modal-footer > button:last-child {
+.my-modal-footer > button:first-child {
     background: black;
     color: white;
     border-radius: 4px;
     padding: 6px 18px;
+    margin-right: 6px;
 }

@@ -4,21 +4,21 @@
     padding: 10px;
 }
 
-.my-modal-delete .botones>button:first-child {
+.my-modal-delete .botones > button:last-child {
     background-color: red;
     color: white;
     border-radius: 4px;
     width: 110px;
     height: 38px;
-    margin-right: 10px;
 }
 
-.my-modal-delete .botones>button:last-child {
-    background-color: var(--primary-color);
+.my-modal-delete .botones > button:first-child {
+    background-color: black;
     color: white;
     border-radius: 4px;
     width: 110px;
     height: 38px;
+    margin-right: 10px;
 }
 
 .my-modal-delete > h4 {

@@ -3,12 +3,8 @@ import "./index.css";
 import Footer from "../../components/footer";
 import UserEdit from "../../components/userEdit";
 import UserTickets from "../../components/userTickets";
-import {
-  getFilterSale,
-  updatePassword,
-  updateUser,
-} from "../../utils/api/apiConcert";
-import { useHistory } from "react-router-dom";
+import {getFilterSale,updateUser,} from "../../utils/api/apiConcert";
+import { useHistory, useLocation} from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
@@ -17,21 +13,27 @@ import ModalAlert from "../../components/modalAlert";
 import ThereAreNotTickets from "../../components/thereAreNotTickets";
 
 const MODES = {
-  conciertos: "conciertos",
   editarPerfil: "editar",
   entradas: "entradas",
 };
 
 const User = () => {
-  const [mode, setMode] = useState(MODES.entradas);
+  const [mode, setMode] = useState(MODES.editarPerfil);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const [sales, setSales] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [emailDuplicate, setEmailDuplicate] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading ] = useState(false);
 
+  const {state} = useLocation();
   const history = useHistory();
 
+  
   useEffect(() => {
+    if(state && state.redirectToTickets){
+      setMode(MODES.entradas);
+    }
     getFilterSale(user._id)
       .then((resp) => {
         setSales(resp);
@@ -57,10 +59,11 @@ const User = () => {
   const onUpdateUser = (user) => {
     const { name, surnames, email, phone, city, _id } = user;
     if (name && surnames && email && phone && city && _id) {
+      setLoading(true);
+      setDisabled(true);
       updateUser(user)
         .then((resp) => {
           setUser(resp);
-          setShowModal(true);
         })
         .catch((err) => {
           if (err.response.data.message.includes("email")) {
@@ -68,7 +71,12 @@ const User = () => {
           } else {
             console.warn(err);
           }
-        });
+        })
+        .finally(()=> {
+          setLoading(false);
+          setDisabled(false);
+          setShowModal(true);
+        })
     }
   };
 
@@ -93,8 +101,8 @@ const User = () => {
           </div>
         </div>
         <div className="user-header-right">
-          {mode === MODES.editarPerfil && <h2>Mi perfil</h2>}
-          {mode === MODES.entradas && <h2>Entradas</h2>}
+          {mode === MODES.editarPerfil && <h1>Mi perfil</h1>}
+          {mode === MODES.entradas && <h1>Entradas</h1>}
         </div>
       </div>
       <div className="user-body">
@@ -120,6 +128,9 @@ const User = () => {
               onUpdateUser={onUpdateUser}
               user={user && user}
               emailDuplicate={emailDuplicate}
+              setEmailDuplicate={setEmailDuplicate}
+              loading={loading}
+              disabled={disabled}
             />
           )}
           {mode === MODES.entradas && renderSales()}
