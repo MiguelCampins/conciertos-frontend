@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { isValidNumber, isValidstring } from "../../utils/functions";
 import CustomSpinner from "../../components/spinner";
 import "./index.css";
+import MultiInput from "../multiImput";
 
 const UpdateconcertModal = ({
   show,
@@ -47,7 +48,7 @@ const UpdateconcertModal = ({
       errs.hasError = true;
       errs.price = true;
     }
-    if (!artists) {
+    if (!artists.length) {
       errs.hasError = true;
       errs.artists = true;
     }
@@ -63,7 +64,7 @@ const UpdateconcertModal = ({
         city,
         maxTickets: tickets,
         ticketPrice: price,
-        artists: artists.split(","),
+        artists,
         _id: concert?._id,
       });
     }
@@ -114,12 +115,7 @@ const UpdateconcertModal = ({
               defaultValue={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            <input
-              disabled={loading}
-              className={errors.artists && "error"}
-              defaultValue={artists}
-              onChange={(e) => setArtists(e.target.value)}
-            />
+            <MultiInput onChange={(value) => setArtists(value)} error={errors.artists} value={artists}/>
           </div>
           <hr />
           <div className="update-form-footer">

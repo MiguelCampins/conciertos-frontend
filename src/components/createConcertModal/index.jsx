@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { isValidNumber, isValidstring } from "../../utils/functions";
 import CustomSpinner from "../../components/spinner";
 import "./index.css";
+import MultiInput from "../multiImput";
 
 const CreateConcertModal = ({
   show,
@@ -62,7 +63,7 @@ const CreateConcertModal = ({
         city,
         maxTickets: tickets,
         ticketPrice,
-        artists: artists.split(","),
+        artists: artists,
       });
     }
   };
@@ -104,23 +105,17 @@ const CreateConcertModal = ({
               disabled={loading}
               className={errors.tickets && "error"}
               placeholder="Numero entradas"
-              type=""
+              type="number"
               onChange={(e) => setTickets(e.target.value)}
             />
             <input
               disabled={loading}
               className={errors.ticketPrice && "error"}
               placeholder="Precio"
-              type=""
+              type="number"
               onChange={(e) => setTicketPrice(e.target.value)}
             />
-            <input
-              disabled={loading}
-              className={errors.artists && "error"}
-              placeholder="Artistas"
-              type=""
-              onChange={(e) => setArtists(e.target.value)}
-            />
+            <MultiInput onChange={(value) => setArtists(value)} error={errors.artists}/>
           </div>
           <hr />
           <div className="concert-footer">

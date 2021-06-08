@@ -1,5 +1,5 @@
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "../src/pages/login";
 import Home from "../src/pages/home";
 import User from "./pages/user";
@@ -14,12 +14,25 @@ import AboutUs from "./pages/aboutUs";
 import ScrollRestoration from 'react-scroll-restoration';
 import "./styles/index.css";
 import Contact from "./pages/contact";
+import Cookie from './components/cookie';
 
 const App = () => {
 
   const [user , setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [cookiesAccepted, setCookiesAccepted ] = useState(false);
+
+  useEffect(() => {
+    const actualDate = new Date( Date.now());
+    const dateLovalstorage = localStorage.getItem('cookiesAccepted');
+    if(actualDate > Date.parse(dateLovalstorage)){
+      localStorage.removeItem('cookiesAccepted');
+    }else if(localStorage.getItem('cookiesAccepted')){
+      setCookiesAccepted(true);
+    }
+  }, []);
+
   /**
-   * Esta función te mira si hay usuario y si el rol es admin, y si hay te devuelve el componente que toca. Sino te lleva al home.
+   * Esta función te comprueba si hay usuario y si el rol es admin, y si hay te devuelve el componente que toca. Sino te lleva al home.
    * @param {*} component
    * @returns
    */
@@ -74,9 +87,20 @@ const App = () => {
      setUser(null);
 }
 
+const onAcceptCookies = () => {
+  const newDate = new Date( Date.now() + (1000*60*60*24*365));
+  localStorage.setItem('cookiesAccepted', newDate);
+  setCookiesAccepted(true);
+};
+
+const onHideCookie = () => {
+  setCookiesAccepted(true);
+};
+
   return (
     <BrowserRouter>
       <Navbar isLoggedIn={isLoggedIn()} user={user} logOut={logOut}/>
+      {!cookiesAccepted && <Cookie handleCookie={()=> onAcceptCookies()} onHide={()=> onHideCookie()}/>}
       <ScrollRestoration />
       <Switch>
         <Route exact path="/" component={Home}/>

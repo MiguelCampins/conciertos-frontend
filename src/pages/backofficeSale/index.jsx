@@ -40,8 +40,8 @@ const BackofficeSale = () => {
                       <th>Total entradas</th>
                       <th>Total vendidas</th>
                   </tr>
-                  {concerts && concerts.map((concert) => (
-                      <tr>
+                  {concerts && concerts.map((concert, index) => (
+                      <tr key={index}>
                           <td>{concert.name}</td>
                           <td>{concert.date}</td>
                           <td>{concert.maxTickets}</td>

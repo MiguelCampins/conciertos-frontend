@@ -20,6 +20,13 @@
     flex-direction: column;
 }
 
+.update-form-body > span {
+    color: grey;
+    font-size: 13px;
+    margin-top: -15px;
+    margin-left: -75px;
+}
+
 .update-form-body .error {
     border: 2px solid red;
 }

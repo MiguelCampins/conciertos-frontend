@@ -1,0 +1,51 @@
+.cookie-container {
+    display: flex;
+    width: 100%;
+    height: 120px;
+    background: black;
+    bottom: 0;
+    position: fixed;
+    z-index: 22;
+}
+
+.cookie-text {
+    display: flex;
+    flex: 0 80%;
+    padding: 16px;
+}
+
+.cookie-text > p {
+    color: white;
+}
+
+.cookie-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 0 20%;
+    padding: 8px 16px;
+}
+
+.cookie-buttons > button:first-child {
+    background: var(--primary-color);
+    padding: 8px 18px;
+    border-radius: 4px;
+    color: white;
+}
+
+.cookie-buttons > button:last-child {
+    background: grey;
+    padding: 8px 18px;
+    border-radius: 4px;
+    color: white;
+}
+
+.cookie-background {
+	background: rgba(0,0,0,.50);
+	position: fixed;
+	z-index: 20;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+} 

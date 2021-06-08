@@ -23,7 +23,18 @@
 .concert-body > input {
     width: 246px;
     margin: auto;
-    margin-bottom: 16px;
+    margin-top: 16px;
+}
+
+.concert-body > span {
+    width: 246px;
+    margin: auto;
+    font-size: 13px;
+    color: grey;
+}
+
+.concert-body .input-container {
+    margin: auto;
 }
 
 .concert-footer {
