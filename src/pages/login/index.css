@@ -42,7 +42,7 @@
     background: rgba(255, 0, 0,0.1);
 }
 
-.login-form input{
+.login-form > input{
     height: 40px;
     border-radius: 60px;
     border: 1px solid #868686;
@@ -52,12 +52,32 @@
     margin-bottom: 16px;
 }
 
+.input-password {
+    height: 40px;
+    width: 234px;
+    border-radius: 60px;
+    border: 1px solid #868686;
+    transition: all 0.5s;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    background: white;
+}
+
+.input-password > input {
+    outline: none;
+    border: 0;
+    width: 85%;
+    padding-left: 16px;
+    font-size: 18px;
+    border-radius: 60px;
+}
+
 .login-form .error {
     border: 2px solid red;
 }
 
-.login-form input:focus{
-    border-color: #25b393;
+.login-form > input:focus{
     outline: none;
 }
 

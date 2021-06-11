@@ -5,6 +5,7 @@ import {
   isValidNumberTarget,
   isValidstring,
   isValidNumberCvv,
+  isValidDate
 } from "../../utils/functions";
 import CustomSpinner from "../../components/spinner";
 import "./index.css";
@@ -21,14 +22,14 @@ const BuyTicketModal = ({
   const [name, setName] = useState();
   const [postalCode, setPostalCode] = useState();
   const [targetNum, setTargetNum] = useState([]);
-  const [date, setDate] = useState();
+  const [date, setDate] = useState([]);
   const [cvv, setCvv] = useState();
   const [errors, setErrors] = useState({});
 
   const resetModal = () => {
     setPostalCode();
     setTargetNum([]);
-    setDate();
+    setDate([]);
     setCvv();
     setName();
   };
@@ -59,7 +60,7 @@ const BuyTicketModal = ({
       errs.hasError = true;
       errs.targetNum = true;
     }
-    if (!date) {
+    if (!date || !isValidDate(date)) {
       errs.hasError = true;
       errs.date = true;
     }
@@ -85,13 +86,13 @@ const BuyTicketModal = ({
 
   return (
     <div>
-      <Modal show={show}>
+      <Modal show={show} onHide={onCloseModalAndResetErrors}>
         <div className="my-modal-container">
           <div className="my-modal-card">
+            <div className="my-modal-map">
             <div className="my-modal-card-content">
               <span>Visa Electron</span>
               <div className="chip">
-                <div className="chip2"></div>
               </div>
               <div className="my-modal-card-number">
                 <span>
@@ -111,10 +112,11 @@ const BuyTicketModal = ({
                 <span>{!name ? "FULL NAME" : name}</span>
               </div>
               <div className="my-modal-card-footer">
-                <span>{!date ? "01/02" : date}</span>
+                <span>{!date.length ? "01/02" : date.slice(0,2) + "/" + date.slice(2,4)}</span>
                 <span>{!cvv ? "cvv: XXX" : `cvv: ${cvv}`}</span>
                 <div className="my-modal-card-footer-logo" />
               </div>
+            </div>
             </div>
           </div>
           <div className="my-modal-inputs">
@@ -139,11 +141,12 @@ const BuyTicketModal = ({
               <div className="my-modal-inputs-left">
                 <label>Expira</label>
                 <input
+                 type="number"
                   disabled={disabled}
                   className={errors.date && "error"}
                   value={date}
                   placeholder="MM/YY"
-                  onChange={(e) => setDate(e.target.value.slice(0, 5))}
+                  onChange={(e) => setDate(e.target.value.slice(0, 4))}
                 />
               </div>
               <div className="my-modal-inputs-right">

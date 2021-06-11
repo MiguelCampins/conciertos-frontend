@@ -33,8 +33,12 @@ const TableUsers = ({ users, roles, onDeleteUser, onSelectUser }) => {
     setIndex(index);
   }
 
+  if (users && !users.length) {
+    return <h4>No existen coincidencias...</h4>;
+  }
+  
   return (
-    <>
+    <div className="table table-bordered table-hover ">
       <table>
         <tbody>
           <tr>
@@ -72,7 +76,7 @@ const TableUsers = ({ users, roles, onDeleteUser, onSelectUser }) => {
         item={userSelect}
         index={index}        
       />
-    </>
+    </div>
   );
 };
 

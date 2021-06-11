@@ -1,0 +1,30 @@
+.my-search {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my-input {
+    display: flex;
+}
+
+.my-input-content {
+    border: 1px solid grey;
+}
+
+.my-search input {
+    padding: 4px;
+    width: 360px;
+    border: none;
+    outline: none;
+}
+
+.my-input > button {
+    background: var(--primary-color);
+    padding: 6px;
+    width: 100px;
+    border-radius: 0px 4px 4px 0px;
+    color: white;
+}

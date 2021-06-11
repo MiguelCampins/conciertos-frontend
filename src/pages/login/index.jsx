@@ -4,58 +4,66 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./index.css";
 import logo from "../../assets/images/logo.png";
 import CustomSpinner from "../../components/spinner";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const Login = () => {
-  
-  const [ email, setEmail ] = useState("");
-  const [ password, setPasword ] = useState("");
-  const [ errors, setErrors ] = useState({});
-  const [ sessionError, setSessionError ] = useState(false)
-  const [ loading, setLoading ] = useState(false);
- 
-  const {state} = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPasword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [sessionError, setSessionError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const { state } = useLocation();
   const history = useHistory();
 
   const onLogin = (email, password) => {
-    if(email && password){
+    if (email && password) {
       setLoading(true);
       setErrors({});
       getUserLogin(email, password)
-      .then((resp) => {
-        localStorage.setItem("user", JSON.stringify(resp?.user));
-        localStorage.setItem("token", resp?.token);
-        if(!state || !state.previousUrl){
+        .then((resp) => {
+          localStorage.setItem("user", JSON.stringify(resp?.user));
+          localStorage.setItem("token", resp?.token);
+          if (!state || !state.previousUrl) {
             history.push("/backofficeUser");
-        }
-            history.push(state.previousUrl);
-      })
-      .catch((err) => {
-        console.warn(err);
-        setSessionError(true);
-      })
-      .finally(()=>{
-        setLoading(false);
-      })
+          }
+          history.push(state.previousUrl);
+        })
+        .catch((err) => {
+          console.warn(err);
+          setSessionError(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
   const validateUserandSend = () => {
     const errs = {};
-    if(!email){
+    if (!email) {
       errs.hasError = true;
       errs.email = true;
     }
-    if(!password){
+    if (!password) {
       errs.hasError = true;
       errs.password = true;
     }
 
-    if(errs.hasError){
+    if (errs.hasError) {
       setErrors(errs);
-    }else{
-      onLogin(email, password)
+    } else {
+      onLogin(email, password);
     }
-  }
+  };
+
+  const togglePasswordVisiblity = (event) => {
+    if (event.type === "mousedown") {
+      setPasswordShown(true);
+    } else {
+      setPasswordShown(false);
+    }
+  };
 
   return (
     <div className="login-container">
@@ -63,23 +71,38 @@ const Login = () => {
         <div className="login-form">
           <img alt="img" src={logo} />
           <input
-            className={errors.email && 'error'}
-            type="text"
+            className={errors.email && "error"}
+            type="email"
             placeholder="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             disabled={loading}
           />
-          <input
-            className={errors.password && 'error'}
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(event) => setPasword(event.target.value)}
-            disabled={loading}
-          />
-          {sessionError && (<div className="error-login">La contraseña o el email son incorrectos</div>)}
-          <button disabled={loading} onClick={validateUserandSend}>{loading && <CustomSpinner/>} Log in</button>
+          <div
+            className="input-password"
+            style={errors.password && { border: "2px solid red" }}
+          >
+            <input
+              type={passwordShown ? "text" : "password"}
+              placeholder="password"
+              value={password}
+              onChange={(event) => setPasword(event.target.value)}
+              disabled={loading}
+            />
+            <VisibilityIcon
+              onMouseDown={togglePasswordVisiblity}
+              onMouseUp={togglePasswordVisiblity}
+              style={{ color: "grey", width: "20px", cursor: "pointer" }}
+            />
+          </div>
+          {sessionError && (
+            <div className="error-login">
+              La contraseña o el email son incorrectos
+            </div>
+          )}
+          <button disabled={loading} onClick={validateUserandSend}>
+            {loading && <CustomSpinner />} Log in
+          </button>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
   };
 
   const maxNumTickets = (value) => {
-    if(maxTickets > value){
+    if(maxTickets > value && value < 10){
       setTickets(value +1);
     }
   }
@@ -58,7 +58,7 @@ const BuyTicketTarget = ({ maxTickets, onAreYouRegistered, concert }) => {
             <span>
               <RemoveIcon />
             </span>
-            <input id="cantidad" disabled value="0"/>
+            <input id="cantidad" disabled />
             <span>
               <AddIcon />
             </span>

@@ -11,7 +11,7 @@
     background-size: cover;
     width: 100%;
     min-height: 400px;
-    background-position-y: -416px;
+    background-position-y: bottom;
 }
 
 .aboutUs {
@@ -76,4 +76,22 @@
 .about-us-text > p {
     color: grey;
     max-width: 70ch;
+}
+
+@media screen and (max-width: 768px) {
+    .aboutUs-img {
+        background-position-x: right;
+    }
+
+    .aboutUs {
+        text-align: center;
+    }
+
+    .about-us-img2 {
+        background-position-x: right;
+    }
+
+    .about-us-text > p {
+        text-align: center;
+    }
 }

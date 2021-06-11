@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import MenuIcon from '@material-ui/icons/Menu';
 import "./index.css";
 import logo from "../../assets/images/logo.png";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const Navbar = ({ isLoggedIn, logOut, user }) => {
 
   const [ isOpen, setIsOpen ] = useState(false);
   const history = useHistory();
+  const location = useLocation();
+  const {pathname} = location;
+  const splitLocation = pathname.split("/");
+
   /**
    * Funcion para comprobar si el user del localstorage es admin o no 
    */
@@ -27,12 +31,12 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
       <img alt="logo" src={logo}></img>
       <a className="tittle" href="/"><b>ticketclick</b></a>
       <div className={`navbar-links ${isOpen ? 'navbarOpen' : ''}`}>
-      <a href="/">Inicio</a>
+      <a className={splitLocation[1] === "" ? "active" : ""} href="/">Inicio</a>
         {!isUserAdmin() ? (
         <>
-          <a href="/aboutUs">Sobre nosotros</a>
-          <a href="/contact">Contacto</a>
-          <a href="/user">{user && user.name}</a>
+          <a className={splitLocation[1] === "aboutUs" ? "active" : ""} href="/aboutUs">Sobre nosotros</a>
+          <a className={splitLocation[1] === "contact" ? "active" : ""} href="/contact">Contacto</a>
+          <a className={splitLocation[1] === "user" ? "active" : ""} href="/user">{user && user.name}</a>
         </>
         ):(
         <>

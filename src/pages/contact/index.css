@@ -171,3 +171,30 @@
     border-bottom-style: solid;
     border-bottom-color: red;
 }
+
+@media screen and (max-width: 768px) {
+    .contact-container .contact-img > h1 {
+        top: 46%;
+        left: 6%;
+        font-size: 40px;
+    }
+
+    .contact-body {
+        padding: 16px;
+        flex-wrap: wrap;
+    }
+
+    .contact-message {
+        flex: 0 100%;
+        padding: 0;
+    }
+
+    .contact-info {
+        flex: 0 100%;
+        margin: 0;
+    }
+
+    .contact-info-mobile > a{
+        padding: 8px 14px;
+    }
+}

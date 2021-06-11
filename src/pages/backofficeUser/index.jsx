@@ -4,6 +4,7 @@ import CreateUserModal from "../../components/createUserModal";
 import TableUsers from "../../components/tableUser/tableUser";
 import UpdateUserModal from "../../components/updateUserModal";
 import "./index.css";
+import Search from "../../components/search";
 
 const BackofficeUser = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,10 @@ const BackofficeUser = () => {
   const [selectedUser, setSelectedUser] = useState();
   const [emailDuplicate, setEmailDuplicated] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get("q");
+  const [searchQuery, setSearchQuery] = useState(query || "");
 
   useEffect(() => {
     //Llamada a la base de datos de los usuarios y de los roles
@@ -128,6 +133,18 @@ const onCloseModal = () => {
      } 
   };
 
+  const filterUsers = (users, query) => {
+    if(!query){
+      return users;
+    }
+    return users.filter((user) => {
+      const userName = user.name.toLowerCase();
+      return userName.includes(query);
+    });
+  };
+
+  const filteredUser = filterUsers(users, query);
+
   return (
     <div className="users-container">
       <div className="header">
@@ -136,6 +153,16 @@ const onCloseModal = () => {
           Crear usuario
         </button>
       </div>
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} action="/backofficeUser" placeholder="Usuario"/>
+          <TableUsers
+            users={filteredUser}
+            roles={roles && roles}
+            onDeleteUser={onDeleteUser}
+            onSelectUser={(usr) => {
+              setSelectedUser(usr);
+              setShowUpdateUserModal(true);
+            }}
+          />
       {showCreateUserModal && (
         <CreateUserModal
           show={showCreateUserModal}
@@ -154,18 +181,7 @@ const onCloseModal = () => {
           emailDuplicate={emailDuplicate}
           loading={loading}
         />
-      )}
-        <div className="table table-bordered table-hover ">
-          <TableUsers
-            users={users && users}
-            roles={roles && roles}
-            onDeleteUser={onDeleteUser}
-            onSelectUser={(usr) => {
-              setSelectedUser(usr);
-              setShowUpdateUserModal(true);
-            }}
-          />
-      </div>
+      )} 
     </div>
   );
 };

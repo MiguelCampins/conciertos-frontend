@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import "./index.css";
 import LocalPhoneIcon from "@material-ui/icons/LocalPhone";
 import PhoneIphoneIcon from "@material-ui/icons/PhoneIphone";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import { ExternalLink } from 'react-external-link';
+import { ExternalLink } from "react-external-link";
 import Footer from "../../components/footer";
 
 const Contact = () => {
@@ -14,6 +14,13 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({});
   const [isValidated, setIsvalidated] = useState(false);
+
+  useEffect(() => {
+    setName("");
+    setPhone("");
+    setMessage("");
+    
+  }, [errors]);
 
   const validateForm = () => {
     const errs = {};
@@ -30,9 +37,6 @@ const Contact = () => {
       setIsvalidated(false);
     } else {
       setIsvalidated(true);
-      setName('');
-      setPhone('');
-      setMessage('');
       setErrors({});
     }
   };
@@ -44,14 +48,14 @@ const Contact = () => {
       </div>
       <div className="contact-body">
         <div className="contact-message">
-          <div className={errors.name ? 'error' : 'contact-input'}>
+          <div className={errors.name ? "error" : "contact-input"}>
             <input
               placeholder="Nombre"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className={errors.phone ? 'error' : 'contact-input'}>
+          <div className={errors.phone ? "error" : "contact-input"}>
             <input
               placeholder="Telefono"
               value={phone}
@@ -67,9 +71,13 @@ const Contact = () => {
           </div>
           <div className="contact-message-send">
             <a
-              style={{color:"white"}}
+              style={{ color: "white" }}
               onClick={validateForm}
-              href={isValidated ? `mailto:miguel_ilutec@hotmail.com?subject=Contactacto: ${name}&body= Telephone: ${phone} %0D%0A%0D%0A Message: ${message} %0D%0A%0D%0A` : null}
+              href={
+                isValidated
+                  ? `mailto:miguel_ilutec@hotmail.com?subject=Contactacto: ${name}&body= Telephone: ${phone} %0D%0A%0D%0A Message: ${message} %0D%0A%0D%0A`
+                  : null
+              }
             >
               Enviar mensaje
             </a>
@@ -91,13 +99,23 @@ const Contact = () => {
           </div>
           <div className="contact-info-email">
             <MailOutlineIcon className="icon" />
-            <a href="mailto:sales@TicketClick.com">Email: sales@TicketClick.com</a>
+            <a href="mailto:sales@TicketClick.com">
+              Email: sales@TicketClick.com
+            </a>
           </div>
           <div className="contact-info-location">
-            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z"><LocationOnIcon className="icon" /></ExternalLink>
-            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z"><span>Calle Wallaby 42</span></ExternalLink>
-            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z"><span>Bloque 2,local 1, 07600</span></ExternalLink>
-            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z"><span>sidney</span></ExternalLink>
+            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z">
+              <LocationOnIcon className="icon" />
+            </ExternalLink>
+            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z">
+              <span>Calle Wallaby 42</span>
+            </ExternalLink>
+            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z">
+              <span>Bloque 2,local 1, 07600</span>
+            </ExternalLink>
+            <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z">
+              <span>sidney</span>
+            </ExternalLink>
           </div>
         </div>
       </div>

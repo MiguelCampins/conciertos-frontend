@@ -1,77 +1,4 @@
-/* .buy-form>h1 {
-    text-align: center;
-    padding: 8px;
-    margin: 0;
-}
-
-.buy-form>hr {
-    background-color: var(--primary-color);
-    height: 1px;
-    border: 0;
-    width: 100%;
-}
-
-.buy-form-body {
-    width: 60%;
-    margin: 0 auto;
-    padding-bottom: 16px;
-}
-
-.buy-form-body-inputs {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-} 
-
-.buy-form-body-inputs > span {
-    color: gray;
-}
-
-.buy-form-body-inputs .error {
-    border: 2px solid red;
-}
-
-.buy-form-body-total {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.buy-form-body-total > span{
-    padding-right: 16px;
-}
-
-.buy-form-footer {
-    display: flex;
-    justify-content: flex-end;
-    height: 48px;
-}
-
-.buy-form-footer> :first-child {
-    background: black;
-    color: white;
-    border-radius: 4px;
-    width: 110px;
-    height: 38px;
-    margin-right: 8px;
-}
-
-.buy-form-footer> :nth-child(2) {
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 4px;
-    width: 110px;
-    height: 38px;
-    margin-right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.buy-form-body .total {
-    margin-left: 352px;
-} */
-
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 .my-modal-container {
     display: flex;
     flex-direction: column;
@@ -82,9 +9,23 @@
     width: 100%;
     min-height: 248px;
     border-radius: 16px;
-    background: #00b4db; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #00b4db, #0083b0); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #00b4db, #0083b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ba8b02;
+    background: -webkit-linear-gradient(to right, #755800, #ba8b02);
+    background: linear-gradient(to right, #886600, #ffbf01);
+    font-family: 'Share Tech Mono';
+    position: relative;
+    box-shadow: 1px 2px 12px -2px black;
+}
+
+.my-modal-map {
+    background-image: url(../../assets/images/map.png);
+    background-size: cover;
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .my-modal-card-content {
@@ -92,35 +33,29 @@
     height: 100%;
 }
 
-.my-modal-card-content > span:first-child {
+.my-modal-card-content>span:first-child {
     font-size: 28px;
     color: white;
 }
 
 .my-modal-card-content .chip {
-    background: rgb(143, 143, 143);
-    margin-top: 20px;
-    width: 54px;
-    height: 44px;
+    background-image: url(../../assets/images/pixlr-bg-result.png);
+    background-size: cover;
+    margin-top: 2px;
+    width: 70px;
+    height: 60px;
     border-radius: 6px;
-    padding: 8px 0px;
-}
-
-.my-modal-card-content .chip2 {
-    background: rgb(179, 179, 179);
-    width: 34px;
-    height: 26px;
-    border-radius: 0px 4px 4px 0px;
+    margin-left: -8px;
 }
 
 .my-modal-card-number {
     display: flex;
 }
 
-.my-modal-card-number > span{
+.my-modal-card-number>span {
     flex: 0 25%;
     color: white;
-    font-size: 24px;
+    font-size: 26px;
     text-shadow: 2px 2px 2px #000000;
 }
 
@@ -128,7 +63,7 @@
     margin-top: 4px;
 }
 
-.my-modal-card-name > span {
+.my-modal-card-name>span {
     color: white;
     font-size: 20px;
 }
@@ -139,13 +74,13 @@
     margin-top: 8px;
 }
 
-.my-modal-card-footer > span:first-child {
+.my-modal-card-footer>span:first-child {
     color: white;
     font-size: 18px;
     text-shadow: 2px 2px 2px #000000;
 }
 
-.my-modal-card-footer > span:nth-child(2) {
+.my-modal-card-footer>span:nth-child(2) {
     color: white;
     font-size: 18px;
     text-shadow: 2px 2px 2px #000000;
@@ -189,7 +124,7 @@
     flex-direction: column;
 }
 
-.my-modal-inputs label{
+.my-modal-inputs label {
     text-transform: uppercase;
     margin-bottom: 0px;
     margin-top: 8px;
@@ -198,6 +133,7 @@
 .my-modal-inputs input {
     padding: 6px 6px;
     border: 1px solid gray;
+    width: 100%;
 }
 
 .my-modal-buttons {
@@ -206,15 +142,15 @@
     margin-top: 12px;
 }
 
-.my-modal-buttons > button:first-child {
+.my-modal-buttons>button:first-child {
     background: mediumseagreen;
     color: white;
     padding: 5px 0px;
     font-size: 18px;
 }
 
-.my-modal-buttons > button:last-child {
-    background:red;
+.my-modal-buttons>button:last-child {
+    background: red;
     color: white;
     padding: 5px 0px;
     margin-top: 12px;
@@ -223,4 +159,35 @@
 
 .my-modal-inputs .error {
     border: 1px solid red
+}
+
+@media screen and (max-width: 768px) { 
+    .my-modal-container {
+        padding: 2px;
+    } 
+    .my-modal-inputs label {
+        font-size: 15px;
+    }
+
+    .my-modal-card-footer>span:nth-child(2) {
+        left: 68px;
+    }
+
+    .my-modal-card-footer-logo {
+        height: 50px;
+        width: 60px;
+    }
+
+    .my-modal-card-content .chip {
+        width: 59px;
+        height: 48px;
+    }
+
+    .my-modal-card {
+        min-height: 210px;
+    }
+
+    .my-modal-card-content {
+        padding: 6px 14px;
+    }
 }

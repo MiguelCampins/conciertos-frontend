@@ -11,6 +11,7 @@ import BuyTicketTarget from "../../components/buyTicketTarget";
 import "./index.css";
 import ModalAlert from "../../components/modalAlert";
 import CarouselConcert from "../../components/carouselConcert";
+import {Link} from 'react-scroll'
 
 const Concert = () => {
   const [concert, setConcert] = useState();
@@ -90,7 +91,7 @@ const Concert = () => {
             <h1>{concert && concert.name}</h1>
             <span>{concert && formatDate(concert.date)} a las {concert && concert.hour}h</span>
             <span>Precio € {concert && concert.ticketPrice}</span>
-            <a href="#entrada" onClick>Comprar entradas</a>
+            <Link to="entrada" spy={true}>Comprar entrada</Link>
           </div>
         </div>
         <div className="event-header-right">
@@ -107,6 +108,7 @@ const Concert = () => {
           molestie offendit has no. Quo te semper invidunt quaestio, per
           vituperatoribus sadipscing ei, partem aliquyam sensibus in cum.
         </p>
+        <div id={'entrada'}/>
         <p>
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
           nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
@@ -123,15 +125,14 @@ const Concert = () => {
           adolescens ut. Offendit reprimique et has, eu mei homero imperdiet.
         </p>
       </div>
-      <div id={'entrada'}></div>
-        <BuyTicketTarget 
+        <BuyTicketTarget  
           setNumTickets={setNumTickets}
           maxTickets={maxTickets}
           onAreYouRegistered={onAreYouRegistered}
           numTickets={numTickets}
           concert={concert}
         />
-      <CarouselConcert imagesUrl={concert && concert.images}/>
+      <CarouselConcert  imagesUrl={concert && concert.images}/>
       <BuyTicketModal
         show={showModalToBuyTickets}
         onCloseModal={onCloseModal}

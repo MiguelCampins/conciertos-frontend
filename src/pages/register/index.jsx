@@ -11,9 +11,9 @@ import {
   isValidstring,
 } from "../../utils/functions";
 import CustomSpinner from "../../components/spinner";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 
 const Register = () => {
-  
   const [name, setName] = useState();
   const [surnames, setSurnames] = useState();
   const [city, setCity] = useState();
@@ -24,6 +24,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [emailDuplicate, setEmailDuplicate] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const history = useHistory();
 
@@ -60,13 +61,9 @@ const Register = () => {
       errs.hasError = true;
       errs.email = true;
     }
-    if (!password) {
+    if (!password || !isValidPassword(password)) {
       errs.hasError = true;
       errs.password = true;
-    }
-    if(!isValidPassword(password)){
-      errs.hasError = true;
-      errs.passwordFormat = true;
     }
     // si hay alguno que falta ponemos que hay un error de validacion
     if (errs.hasError) {
@@ -107,6 +104,14 @@ const Register = () => {
     }
   };
 
+  const togglePasswordVisiblity = (event) => {
+    if (event.type === "mousedown") {
+      setPasswordShown(true);
+    } else {
+      setPasswordShown(false);
+    }
+  };
+
   return (
     <div className="register-container">
       <div className="register-form">
@@ -135,21 +140,32 @@ const Register = () => {
           placeholder="telefono"
           onChange={(e) => setPhone(e.target.value)}
         />
+        {emailDuplicate && (
+          <span style={{ color: "red" }}>El email ya existe</span>
+        )}
         <input
           disabled={loading}
           className={errors.email && "error"}
           placeholder="email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        {emailDuplicate && <span>El email ya existe</span>}
-        <input
-          disabled={loading}
-          className={errors.password && "error"}
-          placeholder="password"
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {errors.passwordFormat && <span>Minimo 8 caracteres y un número</span>}
+        <span>Minimo 8 caracteres y un número</span>
+        <div
+          className="input-password"
+          style={errors.password && { border: "2px solid red" }}
+        >
+          <input
+            type={passwordShown ? "text" : "password"}
+            disabled={loading}
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <VisibilityIcon
+            onMouseDown={togglePasswordVisiblity}
+            onMouseUp={togglePasswordVisiblity}
+            style={{ color: "grey", width: "20px", cursor: "pointer" }}
+          />
+        </div>
         <button disabled={loading} onClick={validateUserAndSave}>
           {loading && <CustomSpinner />}Registrar
         </button>

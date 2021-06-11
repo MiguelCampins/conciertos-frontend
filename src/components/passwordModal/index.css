@@ -17,6 +17,23 @@
     padding: 13px 0px;
 }
 
+.my-modal-body > input {
+    border: 1px solid grey;
+    padding: 4px;
+    outline: none;
+}
+
+.password-input {
+    border: 1px solid grey;
+    padding: 4px;
+}
+
+.password-input > input {
+    outline: none;
+    border: none;
+    width: 90%;
+}
+
 .my-modal-body .error {
     border: 2px solid red;
 }

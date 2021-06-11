@@ -6,7 +6,6 @@
     background-color: transparent;
 }
 
-
 .card-concert::after {
     content: "";
     position: absolute;

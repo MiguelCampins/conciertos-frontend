@@ -4,13 +4,15 @@ button {
 }
 
 .publish {
-    border: 1px solid black;
+    background: mediumseagreen;
+    color: white;
     border-radius: 4px;
-    width: 74px;
-    transition: all 0.4s;
+    padding: 4px 6px;
 }
 
-.publish:hover {
-    background-color: black;
+.no-publish {
+    background: red;
     color: white;
+    border-radius: 4px;
+    padding: 4px 12px;
 }

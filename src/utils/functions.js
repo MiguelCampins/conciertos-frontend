@@ -28,6 +28,11 @@ export const isValidNumberCvv = (num) => {
     return regex.test(num);
 }
 
+export const isValidDate = (num) => {
+    const regex = new RegExp(/^\d{4}$/);
+    return regex.test(num);
+}
+
 export const isValidPassword = (password) => {
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/);
     return regex.test(password);

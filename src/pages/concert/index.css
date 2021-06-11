@@ -51,6 +51,7 @@ html {
 
 .event-header .event-header-left-info > a:hover {
     background: rgb(59, 59, 59);
+    color: white;
 }
 
 .event-header .event-header-right {

@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
+import Search from "../../components/search";
 import { getConcerts, getSales } from "../../utils/api/apiConcert";
 import "./index.css";
 
 const BackofficeSale = () => {
-  const [concerts, setConcerts] = useState();
+  const [concerts, setConcerts] = useState([]);
   const [sales, setSales] = useState();
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get("q");
+  const [searchQuery, setSearchQuery] = useState(query || "");
 
   useEffect(() => {
     Promise.all([getConcerts(), getSales()])
@@ -25,12 +30,25 @@ const BackofficeSale = () => {
       return salesFilteredById.reduce((total, sale)=> total + sale?.quantity,0);
   }
 
+  const filterConcerts = (concerts, query) => {
+    if(!query){
+      return concerts;
+    }
+    return concerts.filter((concert) => {
+      const concertName = concert.name.toLowerCase();
+      return concertName.includes(query);
+    });
+  };
+
+  const filteredConcerts = filterConcerts(concerts, query);
+
   return (
     <div className="backoffice-sale-container">
       <div className="backoffice-sale-header">
           <h1>Ventas</h1>
           <button></button>
       </div>
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} action="/backofficeSale" placeholder="Concierto"/>
       <div className="backoffice-sale-body">
           <table className="table table-bordered table-hover ">
               <tbody>
@@ -40,7 +58,7 @@ const BackofficeSale = () => {
                       <th>Total entradas</th>
                       <th>Total vendidas</th>
                   </tr>
-                  {concerts && concerts.map((concert, index) => (
+                  {concerts && filteredConcerts.map((concert, index) => (
                       <tr key={index}>
                           <td>{concert.name}</td>
                           <td>{concert.date}</td>

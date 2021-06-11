@@ -14,7 +14,7 @@ const CardConcert = ({ concert }) => {
   };
 
   return (
-    <div className="card-concert">
+    <div className="card-concert" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-delay="100" data-aos-duration="1500">
       <Link to={`/concert?id=${concert._id}`}>
         {imageUrl ? (
           <img alt="img-concert" src={imageUrl} />

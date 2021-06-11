@@ -60,6 +60,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,setEmailDuplicate, loading
     setPhone(user.phone);
     setCity(user.city);
     setEmailDuplicate(false);
+    setErrors({});
   };
 
   const onCancelPasswordModal = () => {
@@ -113,7 +114,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,setEmailDuplicate, loading
               value={name}
               onChange={(e) => setName(e.target.value)}
             ></input>
-            <label htmlFor="surnames">Apellidos</label>
+            <label htmlFor="surnames">Apellidos*</label>
             <input
               disabled={dissabled}
               id="surnames"
@@ -121,7 +122,7 @@ const UserEdit = ({user, onUpdateUser, emailDuplicate,setEmailDuplicate, loading
               value={surnames}
               onChange={(e) => setSurnames(e.target.value)}
             ></input>
-            <label htmlFor="phone">Telefono</label>
+            <label htmlFor="phone">Telefono*</label>
             <input
               disabled={dissabled}
               id="phone"
