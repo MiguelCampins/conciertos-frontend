@@ -172,6 +172,10 @@
     border-bottom-color: red;
 }
 
+iframe {
+    border: 0;
+}
+
 @media screen and (max-width: 768px) {
     .contact-container .contact-img > h1 {
         top: 46%;

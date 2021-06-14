@@ -84,7 +84,7 @@ const Login = () => {
           >
             <input
               type={passwordShown ? "text" : "password"}
-              placeholder="password"
+              placeholder="contraseña"
               value={password}
               onChange={(event) => setPasword(event.target.value)}
               disabled={loading}
@@ -101,7 +101,7 @@ const Login = () => {
             </div>
           )}
           <button disabled={loading} onClick={validateUserandSend}>
-            {loading && <CustomSpinner />} Log in
+            {loading && <CustomSpinner />} Acceder
           </button>
         </div>
       </div>

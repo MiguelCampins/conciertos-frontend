@@ -20,6 +20,9 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert, onPublicConc
     setIndex(index);
   };
 
+  const showArtists = (artists) => artists.map((artist, idx) => idx === artists.length -1 ? artist : artist + ' / ');
+  
+
   if (concerts && !concerts.length) {
     return <h4>No existen coincidencias...</h4>;
   }
@@ -45,7 +48,7 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert, onPublicConc
                 <td>{concert.city}</td>
                 <td>{concert.maxTickets}</td>
                 <td>{concert.ticketPrice}</td>
-                <td>{concert.artists.map((artist) => artist + " / ")}</td>
+                <td style={{width:"200px"}}>{showArtists(concert.artists)}</td>
                 <td>
                   <button onClick={() => sunmitDelete(concert, index)}>
                     <DeleteIcon />

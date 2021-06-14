@@ -7,6 +7,7 @@ import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { ExternalLink } from "react-external-link";
 import Footer from "../../components/footer";
+import { isValidPhone, isValidstring } from "../../utils/functions";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -19,16 +20,15 @@ const Contact = () => {
     setName("");
     setPhone("");
     setMessage("");
-    
   }, [errors]);
 
   const validateForm = () => {
     const errs = {};
-    if (!name) {
+    if (!name || !isValidstring(name)) {
       errs.hasErr = true;
       errs.name = true;
     }
-    if (!phone) {
+    if (!phone || !isValidPhone(phone)) {
       errs.hasErr = true;
       errs.phone = true;
     }
@@ -75,7 +75,7 @@ const Contact = () => {
               onClick={validateForm}
               href={
                 isValidated
-                  ? `mailto:miguel_ilutec@hotmail.com?subject=Contactacto: ${name}&body= Telephone: ${phone} %0D%0A%0D%0A Message: ${message} %0D%0A%0D%0A`
+                  ? `mailto:sales@ticketClick.com?subject=Contactacto: ${name}&body= Telephone: ${phone} %0D%0A%0D%0A Message: ${message} %0D%0A%0D%0A`
                   : null
               }
             >
@@ -119,6 +119,14 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <iframe
+        title="sede"
+        width="100%"
+        height="600"
+        id="gmap_canvas"
+        src="https://maps.google.com/maps?q=Select%20Mortgage%20Finance,%20Coughlan%20Road,%20Blaxland%20Nueva%20Gales%20del%20Sur,%20Australia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        scrolling="no"
+      ></iframe>
       <Footer />
     </div>
   );

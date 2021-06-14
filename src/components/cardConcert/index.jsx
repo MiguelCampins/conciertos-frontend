@@ -23,7 +23,7 @@ const CardConcert = ({ concert }) => {
         )}
       </Link>  
         <div className="card-concert-text">
-          <p><b>{name}</b></p>
+          <p style={{fontSize:"30px"}}><b>{name}</b></p>
           <p>{formatDate(date)}</p>
           <p>En la ciudad de {city}</p>
         </div>

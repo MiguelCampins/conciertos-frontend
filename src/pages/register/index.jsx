@@ -157,7 +157,7 @@ const Register = () => {
           <input
             type={passwordShown ? "text" : "password"}
             disabled={loading}
-            placeholder="password"
+            placeholder="contraseña"
             onChange={(e) => setPassword(e.target.value)}
           />
           <VisibilityIcon
