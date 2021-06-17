@@ -28,6 +28,11 @@
     width: 100%;
 }
 
+.user-header-left-text > span {
+    font-size: 18px;
+    color: white;
+}
+
 .user-header-left-text>img {
     width: 50px;
     padding-bottom: 6px;

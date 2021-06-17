@@ -20,9 +20,8 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert, onPublicConc
     setIndex(index);
   };
 
-  const showArtists = (artists) => artists.map((artist, idx) => idx === artists.length -1 ? artist : artist + ' / ');
+  const showArtists = (artists) => artists.map((artist, idx) => idx === artists.length -1 ? artist : artist + ' - ');
   
-
   if (concerts && !concerts.length) {
     return <h4>No existen coincidencias...</h4>;
   }

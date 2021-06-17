@@ -1,13 +1,12 @@
 import { Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 import React from "react";
 import "./index.css";
 
-const ModalAlert = ({ show, setShowAlert, tittle }) => {
-  const history = useHistory();
+const ModalAlert = ({ show, setShowAlert, tittle, onRedirect }) => {
+  
   const redirect = () => {
     setShowAlert(false);
-    history.push("/user",{redirectToTickets:true});
+    onRedirect();
   }
 
   return (

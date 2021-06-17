@@ -36,7 +36,6 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         <>
           <a className={splitLocation[1] === "aboutUs" ? "active" : ""} href="/aboutUs">Sobre nosotros</a>
           <a className={splitLocation[1] === "contact" ? "active" : ""} href="/contact">Contacto</a>
-          <a className={splitLocation[1] === "user" ? "active" : ""} href="/user">{user && user.name}</a>
         </>
         ):(
         <>
@@ -52,6 +51,7 @@ const Navbar = ({ isLoggedIn, logOut, user }) => {
         </>
         ):(
          <>
+          <a className={splitLocation[1] === "user" ? "active" : ""} href="/user">Mi cuenta</a>
           <button onClick={()=>logOutAndRedirect()}>Cerrar sesión</button>
         </> 
         )}

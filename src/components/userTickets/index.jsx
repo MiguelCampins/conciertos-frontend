@@ -4,7 +4,7 @@ import "./index.css";
 
 const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
 
-const UserTickets = ({ sale }) => {
+const UserTickets = ({ sale, onHandleTickets }) => {
  
   const [concert, setConcert] = useState();
 
@@ -52,6 +52,9 @@ const UserTickets = ({ sale }) => {
         <div className="card-sale-ticket-price">
           <span>Total entradas: {sale.quantity}</span>
           <span><b>Total:</b> {concert && totalPrice()} euros</span>
+        </div>
+        <div className="card-sale-ticket-button">
+          <button onClick={()=>onHandleTickets(sale.quantity, concert)}>Ver</button>
         </div>
       </div>
     </div>

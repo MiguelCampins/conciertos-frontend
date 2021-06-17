@@ -3,14 +3,15 @@ import "./index.css";
 import Footer from "../../components/footer";
 import UserEdit from "../../components/userEdit";
 import UserTickets from "../../components/userTickets";
-import {getFilterSale,updateUser,} from "../../utils/api/apiConcert";
-import { useHistory, useLocation} from "react-router-dom";
+import { getFilterSale, updateUser } from "../../utils/api/apiConcert";
+import { useHistory, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import PersonIcon from "@material-ui/icons/Person";
 import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ModalAlert from "../../components/modalAlert";
 import ThereAreNotTickets from "../../components/thereAreNotTickets";
+import UserTicketsList from "../../components/userTicketsList";
 
 const MODES = {
   editarPerfil: "editar",
@@ -24,14 +25,16 @@ const User = () => {
   const [showModal, setShowModal] = useState(false);
   const [emailDuplicate, setEmailDuplicate] = useState(false);
   const [disabled, setDisabled] = useState(false);
-  const [loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showTicketsList, setshowticketsList] = useState(false);
+  const [numTickets, setNumTickets] = useState();
+  const [concertTicket, setConcertTicket] = useState();
 
-  const {state} = useLocation();
+  const { state } = useLocation();
   const history = useHistory();
 
-  
   useEffect(() => {
-    if(state && state.redirectToTickets){
+    if (state && state.redirectToTickets) {
       setMode(MODES.entradas);
     }
     getFilterSale(user._id)
@@ -43,11 +46,11 @@ const User = () => {
       });
   }, []);
 
-  useEffect(() =>{
-    if(user){
-      localStorage.setItem("user", JSON.stringify(user))
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
     }
-  },[user])
+  }, [user]);
 
   const logOut = () => {
     localStorage.removeItem("user");
@@ -72,18 +75,32 @@ const User = () => {
             console.warn(err);
           }
         })
-        .finally(()=> {
+        .finally(() => {
           setLoading(false);
           setDisabled(false);
           setShowModal(true);
-        })
+        });
     }
+  };
+
+  const redirect = () => {
+    history.push("/user");
+  };
+
+  const onHandleTickets = (NumSales, concert) => {
+    setshowticketsList(true);
+    setNumTickets(Array.from(Array(NumSales).keys()));
+    setConcertTicket(concert);
   };
 
   const renderSales = () => {
     if (sales?.length) {
       return sales.map((sale, index) => (
-        <UserTickets key={index} sale={sale} />
+        <UserTickets
+          key={index}
+          sale={sale}
+          onHandleTickets={onHandleTickets}
+        />
       ));
     }
 
@@ -140,8 +157,17 @@ const User = () => {
         tittle="Usuario actualizado"
         show={showModal}
         setShowAlert={setShowModal}
+        onRedirect={redirect}
       />
       <Footer />
+      {showTicketsList && (
+        <UserTicketsList
+          onHandleTickets={setshowticketsList}
+          numTickets={numTickets && numTickets}
+          concertTicket={concertTicket}
+          user={user}
+        />
+      )}
     </div>
   );
 };

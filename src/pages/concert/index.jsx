@@ -83,6 +83,10 @@ const Concert = () => {
     return joinArray;
   };
 
+  const redirect = () => {
+    history.push("/user",{redirectToTickets:true});
+  }
+
   return (
     <div className="event-container">
       <div className="event-header">
@@ -142,7 +146,7 @@ const Concert = () => {
         loading={loading}
         disabled={disabled}
       />
-      <ModalAlert tittle="Gracias por su compra!" show={showAlertThanks} setShowAlert={setShowAlertThanks}/>
+      <ModalAlert tittle="Gracias por su compra!" show={showAlertThanks} setShowAlert={setShowAlertThanks} onRedirect={redirect}/>
       <Footer />
     </div>
   );
