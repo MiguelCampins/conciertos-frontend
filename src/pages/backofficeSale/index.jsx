@@ -69,6 +69,7 @@ const BackofficeSale = () => {
               </tbody>
           </table>
       </div>
+      <hr/>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./index.css";
 import ModalConfirmDelete from "../modalConfirmDelete";
+import { formatDate } from "../../utils/functions";
 
 const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert, onPublicConcert }) => {
   const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
@@ -42,11 +43,11 @@ const TableConcert = ({ concerts, onDeleteConcert, onSelectConcert, onPublicConc
             concerts.map((concert, index) => (
               <tr key={index}>
                 <td>{concert.name}</td>
-                <td>{concert.date}</td>
+                <td>{formatDate(concert.date)}</td>
                 <td>{concert.hour}</td>
                 <td>{concert.city}</td>
                 <td>{concert.maxTickets}</td>
-                <td>{concert.ticketPrice}</td>
+                <td>{concert.ticketPrice} €</td>
                 <td style={{width:"200px"}}>{showArtists(concert.artists)}</td>
                 <td>
                   <button onClick={() => sunmitDelete(concert, index)}>

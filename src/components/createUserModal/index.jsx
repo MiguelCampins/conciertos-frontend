@@ -88,7 +88,7 @@ const CreateUserModal = ({
     <div>
       <Modal show={show}>
         <div className="create-form">
-          <h1>Crear usuario</h1>
+          <h1>Nuevo usuario</h1>
           <hr />
           <div className="create-form-body">
             <input

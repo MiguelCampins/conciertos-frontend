@@ -2,16 +2,10 @@ import React from "react";
 import "./index.css";
 import imgDefault from "../../assets/images/pien-muller-Fh-Q-xfdh_o-unsplash.jpg";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../utils/functions";
 
 const CardConcert = ({ concert }) => {
   const { name, imageUrl, date, city } = concert;
-
-  const formatDate = (date) => {
-      let splitString = date.split("-");
-      let reverseArray = splitString.reverse();
-      let joinArray = reverseArray.join("-");
-      return joinArray;
-  };
 
   return (
     <div className="card-concert" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-delay="100" data-aos-duration="1500">

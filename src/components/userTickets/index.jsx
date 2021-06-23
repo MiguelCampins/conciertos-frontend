@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getConcert } from "../../utils/api/apiConcert";
+import { formatDay, formatMonthYear } from "../../utils/functions";
 import "./index.css";
-
-const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
 
 const UserTickets = ({ sale, onHandleTickets }) => {
  
@@ -17,17 +16,6 @@ const UserTickets = ({ sale, onHandleTickets }) => {
         console.warn(err);
       });
   }, []);
-
-  const formatDay = (date) => {
-    let splitString = date.split("-");
-    return splitString[2];
-  };
-
-  const formatMonthYear = (date) => {
-    let splitString = date.split("-");
-    let moth = splitString[1];
-    return moths[Number(moth)] + "-" + splitString[0];
-  };
 
   const totalPrice = () => {
     return concert.ticketPrice * sale.quantity;

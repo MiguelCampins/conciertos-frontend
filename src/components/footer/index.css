@@ -5,8 +5,12 @@
     background: rgb(122, 122, 122);
     width: 100%;
     min-height: 250px;
-    padding: 28px;
+    padding: 68px 28px;
     margin-top: -6px;
+}
+
+.footer-container h3,h4 {
+    margin-bottom: 30px;
 }
 
 .footer-logo {
@@ -43,7 +47,7 @@
 
 .footer-container a {
     color: white;
-    text-decoration: none;
+   
 }
 
 @media screen and (max-width: 768px) {

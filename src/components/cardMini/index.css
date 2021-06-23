@@ -1,0 +1,41 @@
+.card-mini-container {
+    padding: 6px 18px;
+    border-radius: 6px;
+}
+
+.card-mini-container  img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.card-mini-container > a {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    transition: all 0.5s;
+    position: relative;
+}
+
+.card-mini-container > a::after {
+    content: "";
+    position: absolute;
+    top: -67px;
+    left: 0;
+    width: 100%;
+    height: 168px;
+    transition: all .5s;
+    border-radius: 6px;
+}
+
+.card-mini-container > a:hover::after {
+    background-color: rgba(0, 178, 248, 0.5);
+}
+
+.card-mini-container > a:hover {
+    color: blue;
+}
+
+.card-mini-container h4 {
+    margin: 12px 0px;
+    padding-left: 12px;
+}

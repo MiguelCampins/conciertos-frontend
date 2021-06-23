@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import CloseIcon from "@material-ui/icons/Close";
+import { formatDate } from "../../utils/functions";
 var QRCode = require("qrcode.react");
 var Barcode = require("react-barcode");
 
@@ -10,9 +11,8 @@ const UserTicketsList = ({
   concertTicket,
   user,
 }) => {
-  console.log(concertTicket);
-  console.log(user);
   const { name, city, imageUrl, date, hour, ticketPrice } = concertTicket;
+
   return (
     <div className="tickets-container">
       <div className="tickets-body">
@@ -25,9 +25,9 @@ const UserTicketsList = ({
         {numTickets.map((num, index) => (
           <div key={index} className="ticket-container">
             <div className="ticket-info">
-              <h1 style={{paddingBottom:"40px"}}>{name}</h1>
+              <h1>{name}</h1>
               <p><b>Ciudad: </b>{city}</p>
-              <p><b>Fecha: </b>{date}</p>
+              <p><b>Fecha: </b>{formatDate(date)}</p>
               <p><b>Hora: </b>{hour}h</p>
               <p><b>Precio: </b>{ticketPrice}€</p>
             </div>
@@ -47,7 +47,9 @@ const UserTicketsList = ({
                   <b>SCAN AND ENJOY</b>
                 </span>
               </div>
-              <Barcode height={70} width={1} value="http://ticketclick.com" />
+              <div className="ticket-bar">
+                <Barcode height={70} width={1} value="http://ticketclick.com" />
+              </div>
             </div>
           </div>
         ))}

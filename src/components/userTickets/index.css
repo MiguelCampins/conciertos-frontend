@@ -66,4 +66,9 @@
     .card-sale-ticket-container {
         width: 95%;
     }
+
+    .card-sale-ticket-button {
+        justify-content: center;
+        margin-top: 6px;
+    }
 }

@@ -67,6 +67,7 @@ const User = () => {
       updateUser(user)
         .then((resp) => {
           setUser(resp);
+          setShowModal(true);
         })
         .catch((err) => {
           if (err.response.data.message.includes("email")) {
@@ -78,7 +79,6 @@ const User = () => {
         .finally(() => {
           setLoading(false);
           setDisabled(false);
-          setShowModal(true);
         });
     }
   };

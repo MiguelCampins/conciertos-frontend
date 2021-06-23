@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardConcert from "../../components/cardConcert";
+import CardMini from "../../components/cardMini";
 import Footer from "../../components/footer";
 import { getFilterConcert } from "../../utils/api/apiConcert";
 import { Link } from "react-router-dom";
@@ -24,14 +25,42 @@ const Home = () => {
         <div className="tag-entradas">
           <h2>AC/DC</h2>
           <p>Legacy Beast Tour 2022</p>
-          <Link to="/concert?id=60a2a8a232b11c1c58ba7918">Entradas</Link>
+          <Link to="/concert?id=60a2a8a232b11c1c58ba7918">ENTRADAS</Link>
         </div>
       </div>
-      <div className="home-body">
-        {concerts &&
-          concerts.map((concert, index) => (
-            <CardConcert key={index} concert={concert} />
-          ))}
+      <div className="home-body-container">
+        <div className="home-body">
+          {concerts &&
+            concerts.map((concert, index) => (
+              <CardConcert key={index} concert={concert} />
+            ))}
+        </div>
+        <div className="home-body-right">
+          <div className="home-body-right-anuncio">
+        
+          </div>
+          <div className="home-body-right-tittle">
+            <h4>
+              <b>DESTACADOS</b>
+            </h4>
+            <div className="line" />
+          </div>
+          <CardMini
+            href="https://www.ticketmaster.es/feature/indiemaster/?int_cmp_name=Indiemaster&int_cmp_id=ES-Home-501&int_cmp_creative=Home-featured-3&tm_link=tm_ccp_Home_featured_Indiemaster"
+            src="https://uk.tmconst.com/ccp-salesforce-images/ES/indiemaster19720x405_1.jpg?auto=webp"
+            name="Indiemaster"
+          />
+          <CardMini
+            href="https://www.ticketmaster.es/feature/metalmaster/?int_cmp_name=Metalmaster&int_cmp_id=ES-Home-501&int_cmp_creative=Home-featured-4&tm_link=tm_ccp_Home_featured_Metalmaster"
+            src="https://uk.tmconst.com/ccp-salesforce-images/ES/metalmaster19720x405.jpg?auto=webp"
+            name="Metalmaster"
+          />
+          <CardMini
+            href="https://www.ticketmaster.es/"
+            src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2018/06/28/15301762581939.png"
+            name="Ticketmaster"
+          />
+        </div>
       </div>
       <h3>Sobre nosotros</h3>
       <div className="home-about-us">

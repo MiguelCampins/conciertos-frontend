@@ -72,7 +72,7 @@ const CreateConcertModal = ({
     <div>
       <Modal show={show}>
         <div className="concert-form">
-          <h1>Crear concierto</h1>
+          <h1>Nuevo concierto</h1>
           <hr />
           <div className="concert-body">
             <input

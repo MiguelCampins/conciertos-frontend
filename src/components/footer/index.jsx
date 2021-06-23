@@ -15,13 +15,13 @@ const Footer = () => {
         <h3>TicketClick</h3>
       </div>
       <div className="footer-info">
-        <h5>Contáctanos</h5>
+        <h4>Contáctanos</h4>
         <span>Lamar:+34 971 472 145</span>
         <a href="tel:+34649211654">Móvil:+34 649 211 654</a>
         <a href="mailto:sales@TicketClick.com">Email: sales@TicketClick.com</a>
       </div>
       <div className="footer-info">
-        <h5>Dónde nos encontrarás?</h5>
+        <h4>Dónde nos encontrarás?</h4>
         <ExternalLink href="https://www.google.com/maps/@-33.7555248,150.6036152,17.26z"><span>Calle Wallaby 42, sidney</span></ExternalLink>
         <div className="iconos">
         <ExternalLink href="https://es-es.facebook.com"><FacebookIcon/></ExternalLink>
@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-info">
-        <h5>Política de privacidad</h5>
+        <h4>Política de privacidad</h4>
         <span>Protección de datos</span>
         <span>Mas info+</span>
       </div>

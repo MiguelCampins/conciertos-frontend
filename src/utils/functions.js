@@ -37,3 +37,22 @@ export const isValidPassword = (password) => {
     const regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/);
     return regex.test(password);
 }
+
+export const formatDate = (date) => {
+    let splitString = date.split("-");
+    let reverseArray = splitString.reverse();
+    let joinArray = reverseArray.join("-");
+    return joinArray;
+}
+
+export const formatDay = (date) => {
+    let splitString = date.split("-");
+    return splitString[2];
+  }
+  
+const moths = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic",];
+export  const formatMonthYear = (date) => {
+    let splitString = date.split("-");
+    let moth = splitString[1];
+    return moths[Number(moth)] + "-" + splitString[0];
+  }
