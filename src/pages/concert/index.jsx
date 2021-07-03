@@ -49,8 +49,8 @@ const Concert = () => {
   };
 
   const onBuyTickets = (sale) => {
-    const {  postalCode, name, targetNum, date, cvv } = sale;
-    if ( postalCode && name && targetNum && date && cvv ) {
+    const {  name, targetNum, date, cvv } = sale;
+    if ( name && targetNum && date && cvv ) {
       setLoading(true);
       setDissabled(true);
       //cogemos el usuario del localStorage

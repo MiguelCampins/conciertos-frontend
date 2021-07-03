@@ -53,7 +53,7 @@
     display: flex;
 }
 
-.my-modal-card-number>span {
+.my-modal-card-number > span {
     flex: 0 25%;
     color: white;
     font-size: 26px;
@@ -77,13 +77,13 @@
 
 .my-modal-card-footer>span:first-child {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     text-shadow: 2px 2px 2px #000000;
 }
 
 .my-modal-card-footer>span:nth-child(2) {
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     text-shadow: 2px 2px 2px #000000;
     position: absolute;
     left: 138px;

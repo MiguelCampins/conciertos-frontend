@@ -22,9 +22,9 @@ const Home = () => {
   return (
     <div className="home-container">
       <div className="home-header">
-        <div className="tag-entradas">
-          <h2>AC/DC</h2>
-          <p>Legacy Beast Tour 2022</p>
+        <div data-aos="flip-left" data-aos-easing="linear" data-aos-duration="1500" className="tag-entradas">
+          <h2 className="neon">AC/DC</h2>
+          <p className="flux">PWR/UP the new album</p>
           <Link to="/concert?id=60a2a8a232b11c1c58ba7918">ENTRADAS</Link>
         </div>
       </div>

@@ -30,7 +30,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.5);
     height: 100%;
     width: 100%;
 }
@@ -47,10 +47,12 @@ body{
 
 .tag-entradas h2  {
     color: white;
+    font-size: 40px;
 }
 
 .tag-entradas p {
     color: white;
+    font-size: 18px;
 }
 
 .tag-entradas > a {
@@ -97,7 +99,7 @@ body{
 
 .home-body-right-anuncio {
     width: 100%;
-    min-height: 300px;
+    min-height: 240px;
     border-bottom: 1px solid grey;
     display: flex;
     align-items: center;

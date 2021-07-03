@@ -20,14 +20,12 @@ const BuyTicketModal = ({
   disabled,
 }) => {
   const [name, setName] = useState();
-  const [postalCode, setPostalCode] = useState();
   const [targetNum, setTargetNum] = useState([]);
   const [date, setDate] = useState([]);
   const [cvv, setCvv] = useState();
   const [errors, setErrors] = useState({});
 
   const resetModal = () => {
-    setPostalCode();
     setTargetNum([]);
     setDate([]);
     setCvv();
@@ -52,10 +50,6 @@ const BuyTicketModal = ({
       errs.hasError = true;
       errs.name = true;
     }
-    if (!postalCode || !isValidNumber(postalCode)) {
-      errs.hasError = true;
-      errs.postalCode = true;
-    }
     if (!targetNum || !isValidNumberTarget(targetNum)) {
       errs.hasError = true;
       errs.targetNum = true;
@@ -75,7 +69,6 @@ const BuyTicketModal = ({
       // si no hay error, guardamos
       resetModal();
       onBuyTickets({
-        postalCode,
         targetNum,
         date,
         cvv,
@@ -161,15 +154,6 @@ const BuyTicketModal = ({
                 />
               </div>
             </div>
-            <label>Codigo Postal</label>
-            <input
-              type="number"
-              disabled={disabled}
-              className={errors.postalCode && "error"}
-              value={postalCode}
-              placeholder="XXXXX"
-              onChange={(e) => setPostalCode(e.target.value.slice(0, 5))}
-            />
           </div>
           <div className="my-modal-buttons">
             <button disabled={disabled} onClick={validateSaleAndSave}>

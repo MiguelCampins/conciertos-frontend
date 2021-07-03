@@ -28,6 +28,7 @@ const Login = () => {
             history.push("/backofficeUser");
           }
           history.push(state.previousUrl);
+          window.location.reload();
         })
         .catch((err) => {
           console.warn(err);

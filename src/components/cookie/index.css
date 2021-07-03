@@ -41,7 +41,7 @@
 }
 
 .cookie-background {
-	background: rgba(0,0,0,.50);
+	background: rgba(0,0,0,.75);
 	position: fixed;
 	z-index: 20;
 	width: 100vw;
