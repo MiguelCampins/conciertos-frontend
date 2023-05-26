@@ -77,7 +77,7 @@ const Register = () => {
         phone,
         email,
         password,
-        userRoleId: roles[1]._id,
+        userRoleId: roles[0]._id,
       });
     }
   };
